@@ -1,19 +1,18 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import Rsvp from '../models/Rsvp';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_req: Request, res: Response) => {
   try {
     const rsvps = await Rsvp.find().sort({ createdAt: -1 });
     res.json(rsvps);
   } catch (error) {
-    console.error('Error fetching RSVPs:', error);
     res.status(500).json({ error: 'Failed to fetch RSVPs' });
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req: Request, res: Response) => {
   try {
     const { name, phone, willAttend, numberOfGuests, message } = req.body;
     const newRsvp = new Rsvp({
@@ -26,8 +25,7 @@ router.post('/', async (req, res) => {
     await newRsvp.save();
     res.status(201).json(newRsvp);
   } catch (error) {
-    console.error('Error saving RSVP:', error);
-    res.status(500).json({ error: 'Failed to save RSVP' });
+    res.status(500).json({ error: 'Failed to create RSVP' });
   }
 });
 
