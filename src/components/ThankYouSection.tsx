@@ -23,7 +23,12 @@ const ThankYouSection: React.FC = () => {
   const fetchComments = async () => {
     try {
       const response = await axios.get('/api/comments'); // Pastikan route API backend sudah ada
-      setComments(response.data);
+      if (Array.isArray(response.data)) {
+        setComments(response.data);
+      } else {
+        console.error('Data komentar tidak valid:', response.data);
+        setComments([]);
+      }
     } catch (error) {
       console.error('Gagal mengambil data komentar:', error);
     }
@@ -108,7 +113,7 @@ const ThankYouSection: React.FC = () => {
             className='bg-white rounded-lg shadow-md p-8 mb-8'
           >
             <h3 className='text-2xl font-semibold text-amber-900 mb-6'>
-              Ucapan ({comments.length})
+              Ucapan ({Array.isArray(comments) ? comments.length : 0})
             </h3>
             <form onSubmit={handleSubmit}>
               <div className='mb-4'>
@@ -161,30 +166,36 @@ const ThankYouSection: React.FC = () => {
           </motion.div>
 
           <div className='space-y-6'>
-            {comments.map((comment) => (
-              <motion.div
-                key={comment._id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className='bg-white rounded-lg shadow-sm p-6 border-l-4 border-amber-500'
-              >
-                <div className='flex justify-between items-start mb-2'>
-                  <h4
-                    className={`font-semibold ${getColorFromName(
-                      comment.name
-                    )}`}
-                  >
-                    {comment.name}
-                  </h4>
-                  <span className='text-xs text-gray-500'>
-                    {formatDateToIndonesian(comment.createdAt)}
-                  </span>
-                </div>
-                <p className='text-amber-800'>{comment.message}</p>
-              </motion.div>
-            ))}
+            {Array.isArray(comments) && comments.length > 0 ? (
+              comments.map((comment) => (
+                <motion.div
+                  key={comment._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className='bg-white rounded-lg shadow-sm p-6 border-l-4 border-amber-500'
+                >
+                  <div className='flex justify-between items-start mb-2'>
+                    <h4
+                      className={`font-semibold ${getColorFromName(
+                        comment.name
+                      )}`}
+                    >
+                      {comment.name}
+                    </h4>
+                    <span className='text-xs text-gray-500'>
+                      {formatDateToIndonesian(comment.createdAt)}
+                    </span>
+                  </div>
+                  <p className='text-amber-800'>{comment.message}</p>
+                </motion.div>
+              ))
+            ) : (
+              <p className='text-center text-amber-800'>
+                Belum ada ucapan. Jadilah yang pertama!
+              </p>
+            )}
           </div>
         </div>
       </div>

@@ -1,14 +1,15 @@
+// filepath: /Users/f/alim-risa/src/models/Rsvp.ts
 import mongoose from 'mongoose';
 
-const commentSchema = new mongoose.Schema(
+const rsvpSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    comment: { type: String, required: true },
+    phone: { type: String, required: true },
+    willAttend: { type: String, required: true },
+    numberOfGuests: { type: Number, required: true },
+    message: { type: String },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-export default mongoose.models.Comment ||
-  mongoose.model('Comment', commentSchema);
+export default mongoose.models.Rsvp || mongoose.model('Rsvp', rsvpSchema);
