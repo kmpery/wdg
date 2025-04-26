@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
-import axios from 'axios'; // <-- untuk koneksi ke backend API
+import axios from 'axios';
 
 interface Comment {
   _id: string;
@@ -9,6 +9,8 @@ interface Comment {
   message: string;
   createdAt: string;
 }
+
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL; // ⬅️ Ambil dari .env
 
 const ThankYouSection: React.FC = () => {
   const [commentName, setCommentName] = useState('');
@@ -22,7 +24,7 @@ const ThankYouSection: React.FC = () => {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get('/api/comments'); // Pastikan route API backend sudah ada
+      const response = await axios.get(`${API_BASE_URL}/api/comments`);
       if (Array.isArray(response.data)) {
         setComments(response.data);
       } else {
@@ -36,12 +38,11 @@ const ThankYouSection: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!commentName.trim() || !commentMessage.trim()) return;
 
     setIsSubmitting(true);
     try {
-      await axios.post('/api/comments', {
+      await axios.post(`${API_BASE_URL}/api/comments`, {
         name: commentName,
         message: commentMessage,
       });
@@ -70,7 +71,6 @@ const ThankYouSection: React.FC = () => {
     return colors[hash % colors.length];
   };
 
-  // Format tanggal ke Bahasa Indonesia
   const formatDateToIndonesian = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
@@ -113,7 +113,7 @@ const ThankYouSection: React.FC = () => {
             className='bg-white rounded-lg shadow-md p-8 mb-8'
           >
             <h3 className='text-2xl font-semibold text-amber-900 mb-6'>
-              Ucapan ({Array.isArray(comments) ? comments.length : 0})
+              Ucapan ({comments.length})
             </h3>
             <form onSubmit={handleSubmit}>
               <div className='mb-4'>
@@ -166,7 +166,7 @@ const ThankYouSection: React.FC = () => {
           </motion.div>
 
           <div className='space-y-6'>
-            {Array.isArray(comments) && comments.length > 0 ? (
+            {comments.length > 0 ? (
               comments.map((comment) => (
                 <motion.div
                   key={comment._id}

@@ -20,6 +20,8 @@ interface GuestEntry {
   message: string;
 }
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL; // ⬅️ Tambahan ini di atas
+
 const RsvpSection: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -61,7 +63,8 @@ const RsvpSection: React.FC = () => {
     }
 
     try {
-      const res = await fetch('/api/rsvp', {
+      const res = await fetch(`${backendUrl}/api/rsvp`, {
+        // ⬅️ Update fetch pakai backendUrl
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +90,7 @@ const RsvpSection: React.FC = () => {
   const fetchGuestbook = async () => {
     setLoadingGuestbook(true);
     try {
-      const res = await fetch('/api/rsvp', { method: 'GET' });
+      const res = await fetch(`${backendUrl}/api/rsvp`, { method: 'GET' }); // ⬅️ Update fetch pakai backendUrl
       if (!res.ok) {
         throw new Error('Failed to fetch guestbook');
       }
