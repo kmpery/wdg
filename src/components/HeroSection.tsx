@@ -28,7 +28,7 @@ const HeroSection: React.FC = () => {
 
     const parts = recipientParam.toLowerCase().split('.');
     const title = parts[0];
-    const name = parts[1] || '';
+    const name = parts.slice(1).join(' '); // Perubahan di sini ✅
 
     let prefix = '';
     if (title === 'bpk') prefix = 'Bpk :';
