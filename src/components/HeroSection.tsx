@@ -69,7 +69,7 @@ const HeroSection: React.FC = () => {
   return (
     <Parallax
       blur={{ min: -15, max: 15 }}
-      bgImage='/public/bg-1.jpg'
+      bgImage='/bg-1.jpg'
       bgImageAlt='Wedding background'
       strength={300}
       className='h-screen'

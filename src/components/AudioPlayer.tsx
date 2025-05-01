@@ -11,7 +11,7 @@ const AudioPlayer: React.FC = () => {
   const isOpen = useStore((state) => state.isOpen);
 
   // Wedding song URL (example - would be replaced with actual song)
-  const audioSrc = '/public/audio/01 Sammy Simorangkir Tulang Rusuk(1).mp3';
+  const audioSrc = '/audio/01 Sammy Simorangkir Tulang Rusuk(1).mp3';
 
   const togglePlay = () => {
     if (audioRef.current) {
