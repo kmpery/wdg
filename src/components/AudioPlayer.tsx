@@ -11,8 +11,7 @@ const AudioPlayer: React.FC = () => {
   const isOpen = useStore((state) => state.isOpen);
 
   // Wedding song URL (example - would be replaced with actual song)
-  const audioSrc =
-    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+  const audioSrc = '/public/audio/01 Sammy Simorangkir Tulang Rusuk(1).mp3';
 
   const togglePlay = () => {
     if (audioRef.current) {

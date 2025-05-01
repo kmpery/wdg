@@ -1,6 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  safelist: [
+    'text-blue-800',
+    'text-pink-800',
+    'text-indigo-800',
+    'text-yellow-800',
+    'text-teal-800',
+    'text-emerald-800',
+  ],
   theme: {
     extend: {
       colors: {
@@ -22,7 +30,8 @@ export default {
         serif: ['Cormorant Garamond', 'serif'],
       },
       backgroundImage: {
-        'pattern-light': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        'pattern-light':
+          "url('https://www.transparenttextures.com/patterns/cubes.png')",
       },
       animation: {
         float: 'float 6s ease-in-out infinite',

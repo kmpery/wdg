@@ -1,48 +1,70 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Instagram } from 'lucide-react';
+import { FaInstagram } from 'react-icons/fa';
 
 const HomeSection: React.FC = () => {
   return (
-    <section className="py-20 bg-white" id="home">
-      <div className="container mx-auto px-4">
+    <section className='py-20 bg-white' id='home'>
+      <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className='text-center mb-12'
         >
-          <h2 className="text-4xl font-bold text-amber-900 mb-4">Welcome to Our Wedding</h2>
-          <div className="w-16 h-1 bg-amber-800 mx-auto mb-8"></div>
+          <h2 className='text-4xl font-bold text-amber-900 mb-4'>
+            The Wedding
+          </h2>
+          <div className='w-16 h-1 bg-amber-800 mx-auto mb-10'></div>
+
+          <h3 className='mb-2 font-bold'>
+            بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْم
+          </h3>
+          <h3 className='mb-2 font-bold'>
+            Assalamu'alaikum Warohmatullahi Wabarokatuh
+          </h3>
+          <p className='text-amber-800 max-w-2xl mx-auto'>
+            Dengan memohon Ridho serta Rahmat Allah SWT dan tanpa mengurangi
+            rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk
+            menghadiri acara pernikahan kami
+          </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className='max-w-4xl mx-auto'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-12 items-center'>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-center"
+              className='text-center'
             >
-              <div className="mb-6">
+              <div className='mb-6'>
                 <img
-                  src="https://images.pexels.com/photos/8100784/pexels-photo-8100784.jpeg"
-                  alt="Groom"
-                  className="w-64 h-64 rounded-full mx-auto object-cover border-4 border-amber-200"
+                  src='https://images.pexels.com/photos/8100784/pexels-photo-8100784.jpeg'
+                  alt='Groom'
+                  className='w-64 h-64 rounded-full mx-auto mt-4 object-cover border-4 border-amber-200'
                 />
               </div>
-              <h3 className="text-2xl font-bold text-amber-900 mb-2">Nursalim</h3>
+              <h3 className='text-2xl font-bold text-amber-900 mb-2'>
+                Nursalim
+              </h3>
               <a
-                href="https://instagram.com/nursalim"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-amber-800 hover:text-amber-600 transition-colors duration-300"
+                href='https://www.instagram.com/_aaaalim?igsh=MmFjYTZhYjBvOWxk&utm_source=qr'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='inline-flex items-center text-amber-800 hover:text-amber-600 transition-colors duration-300'
               >
-                <Instagram size={20} className="mr-1" />
-                @nursalim
+                <FaInstagram size={20} className='mr-1' />
+                @_aaaalim
               </a>
+              <p className='mt-4'>
+                <br />
+                Putra Pertama dari Bapak Haeruddin dg. Gassing <br />
+                dan <br />
+                Ibu Hj. Nurbaya dg. Sabbe
+              </p>
             </motion.div>
 
             <motion.div
@@ -50,25 +72,34 @@ const HomeSection: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-center"
+              className='text-center'
             >
-              <div className="mb-6">
+              <div className='mb-6'>
                 <img
-                  src="https://images.pexels.com/photos/8100584/pexels-photo-8100584.jpeg"
-                  alt="Bride"
-                  className="w-64 h-64 rounded-full mx-auto object-cover border-4 border-amber-200"
+                  src='https://images.pexels.com/photos/8100584/pexels-photo-8100584.jpeg'
+                  alt='Bride'
+                  className='w-64 h-64 rounded-full mx-auto mt-4 object-cover border-4 border-amber-200'
                 />
               </div>
-              <h3 className="text-2xl font-bold text-amber-900 mb-2">Risa Inda Sari</h3>
+              <h3 className='text-2xl font-bold text-amber-900 mb-2'>
+                Risa Inda Sari
+              </h3>
               <a
-                href="https://instagram.com/risaindasari"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-amber-800 hover:text-amber-600 transition-colors duration-300"
+                href='https://www.instagram.com/rhisaaaaaaa_?utm_source=qr&igsh=MXZnanV1ZW9tcDBqOQ=='
+                target='_blank'
+                rel='noopener noreferrer'
+                className='inline-flex items-center text-amber-800 hover:text-amber-600 transition-colors duration-300'
               >
-                <Instagram size={20} className="mr-1" />
-                @risaindasari
+                <FaInstagram size={20} className='mr-1' />
+                @rhisaaaaaaa_
               </a>
+              <p className='mt-4'>
+                <br />
+                Putri ke 3 dari Bapak Muh. Rusydi
+                <br />
+                dan <br />
+                Ibu Rahma dg. Baji
+              </p>
             </motion.div>
           </div>
 
@@ -77,13 +108,23 @@ const HomeSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="mt-16 text-center bg-amber-50 p-8 rounded-lg"
+            className='mt-16 text-center bg-amber-50 p-8 rounded-lg'
           >
-            <h3 className="text-2xl font-semibold text-amber-800 mb-4">Ar-Rum: 21</h3>
-            <p className="italic text-amber-700">
-              "And among His Signs is that He created for you mates from among yourselves, 
-              that you may dwell in tranquility with them, and He has put love and mercy 
-              between your hearts. Verily in that are Signs for those who reflect."
+            <h3 className='text-2xl font-semibold text-amber-800 mb-4'>
+              (Q.S. Ar-Rum: 21)
+            </h3>
+            <p>
+              وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا
+              لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً
+              إِنَّ فِي ذَلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ
+            </p>
+            <p className='italic text-amber-700 mt-2'>
+              " Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan
+              pasangan-pasangan untukmu dari jenismu sendiri, agar kamu
+              cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di
+              antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu
+              benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang
+              berpikir."
             </p>
           </motion.div>
         </div>

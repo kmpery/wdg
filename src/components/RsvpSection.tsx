@@ -1,54 +1,48 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, Users } from 'lucide-react';
+import useStore from '../store/useStore';
 
 interface FormData {
   name: string;
-  phone: string;
   willAttend: string;
-  numberOfGuests: number;
-  message: string;
 }
 
 interface GuestEntry {
   _id: string;
   name: string;
   willAttend: string;
-  numberOfGuests: number;
-  message: string;
 }
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL; // ⬅️ Tambahan ini di atas
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const RsvpSection: React.FC = () => {
+  const { recipientName } = useStore();
+
   const [formData, setFormData] = useState<FormData>({
     name: '',
-    phone: '',
     willAttend: '',
-    numberOfGuests: 1,
-    message: '',
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
   const [showGuestbook, setShowGuestbook] = useState(false);
   const [guestbook, setGuestbook] = useState<GuestEntry[]>([]);
   const [loadingGuestbook, setLoadingGuestbook] = useState(false);
 
+  useEffect(() => {
+    if (recipientName) {
+      setFormData((prev) => ({ ...prev, name: recipientName }));
+    }
+  }, [recipientName]);
+
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: name === 'numberOfGuests' ? parseInt(value) : value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,32 +50,28 @@ const RsvpSection: React.FC = () => {
     setIsSubmitting(true);
     setErrorMessage('');
 
-    if (!formData.name || !formData.phone || !formData.willAttend) {
-      setErrorMessage('Please fill out all required fields.');
+    if (!formData.name || !formData.willAttend) {
+      setErrorMessage('Mohon lengkapi semua field yang wajib diisi.');
       setIsSubmitting(false);
       return;
     }
 
     try {
       const res = await fetch(`${backendUrl}/api/rsvp`, {
-        // ⬅️ Update fetch pakai backendUrl
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       if (!res.ok) {
-        throw new Error('Failed to submit RSVP');
+        throw new Error('Gagal mengirim RSVP');
       }
 
       setIsSubmitted(true);
+      await fetchGuestbook();
     } catch (error) {
       console.error(error);
-      setErrorMessage(
-        'There was an error submitting your RSVP. Please try again.'
-      );
+      setErrorMessage('Gagal mengirimkan RSVP. Silakan coba lagi.');
     } finally {
       setIsSubmitting(false);
     }
@@ -90,30 +80,28 @@ const RsvpSection: React.FC = () => {
   const fetchGuestbook = async () => {
     setLoadingGuestbook(true);
     try {
-      const res = await fetch(`${backendUrl}/api/rsvp`, { method: 'GET' }); // ⬅️ Update fetch pakai backendUrl
+      const res = await fetch(`${backendUrl}/api/rsvp`);
       if (!res.ok) {
-        throw new Error('Failed to fetch guestbook');
+        throw new Error('Gagal mengambil data buku tamu');
       }
       const data = await res.json();
       setGuestbook(data);
-      setShowGuestbook(true);
     } catch (error) {
-      console.error(error);
+      console.error('Error fetching guestbook:', error);
     } finally {
       setLoadingGuestbook(false);
     }
   };
 
+  const toggleGuestbook = async () => {
+    if (!showGuestbook) {
+      await fetchGuestbook();
+    }
+    setShowGuestbook((prev) => !prev);
+  };
+
   return (
-    <section
-      className='py-20 bg-amber-800 text-white'
-      id='rsvp'
-      style={{
-        backgroundImage: `url("https://images.pexels.com/photos/1731710/pexels-photo-1731710.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
+    <section className='py-20 bg-amber-50 text-amber-300' id='rsvp'>
       <div className='container mx-auto px-4 relative'>
         <div className='absolute inset-0 bg-amber-900 bg-opacity-70'></div>
 
@@ -124,10 +112,10 @@ const RsvpSection: React.FC = () => {
           viewport={{ once: true }}
           className='text-center mb-12 relative z-10'
         >
-          <h2 className='text-4xl font-bold text-white mb-4'>RSVP</h2>
+          <h2 className='text-4xl font-bold text-amber-300 mb-4'>RSVP</h2>
           <div className='w-16 h-1 bg-amber-300 mx-auto mb-8'></div>
-          <p className='text-amber-100 max-w-2xl mx-auto'>
-            Please let us know if you'll be able to join us on our special day.
+          <p className='text-amber-300 max-w-2xl mx-auto'>
+            Mohon isi form dibawah ini untuk melakukan konfirmasi kehadiran.
           </p>
         </motion.div>
 
@@ -141,10 +129,10 @@ const RsvpSection: React.FC = () => {
               <div className='w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4'>
                 <Check size={32} className='text-green-600' />
               </div>
-              <h3 className='text-2xl font-bold mb-4'>Thank You!</h3>
-              <p>
-                Your RSVP has been submitted successfully. We're excited to
-                celebrate with you!
+              <h3 className='text-2xl font-bold mb-4'>Terima kasih!</h3>
+              <p className='text-amber-800 max-w-2xl mx-auto'>
+                RSVP berhasil dikirim. Status konfirmasi disimpan dalam buku
+                tamu!
               </p>
             </motion.div>
           ) : (
@@ -154,7 +142,7 @@ const RsvpSection: React.FC = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
               onSubmit={handleSubmit}
-              className='bg-white rounded-lg p-8 shadow-xl text-amber-900'
+              className='bg-amber-50 rounded-lg p-8 shadow-xl text-amber-900'
             >
               {errorMessage && (
                 <div className='mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700'>
@@ -165,13 +153,13 @@ const RsvpSection: React.FC = () => {
                 </div>
               )}
 
-              {/* Form Fields */}
+              {/* Input Nama */}
               <div className='mb-6'>
                 <label
-                  className='block text-amber-800 text-sm font-medium mb-2'
                   htmlFor='name'
+                  className='block text-amber-800 text-sm font-medium mb-2'
                 >
-                  Full Name <span className='text-red-500'>*</span>
+                  Nama Lengkap <span className='text-red-500'>*</span>
                 </label>
                 <input
                   type='text'
@@ -181,35 +169,18 @@ const RsvpSection: React.FC = () => {
                   onChange={handleChange}
                   required
                   className='w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500'
-                  placeholder='Your name'
+                  placeholder='Nama'
                 />
               </div>
 
+              {/* Pilihan Hadir */}
               <div className='mb-6'>
                 <label
-                  className='block text-amber-800 text-sm font-medium mb-2'
-                  htmlFor='phone'
-                >
-                  Phone Number <span className='text-red-500'>*</span>
-                </label>
-                <input
-                  type='tel'
-                  id='phone'
-                  name='phone'
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  className='w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500'
-                  placeholder='Your phone number'
-                />
-              </div>
-
-              <div className='mb-6'>
-                <label
-                  className='block text-amber-800 text-sm font-medium mb-2'
                   htmlFor='willAttend'
+                  className='block text-amber-800 text-sm font-medium mb-2'
                 >
-                  Will you attend? <span className='text-red-500'>*</span>
+                  Apakah Anda akan hadir?{' '}
+                  <span className='text-red-500'>*</span>
                 </label>
                 <select
                   id='willAttend'
@@ -219,111 +190,94 @@ const RsvpSection: React.FC = () => {
                   required
                   className='w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500'
                 >
-                  <option value=''>Please select</option>
-                  <option value='yes'>Yes, I will attend</option>
-                  <option value='no'>Sorry, I cannot attend</option>
+                  <option value=''>Pilih salah satu</option>
+                  <option value='yes'>Ya, saya akan hadir</option>
+                  <option value='no'>Maaf, saya tidak bisa hadir</option>
                 </select>
               </div>
 
-              {formData.willAttend === 'yes' && (
-                <div className='mb-6'>
-                  <label
-                    className='block text-amber-800 text-sm font-medium mb-2'
-                    htmlFor='numberOfGuests'
-                  >
-                    Number of Guests
-                  </label>
-                  <input
-                    type='number'
-                    id='numberOfGuests'
-                    name='numberOfGuests'
-                    value={formData.numberOfGuests}
-                    onChange={handleChange}
-                    min='1'
-                    max='5'
-                    className='w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500'
-                  />
-                </div>
-              )}
-
-              <div className='mb-6'>
-                <label
-                  className='block text-amber-800 text-sm font-medium mb-2'
-                  htmlFor='message'
+              {/* Tombol Kirim */}
+              <div className='text-center mt-6'>
+                <button
+                  type='submit'
+                  disabled={isSubmitting}
+                  className='inline-flex items-center px-6 py-3 bg-amber-500 text-white font-semibold rounded-md shadow-md hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 transition'
                 >
-                  Message
-                </label>
-                <textarea
-                  id='message'
-                  name='message'
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={4}
-                  className='w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500'
-                  placeholder='Your message for the couple'
-                ></textarea>
+                  {isSubmitting ? 'Mengirim...' : 'Kirim RSVP'}
+                </button>
               </div>
-
-              <button
-                type='submit'
-                disabled={isSubmitting}
-                className={`w-full py-3 px-4 bg-amber-800 hover:bg-amber-900 text-white rounded-md transition-colors duration-300 ${
-                  isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
-                }`}
-              >
-                {isSubmitting ? 'Submitting...' : 'Send RSVP'}
-              </button>
-
-              {/* Tombol lihat buku tamu */}
-              <button
-                type='button'
-                onClick={fetchGuestbook}
-                disabled={loadingGuestbook}
-                className='w-full mt-4 py-3 px-4 flex items-center justify-center bg-amber-600 hover:bg-amber-700 text-white rounded-md transition-colors duration-300'
-              >
-                <Users className='mr-2' size={20} />
-                {loadingGuestbook ? 'Loading...' : 'Lihat Buku Tamu'}
-              </button>
             </motion.form>
           )}
-        </div>
 
-        {/* Daftar buku tamu */}
-        <AnimatePresence>
-          {showGuestbook && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.5 }}
-              className='max-w-3xl mx-auto mt-12 bg-white rounded-lg p-8 text-amber-900 relative z-10'
+          {/* Tombol Lihat Buku Tamu */}
+          <div className='text-center mt-8'>
+            <button
+              type='button'
+              onClick={toggleGuestbook}
+              className='inline-flex items-center px-5 py-2 bg-amber-700 text-white font-semibold rounded-md shadow hover:bg-amber-800 transition mt-2'
             >
-              <h3 className='text-2xl font-bold mb-6 text-center'>
-                Guest Book
-              </h3>
-              <div className='space-y-6'>
-                {guestbook.length === 0 ? (
-                  <p className='text-center text-gray-600'>No guests yet.</p>
+              <Users size={20} className='mr-2' />
+              {showGuestbook ? 'Tutup Buku Tamu' : 'Lihat Buku Tamu'}
+            </button>
+          </div>
+
+          {/* Buku Tamu */}
+          <AnimatePresence>
+            {showGuestbook && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className='overflow-hidden mt-4'
+              >
+                {loadingGuestbook ? (
+                  <p className='text-center text-amber-800 mt-4'>
+                    Memuat buku tamu...
+                  </p>
+                ) : guestbook.length > 0 ? (
+                  <div className='overflow-y-auto max-h-64 mt-4 rounded-md border border-amber-300'>
+                    <table className='w-full text-sm'>
+                      <thead>
+                        <tr className='bg-amber-500 text-white opacity-90'>
+                          <th className='py-2 px-3 text-center'>No.</th>
+                          <th className='py-2 px-3 text-center'>Nama</th>
+                          <th className='py-2 px-3 text-center'>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {guestbook.map((entry, index) => (
+                          <tr
+                            key={entry._id}
+                            className={`${
+                              index % 2 === 0 ? 'bg-gray-50' : 'bg-amber-50'
+                            } border-b last:border-none opacity-90`}
+                          >
+                            <td className='py-2 px-3 text-center text-amber-800'>
+                              {index + 1}
+                            </td>
+                            <td className='py-2 px-3 text-center text-amber-800'>
+                              {entry.name}
+                            </td>
+                            <td className='py-2 px-3 text-center text-amber-800'>
+                              {entry.willAttend === 'yes'
+                                ? 'Hadir'
+                                : 'Tidak Hadir'}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 ) : (
-                  guestbook.map((guest) => (
-                    <div key={guest._id} className='border-b pb-4'>
-                      <h4 className='text-lg font-semibold'>{guest.name}</h4>
-                      <p className='text-sm text-gray-700'>
-                        {guest.willAttend === 'yes'
-                          ? 'Will Attend'
-                          : 'Cannot Attend'}{' '}
-                        - Guests: {guest.numberOfGuests}
-                      </p>
-                      {guest.message && (
-                        <p className='mt-2 text-gray-800'>“{guest.message}”</p>
-                      )}
-                    </div>
-                  ))
+                  <p className='text-center text-amber-800 mt-4'>
+                    Buku tamu masih kosong
+                  </p>
                 )}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

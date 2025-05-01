@@ -1,44 +1,48 @@
 import React from 'react';
-import { Heart, Instagram, Mail, Phone } from 'lucide-react';
+import { FaLinkedin, FaInstagram, FaRegHeart, FaGithub } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="py-12 bg-amber-900 text-amber-100">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-white mb-2">Alim & Risa</h2>
-          <p>July 10, 2025</p>
-        </div>
-        
-        <div className="flex justify-center space-x-6 mb-8">
-          <a 
-            href="https://instagram.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-300"
+    <footer className='py-8 bg-amber-900 text-amber-100'>
+      <div className='container mx-auto px-4'>
+        <div className='flex justify-center space-x-8 mb-8'>
+          <a
+            href='https://www.instagram.com/perrikembali?igsh=MWlyNXFxcWN2bzJxYg%3D%3D&utm_source=qr'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='hover:text-red-400 transition-colors duration-300'
           >
-            <Instagram size={24} />
+            <FaInstagram size={24} />
           </a>
-          <a 
-            href="mailto:contact@alimrisa.com" 
-            className="hover:text-white transition-colors duration-300"
+          <a
+            href='https://github.com/kmpery'
+            target='_blank'
+            className='hover:text-red-400 transition-colors duration-300'
           >
-            <Mail size={24} />
+            <FaGithub size={24} />
           </a>
-          <a 
-            href="tel:+1234567890" 
-            className="hover:text-white transition-colors duration-300"
+          <a
+            href='https://www.linkedin.com/in/km-pery-permana-327552200/'
+            target='_blank'
+            className='hover:text-red-400 transition-colors duration-300'
           >
-            <Phone size={24} />
+            <FaLinkedin size={24} />
           </a>
         </div>
-        
-        <div className="text-center">
-          <p className="flex items-center justify-center">
-            Made with <Heart size={16} className="mx-2 text-red-400" /> by Perri
+
+        <div className='text-center'>
+          <p className='flex items-center justify-center'>
+            Design by <FaRegHeart size={16} className='mx-2 text-red-400' />
+            <a
+              className='hover:text-red-400 transition-colors duration-300'
+              href='https://euphonious-fudge-2467ed.netlify.app/#about'
+              target='_blank'
+            >
+              @kmpery
+            </a>
           </p>
-          <p className="mt-4 text-sm opacity-75">
-            &copy; {new Date().getFullYear()} Alim & Risa Wedding. All rights reserved.
+          <p className='mt-4 text-sm opacity-75'>
+            &copy; {new Date().getFullYear()} wdg . All rights reserved.
           </p>
         </div>
       </div>

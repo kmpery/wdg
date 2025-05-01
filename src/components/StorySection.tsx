@@ -5,26 +5,24 @@ import { Heart } from 'lucide-react';
 const StorySection: React.FC = () => {
   const timelineEvents = [
     {
-      date: 'May 15, 2020',
-      title: 'First Meeting',
-      description:
-        "We first met at a mutual friend's birthday party. Alim was instantly captivated by Risa's smile, while she was drawn to his sense of humor.",
+      date: 'Mei, 2019',
+      title: 'Pertama kali bertemu',
+      description: `Dia adalah kakak kelasku di tahun 2018, dan awal kedekatan kami terjadi pada Mei 2019, tepatnya di bulan puasa. Di bulan yang penuh berkah ini, dia memberanikan diri untuk membawa sekantong gorengan dan martabak, sebagai tanda niat baiknya, untuk pertama kali bertemu dengan keluargaku.`,
       image:
         'https://images.pexels.com/photos/1415131/pexels-photo-1415131.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     },
     {
-      date: 'December 24, 2021',
-      title: 'First Date',
+      date: 'Maret, 2024',
+      title: 'Mulai Serius',
       description:
-        'After months of friendship, we finally went on our first official date. We talked for hours over coffee and knew there was something special between us.',
+        'Setelah Lebaran, keluarganya datang dalam tradisi Makassar yang dikenal dengan istilah ma’manu’ manu’, untuk berbicara serius tentang masa depan kami. Mereka menyampaikan niat baik untuk melamar di tahun depan, 2025.',
       image:
         'https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     },
     {
-      date: 'August 10, 2023',
-      title: 'The Proposal',
-      description:
-        'During a sunset beach walk in Bali, Alim surprised Risa with a heartfelt proposal. Surrounded by candles and roses, she said "Yes!" without hesitation.',
+      date: 'April, 2025',
+      title: 'Tunangan',
+      description: `Dan dia menepati janjinya. Setelah 6 tahun penantian, akhirnya dia melamarku. Insya Allah, dengan doa dan restu dari keluarga, hubungan ini akan terus langgeng dan abadi, sampai kita menua bersama.`,
       image:
         'https://images.pexels.com/photos/3387577/pexels-photo-3387577.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     },
@@ -47,10 +45,14 @@ const StorySection: React.FC = () => {
           Our Love Story
         </h2>
         <div className='w-16 h-1 bg-amber-800 mx-auto mb-8'></div>
-
+        <p className='text-amber-800 max-w-2xl mx-auto mb-8'>
+          Banyak cerita yang kami lalui sehingga akhirnya kami bisa bersatu,
+          cerita yang akan kami kenang selalu, dan cerita itu kami bagi untuk
+          anda.
+        </p>
         <div className='relative'>
           {/* Timeline line */}
-          <div className='absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-amber-400 z-0'></div>
+          <div className='absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-amber-200 z-0'></div>
 
           {timelineEvents.map((event, index) => (
             <motion.div
@@ -64,11 +66,15 @@ const StorySection: React.FC = () => {
               }`}
             >
               {/* Timeline dot */}
-              <div className='absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-amber-400 rounded-full border-4 border-white z-20 hidden md:block'></div>
+              <div className='absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-amber-200 rounded-full border-4 border-white z-20 hidden md:block'></div>
 
               {/* Image */}
-              <div className='w-full md:w-1/2 flex justify-center md:justify-end'>
-                <div className='w-64 h-64 rounded-full overflow-hidden border-4 border-white shadow-lg'>
+              <div
+                className={`w-full md:w-1/2 flex justify-center ${
+                  index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'
+                }`}
+              >
+                <div className='w-64 h-64 rounded-full overflow-hidden border-4 border-amber-200 shadow-lg'>
                   <div
                     className='w-full h-full bg-cover bg-center'
                     style={{ backgroundImage: `url(${event.image})` }}

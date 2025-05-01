@@ -1,134 +1,245 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  IoCloseOutline,
+  IoPlayCircleOutline,
+  IoPauseCircleOutline,
+} from 'react-icons/io5';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { useKeenSlider } from 'keen-slider/react';
+import 'keen-slider/keen-slider.min.css';
 
 interface Image {
   src: string;
   alt: string;
-  width: string;
-  height: string;
 }
 
+const images: Image[] = [
+  {
+    src: 'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg',
+    alt: 'Couple photo 1',
+  },
+  {
+    src: 'https://images.pexels.com/photos/1730877/pexels-photo-1730877.jpeg',
+    alt: 'Couple photo 2',
+  },
+  {
+    src: 'https://images.pexels.com/photos/3352398/pexels-photo-3352398.jpeg',
+    alt: 'Couple photo 3',
+  },
+  {
+    src: 'https://images.pexels.com/photos/1405761/pexels-photo-1405761.jpeg',
+    alt: 'Couple photo 4',
+  },
+  {
+    src: 'https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg',
+    alt: 'Couple photo 5',
+  },
+  {
+    src: 'https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg',
+    alt: 'Couple photo 5',
+  },
+  {
+    src: 'https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg',
+    alt: 'Couple photo 5',
+  },
+  {
+    src: 'https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg',
+    alt: 'Couple photo 5',
+  },
+  {
+    src: 'https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg',
+    alt: 'Couple photo 5',
+  },
+];
+
 const GallerySection: React.FC = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null
+  );
+  const [autoSlide, setAutoSlide] = useState(true);
 
-  const images: Image[] = [
-    {
-      src: "https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      alt: "Couple photo 1",
-      width: "w-full md:w-1/3",
-      height: "h-64 md:h-72"
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
+    loop: true,
+    slides: { perView: 1, spacing: 20 },
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel);
     },
-    {
-      src: "https://images.pexels.com/photos/1730877/pexels-photo-1730877.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      alt: "Couple photo 2",
-      width: "w-full md:w-1/3",
-      height: "h-64 md:h-96"
-    },
-    {
-      src: "https://images.pexels.com/photos/3352398/pexels-photo-3352398.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      alt: "Couple photo 3",
-      width: "w-full md:w-1/3",
-      height: "h-64 md:h-72"
-    },
-    {
-      src: "https://images.pexels.com/photos/1405761/pexels-photo-1405761.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      alt: "Couple photo 4",
-      width: "w-full md:w-1/2",
-      height: "h-64 md:h-80"
-    },
-    {
-      src: "https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      alt: "Couple photo 5",
-      width: "w-full md:w-1/2",
-      height: "h-64 md:h-80"
-    },
-    {
-      src: "https://images.pexels.com/photos/1754313/pexels-photo-1754313.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      alt: "Couple photo 6",
-      width: "w-full md:w-2/3",
-      height: "h-64 md:h-72"
-    },
-    {
-      src: "https://images.pexels.com/photos/948185/pexels-photo-948185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      alt: "Couple photo 7",
-      width: "w-full md:w-1/3",
-      height: "h-64 md:h-72"
+  });
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (autoSlide) {
+      interval = setInterval(() => {
+        instanceRef.current?.next();
+      }, 4000);
     }
-  ];
+    return () => clearInterval(interval);
+  }, [instanceRef, autoSlide]);
 
-  const openLightbox = (src: string) => {
-    setSelectedImage(src);
-    document.body.style.overflow = 'hidden';
+  const openLightbox = (index: number) => {
+    setSelectedImageIndex(index);
+    setLightboxOpen(true);
   };
 
   const closeLightbox = () => {
-    setSelectedImage(null);
-    document.body.style.overflow = 'auto';
+    setLightboxOpen(false);
+    setSelectedImageIndex(null);
+  };
+
+  const nextImage = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((selectedImageIndex + 1) % images.length);
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex(
+        (selectedImageIndex - 1 + images.length) % images.length
+      );
+    }
+  };
+
+  const toggleAutoSlide = () => {
+    setAutoSlide(!autoSlide);
   };
 
   return (
-    <section className="py-20 bg-amber-50" id="gallery">
-      <div className="container mx-auto px-4">
+    <section className='py-20 bg-amber-950' id='gallery'>
+      <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className='text-center mb-12 text-amber-300'
         >
-          <h2 className="text-4xl font-bold text-amber-900 mb-4">Our Gallery</h2>
-          <div className="w-16 h-1 bg-amber-800 mx-auto mb-8"></div>
-          <p className="text-amber-800 max-w-2xl mx-auto">
-            Cherished moments we've shared throughout our journey together.
+          <h2 className='text-4xl font-bold mb-4'>Our Gallery</h2>
+          <div className='w-16 h-1 bg-amber-300 mx-auto mb-8'></div>
+          <p className='text-lg max-w-2xl mx-auto'>
+            Gallery foto kebahagiaan kami yang kami kenang selalu.
           </p>
         </motion.div>
 
-        <div className="flex flex-wrap -mx-2">
-          {images.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className={`p-2 ${image.width}`}
-            >
-              <div 
-                className={`${image.height} overflow-hidden rounded-lg cursor-pointer transform transition-transform duration-300 hover:scale-105`}
-                onClick={() => openLightbox(image.src)}
+        {/* Slider */}
+        <div className='relative group'>
+          <div
+            ref={sliderRef}
+            className='keen-slider rounded-2xl overflow-hidden relative'
+          >
+            {images.map((image, index) => (
+              <div
+                className='keen-slider__slide flex justify-center cursor-pointer'
+                key={index}
+                onClick={() => openLightbox(index)}
               >
-                <img 
-                  src={image.src} 
-                  alt={image.alt} 
-                  className="w-full h-full object-cover"
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className='rounded-2xl max-h-[700px] md:max-h-[500px] sm:max-h-[300px] object-cover w-full'
                 />
               </div>
-            </motion.div>
+            ))}
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={() => instanceRef.current?.prev()}
+              className='hidden group-hover:flex absolute top-1/2 left-4 transform -translate-y-1/2 bg-amber-50 text-amber-950 p-2 rounded-full shadow-md hover:scale-110 transition'
+            >
+              <FaChevronLeft size={24} />
+            </button>
+            <button
+              onClick={() => instanceRef.current?.next()}
+              className='hidden group-hover:flex absolute top-1/2 right-4 transform -translate-y-1/2 bg-amber-50 text-amber-950 p-2 rounded-full shadow-md hover:scale-110 transition'
+            >
+              <FaChevronRight size={24} />
+            </button>
+          </div>
+
+          {/* Play/Pause Button Outside */}
+          <div className='flex justify-end mt-2'>
+            <button
+              onClick={toggleAutoSlide}
+              className='flex items-center justify-center w-8 h-8 border border-none text-white rounded-full hover:bg-white/10 transition'
+            >
+              {autoSlide ? (
+                <IoPauseCircleOutline size={24} />
+              ) : (
+                <IoPlayCircleOutline size={24} />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Dots */}
+        <div className='flex justify-center mt-6 gap-2'>
+          {images.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => instanceRef.current?.moveToIdx(idx)}
+              className={`w-2.5 h-2.5 rounded-full ${
+                currentSlide === idx ? 'bg-white' : 'bg-white/50'
+              } transition`}
+            />
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
-          onClick={closeLightbox}
-        >
-          <button 
-            className="absolute top-4 right-4 bg-white rounded-full p-2 text-black hover:bg-gray-200 transition-colors duration-300"
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxOpen && selectedImageIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className='fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50'
             onClick={closeLightbox}
           >
-            <X size={24} />
-          </button>
-          <img 
-            src={selectedImage} 
-            alt="Enlarged gallery" 
-            className="max-w-full max-h-[90vh] object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              onClick={(e) => e.stopPropagation()}
+              className='relative max-w-5xl w-full mx-4 flex flex-col items-center'
+            >
+              {/* Close Button */}
+              <button
+                onClick={closeLightbox}
+                className='absolute top-4 right-4 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
+              >
+                <IoCloseOutline size={24} />
+              </button>
+
+              {/* Prev Button */}
+              <button
+                onClick={prevImage}
+                className='absolute top-1/2 left-4 transform -translate-y-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
+              >
+                <FaChevronLeft size={30} />
+              </button>
+
+              {/* Image */}
+              <motion.img
+                src={images[selectedImageIndex].src}
+                alt={images[selectedImageIndex].alt}
+                className='rounded-2xl max-h-[90vh] w-full object-contain cursor-zoom-in'
+                whileTap={{ scale: 1.2 }}
+              />
+
+              {/* Next Button */}
+              <button
+                onClick={nextImage}
+                className='absolute top-1/2 right-4 transform -translate-y-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
+              >
+                <FaChevronRight size={30} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

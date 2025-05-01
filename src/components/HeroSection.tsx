@@ -7,7 +7,11 @@ import useStore from '../store/useStore';
 import { useSearchParams } from 'react-router-dom';
 
 const HeroSection: React.FC = () => {
-  const { isOpen, setIsOpen } = useStore();
+  const {
+    isOpen,
+    setIsOpen,
+    setRecipientName: setGlobalRecipientName,
+  } = useStore();
   const [searchParams] = useSearchParams();
   const recipientParam = searchParams.get('to') || '';
 
@@ -18,6 +22,7 @@ const HeroSection: React.FC = () => {
     if (!recipientParam) {
       setPronoun('Bapak/Ibu/Saudara/i');
       setRecipientName('');
+      setGlobalRecipientName('');
       return;
     }
 
@@ -39,7 +44,8 @@ const HeroSection: React.FC = () => {
 
     setPronoun(prefix || 'Bapak/Ibu/Saudara/i');
     setRecipientName(capitalizedName);
-  }, [recipientParam]);
+    setGlobalRecipientName(capitalizedName);
+  }, [recipientParam, setGlobalRecipientName]);
 
   const weddingDate = new Date('July 10, 2025 09:30:00');
 
@@ -63,13 +69,13 @@ const HeroSection: React.FC = () => {
   return (
     <Parallax
       blur={{ min: -15, max: 15 }}
-      bgImage='https://images.pexels.com/photos/7275385/pexels-photo-7275385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+      bgImage='/public/bg-1.jpg'
       bgImageAlt='Wedding background'
       strength={300}
       className='h-screen'
     >
       <div
-        className='h-screen flex flex-col items-center justify-center text-center relative'
+        className='h-screen flex flex-col items-center justify-center text-center relative opacity-90'
         id='hero'
       >
         <div className='absolute inset-0 bg-black bg-opacity-40'></div>
@@ -78,7 +84,7 @@ const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className='z-10 px-8 py-12 bg-white bg-opacity-90 rounded-lg shadow-2xl max-w-2xl mx-4 md:mx-auto'
+          className='z-10 px-8 py-12 bg-amber-50 bg-opacity-90 rounded-lg shadow-2xl max-w-2xl mx-4 md:mx-auto'
         >
           <h3 className='text-lg text-amber-800 mb-6 font-light'>Undangan</h3>
 

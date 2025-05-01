@@ -1,7 +1,11 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
 import axios from 'axios';
+import { FaCommentDots } from 'react-icons/fa';
+import useStore from '../store/useStore';
 
 interface Comment {
   _id: string;
@@ -10,9 +14,10 @@ interface Comment {
   createdAt: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_BACKEND_URL; // ⬅️ Ambil dari .env
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const ThankYouSection: React.FC = () => {
+  const { recipientName } = useStore();
   const [commentName, setCommentName] = useState('');
   const [commentMessage, setCommentMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,6 +26,12 @@ const ThankYouSection: React.FC = () => {
   useEffect(() => {
     fetchComments();
   }, []);
+
+  useEffect(() => {
+    if (recipientName) {
+      setCommentName(recipientName);
+    }
+  }, [recipientName]);
 
   const fetchComments = async () => {
     try {
@@ -46,7 +57,7 @@ const ThankYouSection: React.FC = () => {
         name: commentName,
         message: commentMessage,
       });
-      setCommentName('');
+      setCommentName(recipientName || '');
       setCommentMessage('');
       fetchComments();
     } catch (error) {
@@ -58,12 +69,12 @@ const ThankYouSection: React.FC = () => {
 
   const getColorFromName = (name: string): string => {
     const colors = [
-      'text-blue-600',
-      'text-purple-600',
-      'text-green-600',
-      'text-red-600',
-      'text-pink-600',
-      'text-indigo-600',
+      'text-blue-800',
+      'text-pink-800',
+      'text-indigo-800',
+      'text-yellow-800',
+      'text-teal-800',
+      'text-emerald-800',
     ];
     const hash = name
       .split('')
@@ -72,14 +83,34 @@ const ThankYouSection: React.FC = () => {
   };
 
   const formatDateToIndonesian = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    };
-    return new Date(dateString).toLocaleDateString('id-ID', options);
+    const now = new Date();
+    const pastDate = new Date(dateString);
+    const diffInSeconds = Math.floor(
+      (now.getTime() - pastDate.getTime()) / 1000
+    );
+
+    const minutes = Math.floor(diffInSeconds / 60);
+    const hours = Math.floor(diffInSeconds / 3600);
+    const days = Math.floor(diffInSeconds / 86400);
+    const weeks = Math.floor(diffInSeconds / 604800);
+    const months = Math.floor(diffInSeconds / 2592000);
+    const years = Math.floor(diffInSeconds / 31536000);
+
+    if (diffInSeconds < 60) {
+      return `${diffInSeconds} detik yang lalu`;
+    } else if (minutes < 60) {
+      return `${minutes} menit yang lalu`;
+    } else if (hours < 24) {
+      return `${hours} jam yang lalu`;
+    } else if (days < 7) {
+      return `${days} hari yang lalu`;
+    } else if (weeks < 4) {
+      return `${weeks} minggu yang lalu`;
+    } else if (months < 12) {
+      return `${months} bulan yang lalu`;
+    } else {
+      return `${years} tahun yang lalu`;
+    }
   };
 
   return (
@@ -97,11 +128,6 @@ const ThankYouSection: React.FC = () => {
           <p className='text-amber-800 max-w-2xl mx-auto'>
             Tinggalkan doa terbaik Anda untuk momen bahagia kami
           </p>
-          <p className='text-amber-800 font-bold mt-4'>
-            Salam cinta,
-            <br />
-            Nursalim & Risa Inda Sari
-          </p>
         </motion.div>
 
         <div className='max-w-3xl mx-auto'>
@@ -112,9 +138,6 @@ const ThankYouSection: React.FC = () => {
             viewport={{ once: true }}
             className='bg-white rounded-lg shadow-md p-8 mb-8'
           >
-            <h3 className='text-2xl font-semibold text-amber-900 mb-6'>
-              Ucapan ({comments.length})
-            </h3>
             <form onSubmit={handleSubmit}>
               <div className='mb-4'>
                 <label
@@ -130,7 +153,7 @@ const ThankYouSection: React.FC = () => {
                   onChange={(e) => setCommentName(e.target.value)}
                   required
                   className='w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500'
-                  placeholder='Isi Nama Anda'
+                  placeholder='Nama Anda'
                 />
               </div>
 
@@ -163,6 +186,11 @@ const ThankYouSection: React.FC = () => {
                 <span>{isSubmitting ? 'Mengirim...' : 'Kirim'}</span>
               </button>
             </form>
+
+            <h3 className='text-2xl font-semibold text-amber-900 mt-8 flex items-center'>
+              <FaCommentDots className='mr-2' />
+              <span>({comments.length}) Ucapan</span>
+            </h3>
           </motion.div>
 
           <div className='space-y-6'>
@@ -178,7 +206,7 @@ const ThankYouSection: React.FC = () => {
                 >
                   <div className='flex justify-between items-start mb-2'>
                     <h4
-                      className={`font-semibold ${getColorFromName(
+                      className={`font-extrabold ${getColorFromName(
                         comment.name
                       )}`}
                     >
