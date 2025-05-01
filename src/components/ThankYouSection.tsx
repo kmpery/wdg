@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
 import axios from 'axios';
 import { FaCommentDots } from 'react-icons/fa';
-import { io } from 'socket.io-client';
 import useStore from '../store/useStore';
 
 interface Comment {
@@ -16,10 +15,7 @@ interface Comment {
 }
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
-const socket = io(API_BASE_URL, {
-  transports: ['websocket'],
-  withCredentials: true,
-});
+const WS_URL = API_BASE_URL.replace(/^http/, 'ws');
 
 const ThankYouSection: React.FC = () => {
   const { recipientName } = useStore();
@@ -27,17 +23,39 @@ const ThankYouSection: React.FC = () => {
   const [commentMessage, setCommentMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
+  const wsRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
     fetchComments();
 
-    // Dengarkan komentar baru dari socket
-    socket.on('comment-added', () => {
-      fetchComments();
-    });
+    const socket = new WebSocket(WS_URL);
+    wsRef.current = socket;
+
+    socket.onopen = () => {
+      console.log('WebSocket connected');
+    };
+
+    socket.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data?.event === 'new-comment') {
+          fetchComments();
+        }
+      } catch (err) {
+        console.error('Data WebSocket tidak valid:', event.data);
+      }
+    };
+
+    socket.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    socket.onclose = () => {
+      console.log('WebSocket closed');
+    };
 
     return () => {
-      socket.off('comment-added');
+      socket.close();
     };
   }, []);
 
@@ -71,6 +89,12 @@ const ThankYouSection: React.FC = () => {
         name: commentName,
         message: commentMessage,
       });
+
+      // Kirim event ke server via WebSocket
+      if (wsRef.current?.readyState === WebSocket.OPEN) {
+        wsRef.current.send(JSON.stringify({ event: 'new-comment' }));
+      }
+
       setCommentName(recipientName || '');
       setCommentMessage('');
     } catch (error) {
