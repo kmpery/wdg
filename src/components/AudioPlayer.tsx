@@ -8,46 +8,37 @@ const AudioPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const isOpen = useStore((state) => state.isOpen);
 
-  // Path file audio
+  // Audio file path
   const audioSrc = '/audio/01 Sammy Simorangkir Tulang Rusuk(1).mp3';
 
   const togglePlay = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (isPlaying) {
-      audio.pause();
-      setIsPlaying(false);
-    } else {
-      audio
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch((error) => console.error('Audio play gagal:', error));
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
     }
   };
 
-  // Auto-play saat undangan dibuka dan audio siap
+  // Auto-play when invitation is opened
   useEffect(() => {
-    const audio = audioRef.current;
-    if (isOpen && audio) {
-      const handleCanPlay = () => {
-        audio
-          .play()
-          .then(() => setIsPlaying(true))
-          .catch((error) => console.error('Audio play gagal:', error));
-      };
-
-      audio.addEventListener('canplaythrough', handleCanPlay);
-
-      return () => {
-        audio.removeEventListener('canplaythrough', handleCanPlay);
-      };
+    if (isOpen && audioRef.current) {
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.error('Audio playback failed:', error);
+        });
     }
   }, [isOpen]);
 
   return (
     <div>
-      <audio ref={audioRef} src={audioSrc} loop preload='auto' />
+      <audio ref={audioRef} src={audioSrc} loop />
 
       <motion.div
         initial={{ opacity: 0 }}
