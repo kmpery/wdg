@@ -41,7 +41,7 @@ const ThankYouSection: React.FC = () => {
         if (data?.event === 'new-comment') {
           fetchComments();
         }
-      } catch (err) {
+      } catch {
         console.error('Data WebSocket tidak valid:', event.data);
       }
     };
