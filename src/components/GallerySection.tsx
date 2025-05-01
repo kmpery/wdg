@@ -115,10 +115,10 @@ const GallerySection: React.FC = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className='text-center mb-12 text-amber-300'
+          className='text-center mb-12 text-amber-100'
         >
           <h2 className='text-4xl font-bold mb-4'>Our Gallery</h2>
-          <div className='w-16 h-1 bg-amber-300 mx-auto mb-8'></div>
+          <div className='w-16 h-1 bg-amber-100 mx-auto mb-8'></div>
           <p className='text-lg max-w-2xl mx-auto'>
             Gallery foto kebahagiaan kami yang kami kenang selalu.
           </p>

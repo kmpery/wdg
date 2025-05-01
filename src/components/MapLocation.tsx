@@ -9,7 +9,7 @@ const MapLocation: React.FC = () => {
   const googleMapsUrl = 'https://maps.app.goo.gl/4kw6z5nDqvNiNxFw9';
 
   return (
-    <div className='bg-white rounded-lg shadow-lg overflow-hidden'>
+    <div className='bg-amber-50 rounded-lg shadow-lg overflow-hidden'>
       <div className='h-96 w-full'>
         <iframe
           src={mapSrc}

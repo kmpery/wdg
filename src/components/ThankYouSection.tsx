@@ -114,7 +114,7 @@ const ThankYouSection: React.FC = () => {
   };
 
   return (
-    <section className='py-20 bg-amber-50' id='thankyou'>
+    <section className='py-20 bg-amber-100' id='thankyou'>
       <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0 }}
@@ -136,7 +136,7 @@ const ThankYouSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='bg-white rounded-lg shadow-md p-8 mb-8'
+            className='bg-amber-50 rounded-lg shadow-md p-8 mb-8'
           >
             <form onSubmit={handleSubmit}>
               <div className='mb-4'>
@@ -202,7 +202,7 @@ const ThankYouSection: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                   viewport={{ once: true }}
-                  className='bg-white rounded-lg shadow-sm p-6 border-l-4 border-amber-500'
+                  className='bg-amber-50 rounded-lg shadow-sm p-6 border-l-4 border-amber-500'
                 >
                   <div className='flex justify-between items-start mb-2'>
                     <h4

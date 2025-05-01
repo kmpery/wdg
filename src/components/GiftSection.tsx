@@ -56,7 +56,7 @@ const GiftSection: React.FC = () => {
   };
 
   return (
-    <section className='py-20 bg-white' id='gifts'>
+    <section className='py-20 bg-amber-100' id='gifts'>
       <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0 }}

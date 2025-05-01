@@ -29,7 +29,7 @@ const StorySection: React.FC = () => {
   ];
 
   return (
-    <section id='story' className='py-20 px-4 bg-[#FFF8F0]'>
+    <section id='story' className='py-20 px-4 bg-amber-100'>
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -66,7 +66,7 @@ const StorySection: React.FC = () => {
               }`}
             >
               {/* Timeline dot */}
-              <div className='absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-amber-200 rounded-full border-4 border-white z-20 hidden md:block'></div>
+              <div className='absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-amber-200 rounded-full border-4 border-amber-50 z-20 hidden md:block'></div>
 
               {/* Image */}
               <div
@@ -83,7 +83,7 @@ const StorySection: React.FC = () => {
               </div>
 
               {/* Content */}
-              <div className='w-full md:w-1/2 text-left p-6 bg-white rounded-lg shadow-md'>
+              <div className='w-full md:w-1/2 text-left p-6 bg-amber-50 rounded-lg shadow-md'>
                 <div className='inline-block px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full mb-2 font-serif'>
                   {event.date}
                 </div>

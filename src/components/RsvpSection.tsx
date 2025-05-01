@@ -101,24 +101,21 @@ const RsvpSection: React.FC = () => {
   };
 
   return (
-    <section className='py-20 bg-amber-50 text-amber-300' id='rsvp'>
+    <section className='py-20 bg-amber-100' id='rsvp'>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className='text-center mb-12 relative z-10'
+      >
+        <h2 className='text-4xl font-bold text-amber-900 mb-4'>RSVP</h2>
+        <div className='w-16 h-1 bg-amber-900 mx-auto mb-8'></div>
+        <p className='text-amber-800 max-w-2xl mx-auto'>
+          Mohon isi form dibawah ini untuk melakukan konfirmasi kehadiran.
+        </p>
+      </motion.div>
       <div className='container mx-auto px-4 relative'>
-        <div className='absolute inset-0 bg-amber-900 bg-opacity-70'></div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className='text-center mb-12 relative z-10'
-        >
-          <h2 className='text-4xl font-bold text-amber-300 mb-4'>RSVP</h2>
-          <div className='w-16 h-1 bg-amber-300 mx-auto mb-8'></div>
-          <p className='text-amber-300 max-w-2xl mx-auto'>
-            Mohon isi form dibawah ini untuk melakukan konfirmasi kehadiran.
-          </p>
-        </motion.div>
-
         <div className='max-w-2xl mx-auto relative z-10'>
           {isSubmitted ? (
             <motion.div
@@ -201,7 +198,7 @@ const RsvpSection: React.FC = () => {
                 <button
                   type='submit'
                   disabled={isSubmitting}
-                  className='inline-flex items-center px-6 py-3 bg-amber-500 text-white font-semibold rounded-md shadow-md hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 transition'
+                  className='inline-flex items-center px-6 py-3 bg-amber-600 text-white font-semibold rounded-md shadow-md hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400 transition'
                 >
                   {isSubmitting ? 'Mengirim...' : 'Kirim RSVP'}
                 </button>
@@ -239,7 +236,7 @@ const RsvpSection: React.FC = () => {
                   <div className='overflow-y-auto max-h-64 mt-4 rounded-md border border-amber-300'>
                     <table className='w-full text-sm'>
                       <thead>
-                        <tr className='bg-amber-500 text-white opacity-90'>
+                        <tr className='bg-amber-900 text-white opacity-90'>
                           <th className='py-2 px-3 text-center'>No.</th>
                           <th className='py-2 px-3 text-center'>Nama</th>
                           <th className='py-2 px-3 text-center'>Status</th>
