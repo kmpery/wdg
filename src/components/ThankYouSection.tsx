@@ -18,6 +18,7 @@ interface Comment {
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 const socket = io(API_BASE_URL, {
   transports: ['websocket'],
+  withCredentials: true,
 });
 
 const ThankYouSection: React.FC = () => {
