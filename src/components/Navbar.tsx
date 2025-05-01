@@ -14,6 +14,7 @@ const Navbar: React.FC = () => {
     { href: '#gallery', label: 'Gallery' },
     { href: '#rsvp', label: 'RSVP' },
     { href: '#gifts', label: 'Gifts' },
+    { href: '#footer', label: 'Footer' },
   ];
 
   useEffect(() => {
