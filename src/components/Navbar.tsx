@@ -18,7 +18,11 @@ const Navbar: React.FC = () => {
     { href: '#thankyou', label: 'Lives' },
     {
       href: '#footer',
-      label: <FaRegHeart size={16} className=' text-red-400' />,
+      label: (
+        <div className='flex justify-center items-center'>
+          <FaRegHeart size={16} className='text-red-400' />
+        </div>
+      ),
     },
   ];
 
