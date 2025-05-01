@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
             onClick={() => scrollToSection('#hero')}
             className='text-2xl font-serif font-bold text-amber-900 hover:text-amber-700 cursor-pointer transition-all duration-300'
           >
-            A&R
+            A<FaRegHeart size={16} className='text-red-400' />R
           </motion.h1>
 
           {/* Desktop Menu */}
