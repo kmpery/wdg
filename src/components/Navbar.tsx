@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaRegHeart } from 'react-icons/fa';
 import useStore from '../store/useStore';
 
 const Navbar: React.FC = () => {
@@ -14,7 +15,11 @@ const Navbar: React.FC = () => {
     { href: '#gallery', label: 'Gallery' },
     { href: '#rsvp', label: 'RSVP' },
     { href: '#gifts', label: 'Gifts' },
-    { href: '#footer', label: 'Footer' },
+    { href: '#thankyou', label: 'Lives' },
+    {
+      href: '#footer',
+      label: <FaRegHeart size={16} className='mx-2 text-red-400' />,
+    },
   ];
 
   useEffect(() => {
