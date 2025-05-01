@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
 import axios from 'axios';
 import { FaCommentDots } from 'react-icons/fa';
+import { io } from 'socket.io-client';
 import useStore from '../store/useStore';
 
 interface Comment {
@@ -15,6 +16,9 @@ interface Comment {
 }
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const socket = io(API_BASE_URL, {
+  transports: ['websocket'],
+});
 
 const ThankYouSection: React.FC = () => {
   const { recipientName } = useStore();
@@ -25,6 +29,15 @@ const ThankYouSection: React.FC = () => {
 
   useEffect(() => {
     fetchComments();
+
+    // Dengarkan komentar baru dari socket
+    socket.on('comment-added', () => {
+      fetchComments();
+    });
+
+    return () => {
+      socket.off('comment-added');
+    };
   }, []);
 
   useEffect(() => {
@@ -59,7 +72,6 @@ const ThankYouSection: React.FC = () => {
       });
       setCommentName(recipientName || '');
       setCommentMessage('');
-      fetchComments();
     } catch (error) {
       console.error('Gagal mengirim komentar:', error);
     } finally {
