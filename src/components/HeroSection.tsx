@@ -47,7 +47,7 @@ const HeroSection: React.FC = () => {
     setGlobalRecipientName(capitalizedName);
   }, [recipientParam, setGlobalRecipientName]);
 
-  const weddingDate = new Date('July 10, 2025 09:30:00');
+  const weddingDate = new Date('June 18, 2025 09:30:00');
 
   useEffect(() => {
     if (isOpen) {
@@ -84,11 +84,13 @@ const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className='z-10 px-8 py-12 bg-amber-50 bg-opacity-90 rounded-lg shadow-2xl max-w-2xl mx-4 md:mx-auto'
+          className='z-10 px-8 py-12 bg-amber-50 bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 rounded-lg shadow-2xl max-w-2xl mx-4 md:mx-auto'
         >
-          <h3 className='text-lg text-amber-800 mb-6 font-light'>Undangan</h3>
+          <h3 className='text-lg text-amber-800 dark:text-amber-300 mb-6 font-light'>
+            Undangan
+          </h3>
 
-          <p className='text-amber-800 mb-8'>
+          <p className='text-amber-800 dark:text-amber-200 mb-8'>
             Kepada {pronoun}{' '}
             <span className='font-semibold'>{recipientName}</span>,
           </p>
@@ -97,14 +99,14 @@ const HeroSection: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className='text-4xl md:text-6xl font-serif font-bold text-amber-900 mb-2'
+            className='text-4xl md:text-6xl font-serif font-bold text-amber-900 dark:text-white mb-2'
           >
             Alim <span className='font-light'>&</span> Risa
           </motion.h1>
 
-          <div className='w-16 h-1 bg-amber-800 mx-auto my-6'></div>
+          <div className='w-16 h-1 bg-amber-800 dark:bg-amber-300 mx-auto my-6'></div>
 
-          <p className='text-amber-800 mb-6'>
+          <p className='text-amber-800 dark:text-amber-200 mb-6'>
             Akan melangsungkan resepsi pernikahan dalam :
           </p>
 
@@ -114,7 +116,7 @@ const HeroSection: React.FC = () => {
             onClick={handleOpenInvitation}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className='mt-8 bg-amber-800 text-white px-6 py-3 rounded-full flex items-center justify-center mx-auto transition-all duration-300 hover:bg-amber-900'
+            className='mt-8 bg-amber-800 text-white px-6 py-3 rounded-full flex items-center justify-center mx-auto transition-all duration-300 hover:bg-amber-900 dark:hover:bg-amber-700'
           >
             {isOpen ? (
               <>

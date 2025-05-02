@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   IoCloseOutline,
@@ -107,18 +107,30 @@ const GallerySection: React.FC = () => {
     setAutoSlide(!autoSlide);
   };
 
+  const [showControls, setShowControls] = useState(false);
+
+  const handleImageTap = () => {
+    setShowControls(true);
+    clearTimeout(timeoutRef.current); // agar tidak dobel
+    timeoutRef.current = setTimeout(() => {
+      setShowControls(false);
+    }, 3000);
+  };
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   return (
-    <section className='py-20 bg-amber-950' id='gallery'>
+    <section className='py-20 bg-amber-950 dark:bg-neutral-900' id='gallery'>
       <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className='text-center mb-12 text-amber-100'
+          className='text-center mb-12 text-amber-100 dark:text-white'
         >
           <h2 className='text-4xl font-bold mb-4'>Our Gallery</h2>
-          <div className='w-16 h-1 bg-amber-100 mx-auto mb-8'></div>
+          <div className='w-16 h-1 bg-amber-100 dark:bg-white mx-auto mb-8'></div>
           <p className='text-lg max-w-2xl mx-auto'>
             Gallery foto kebahagiaan kami yang kami kenang selalu.
           </p>
@@ -206,36 +218,61 @@ const GallerySection: React.FC = () => {
               className='relative max-w-5xl w-full mx-4 flex flex-col items-center'
             >
               {/* Close Button */}
-              <button
-                onClick={closeLightbox}
-                className='absolute top-4 right-4 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
-              >
-                <IoCloseOutline size={24} />
-              </button>
+              <AnimatePresence>
+                {showControls && (
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={closeLightbox}
+                    className='absolute top-4 right-4 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
+                  >
+                    <IoCloseOutline size={24} />
+                  </motion.button>
+                )}
+              </AnimatePresence>
 
               {/* Prev Button */}
-              <button
-                onClick={prevImage}
-                className='absolute top-1/2 left-4 transform -translate-y-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
-              >
-                <FaChevronLeft size={30} />
-              </button>
+              <AnimatePresence>
+                {showControls && (
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={prevImage}
+                    className='absolute top-1/2 left-4 transform -translate-y-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
+                  >
+                    <FaChevronLeft size={30} />
+                  </motion.button>
+                )}
+              </AnimatePresence>
 
               {/* Image */}
               <motion.img
                 src={images[selectedImageIndex].src}
                 alt={images[selectedImageIndex].alt}
                 className='rounded-2xl max-h-[90vh] w-full object-contain cursor-zoom-in'
+                onClick={handleImageTap}
                 whileTap={{ scale: 1.2 }}
               />
 
               {/* Next Button */}
-              <button
-                onClick={nextImage}
-                className='absolute top-1/2 right-4 transform -translate-y-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
-              >
-                <FaChevronRight size={30} />
-              </button>
+              <AnimatePresence>
+                {showControls && (
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={nextImage}
+                    className='absolute top-1/2 right-4 transform -translate-y-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
+                  >
+                    <FaChevronRight size={30} />
+                  </motion.button>
+                )}
+              </AnimatePresence>
             </motion.div>
           </motion.div>
         )}

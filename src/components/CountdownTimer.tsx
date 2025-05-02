@@ -62,12 +62,14 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
           transition={{ delay: 0.5 + index * 0.1 }}
           className='flex flex-col items-center'
         >
-          <div className='bg-amber-100 rounded-lg w-16 h-16 md:w-20 md:h-20 flex items-center justify-center border border-amber-200 shadow-sm'>
-            <span className='text-2xl md:text-3xl font-bold text-amber-900'>
+          <div className='bg-amber-100 dark:bg-gray-800 rounded-lg w-16 h-16 md:w-20 md:h-20 flex items-center justify-center border border-amber-200 dark:border-gray-700 shadow-sm'>
+            <span className='text-2xl md:text-3xl font-bold text-amber-900 dark:text-white'>
               {component.value}
             </span>
           </div>
-          <span className='text-xs mt-2 text-amber-700'>{component.label}</span>
+          <span className='text-xs mt-2 text-amber-700 dark:text-amber-300'>
+            {component.label}
+          </span>
         </motion.div>
       ))}
     </div>

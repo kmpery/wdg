@@ -90,7 +90,6 @@ const ThankYouSection: React.FC = () => {
         message: commentMessage,
       });
 
-      // Kirim event ke server via WebSocket
       if (wsRef.current?.readyState === WebSocket.OPEN) {
         wsRef.current.send(JSON.stringify({ event: 'new-comment' }));
       }
@@ -133,25 +132,17 @@ const ThankYouSection: React.FC = () => {
     const months = Math.floor(diffInSeconds / 2592000);
     const years = Math.floor(diffInSeconds / 31536000);
 
-    if (diffInSeconds < 60) {
-      return `${diffInSeconds} detik yang lalu`;
-    } else if (minutes < 60) {
-      return `${minutes} menit yang lalu`;
-    } else if (hours < 24) {
-      return `${hours} jam yang lalu`;
-    } else if (days < 7) {
-      return `${days} hari yang lalu`;
-    } else if (weeks < 4) {
-      return `${weeks} minggu yang lalu`;
-    } else if (months < 12) {
-      return `${months} bulan yang lalu`;
-    } else {
-      return `${years} tahun yang lalu`;
-    }
+    if (diffInSeconds < 60) return `${diffInSeconds} detik yang lalu`;
+    if (minutes < 60) return `${minutes} menit yang lalu`;
+    if (hours < 24) return `${hours} jam yang lalu`;
+    if (days < 7) return `${days} hari yang lalu`;
+    if (weeks < 4) return `${weeks} minggu yang lalu`;
+    if (months < 12) return `${months} bulan yang lalu`;
+    return `${years} tahun yang lalu`;
   };
 
   return (
-    <section className='py-20 bg-amber-100' id='thankyou'>
+    <section className='py-20 bg-amber-100 dark:bg-black' id='thankyou'>
       <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0 }}
@@ -160,9 +151,11 @@ const ThankYouSection: React.FC = () => {
           viewport={{ once: true }}
           className='text-center mb-12'
         >
-          <h2 className='text-4xl font-bold text-amber-900 mb-4'>Thank You</h2>
-          <div className='w-16 h-1 bg-amber-800 mx-auto mb-8'></div>
-          <p className='text-amber-800 max-w-2xl mx-auto'>
+          <h2 className='text-4xl font-bold text-amber-900 dark:text-white mb-4'>
+            Thank You
+          </h2>
+          <div className='w-16 h-1 bg-amber-800 dark:bg-yellow-400 mx-auto mb-8'></div>
+          <p className='text-amber-800 dark:text-gray-300 max-w-2xl mx-auto'>
             Tinggalkan doa terbaik Anda untuk momen bahagia kami
           </p>
         </motion.div>
@@ -173,12 +166,12 @@ const ThankYouSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='bg-amber-50 rounded-lg shadow-md p-8 mb-8'
+            className='bg-amber-50 dark:bg-gray-900 rounded-lg shadow-md p-8 mb-8'
           >
             <form onSubmit={handleSubmit}>
               <div className='mb-4'>
                 <label
-                  className='block text-amber-800 text-sm font-medium mb-2'
+                  className='block text-amber-800 dark:text-gray-300 text-sm font-medium mb-2'
                   htmlFor='name'
                 >
                   Nama
@@ -189,14 +182,14 @@ const ThankYouSection: React.FC = () => {
                   value={commentName}
                   onChange={(e) => setCommentName(e.target.value)}
                   required
-                  className='w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500'
+                  className='w-full px-4 py-2 border border-amber-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-yellow-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400'
                   placeholder='Nama Anda'
                 />
               </div>
 
               <div className='mb-6'>
                 <label
-                  className='block text-amber-800 text-sm font-medium mb-2'
+                  className='block text-amber-800 dark:text-gray-300 text-sm font-medium mb-2'
                   htmlFor='message'
                 >
                   Pesan
@@ -207,7 +200,7 @@ const ThankYouSection: React.FC = () => {
                   onChange={(e) => setCommentMessage(e.target.value)}
                   required
                   rows={4}
-                  className='w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500'
+                  className='w-full px-4 py-2 border border-amber-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-yellow-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400'
                   placeholder='Tulis Ucapan'
                 ></textarea>
               </div>
@@ -215,7 +208,7 @@ const ThankYouSection: React.FC = () => {
               <button
                 type='submit'
                 disabled={isSubmitting}
-                className={`flex items-center justify-center px-6 py-3 bg-amber-800 hover:bg-amber-900 text-white rounded-md transition-colors duration-300 ${
+                className={`flex items-center justify-center px-6 py-3 bg-amber-800 hover:bg-amber-900 dark:hover:bg-yellow-700 text-white rounded-md transition-colors duration-300 ${
                   isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
                 }`}
               >
@@ -224,7 +217,7 @@ const ThankYouSection: React.FC = () => {
               </button>
             </form>
 
-            <h3 className='text-2xl font-semibold text-amber-900 mt-8 flex items-center'>
+            <h3 className='text-2xl font-semibold text-amber-900 dark:text-white mt-8 flex items-center'>
               <FaCommentDots className='mr-2' />
               <span>({comments.length}) Ucapan</span>
             </h3>
@@ -239,7 +232,7 @@ const ThankYouSection: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                   viewport={{ once: true }}
-                  className='bg-amber-50 rounded-lg shadow-sm p-6 border-l-4 border-amber-500'
+                  className='bg-amber-50 dark:bg-gray-900 rounded-lg shadow-sm p-6 border-l-4 border-amber-500 dark:border-yellow-400'
                 >
                   <div className='flex justify-between items-start mb-2'>
                     <h4
@@ -249,15 +242,17 @@ const ThankYouSection: React.FC = () => {
                     >
                       {comment.name}
                     </h4>
-                    <span className='text-xs text-gray-500'>
+                    <span className='text-xs text-gray-500 dark:text-gray-400'>
                       {formatDateToIndonesian(comment.createdAt)}
                     </span>
                   </div>
-                  <p className='text-amber-800'>{comment.message}</p>
+                  <p className='text-amber-800 dark:text-gray-300'>
+                    {comment.message}
+                  </p>
                 </motion.div>
               ))
             ) : (
-              <p className='text-center text-amber-800'>
+              <p className='text-center text-amber-800 dark:text-gray-300'>
                 Belum ada ucapan. Jadilah yang pertama!
               </p>
             )}

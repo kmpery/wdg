@@ -101,7 +101,7 @@ const RsvpSection: React.FC = () => {
   };
 
   return (
-    <section className='py-20 bg-amber-100' id='rsvp'>
+    <section className='py-20 bg-amber-100 dark:bg-gray-900' id='rsvp'>
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -109,25 +109,31 @@ const RsvpSection: React.FC = () => {
         viewport={{ once: true }}
         className='text-center mb-12 relative z-10'
       >
-        <h2 className='text-4xl font-bold text-amber-900 mb-4'>RSVP</h2>
-        <div className='w-16 h-1 bg-amber-900 mx-auto mb-8'></div>
-        <p className='text-amber-800 max-w-2xl mx-auto'>
+        <h2 className='text-4xl font-bold text-amber-900 dark:text-white mb-4'>
+          RSVP
+        </h2>
+        <div className='w-16 h-1 bg-amber-900 dark:bg-white mx-auto mb-8'></div>
+        <p className='text-amber-800 dark:text-gray-300 max-w-2xl mx-auto'>
           Mohon isi form dibawah ini untuk melakukan konfirmasi kehadiran.
         </p>
       </motion.div>
+
       <div className='container mx-auto px-4 relative'>
         <div className='max-w-2xl mx-auto relative z-10'>
           {isSubmitted ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className='bg-white rounded-lg p-8 text-center text-amber-900'
+              className='bg-white dark:bg-gray-800 rounded-lg p-8 text-center text-amber-900 dark:text-white'
             >
-              <div className='w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4'>
-                <Check size={32} className='text-green-600' />
+              <div className='w-16 h-16 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mx-auto mb-4'>
+                <Check
+                  size={32}
+                  className='text-green-600 dark:text-green-400'
+                />
               </div>
               <h3 className='text-2xl font-bold mb-4'>Terima kasih!</h3>
-              <p className='text-amber-800 max-w-2xl mx-auto'>
+              <p className='text-amber-800 dark:text-gray-300 max-w-2xl mx-auto'>
                 RSVP berhasil dikirim. Status konfirmasi disimpan dalam buku
                 tamu!
               </p>
@@ -139,10 +145,10 @@ const RsvpSection: React.FC = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
               onSubmit={handleSubmit}
-              className='bg-amber-50 rounded-lg p-8 shadow-xl text-amber-900'
+              className='bg-amber-50 dark:bg-gray-800 rounded-lg p-8 shadow-xl text-amber-900 dark:text-white'
             >
               {errorMessage && (
-                <div className='mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700'>
+                <div className='mb-6 p-4 bg-red-100 dark:bg-red-900 border-l-4 border-red-500 text-red-700 dark:text-red-300'>
                   <div className='flex'>
                     <X size={20} className='mr-2' />
                     <p>{errorMessage}</p>
@@ -150,11 +156,10 @@ const RsvpSection: React.FC = () => {
                 </div>
               )}
 
-              {/* Input Nama */}
               <div className='mb-6'>
                 <label
                   htmlFor='name'
-                  className='block text-amber-800 text-sm font-medium mb-2'
+                  className='block text-amber-800 dark:text-gray-300 text-sm font-medium mb-2'
                 >
                   Nama Lengkap <span className='text-red-500'>*</span>
                 </label>
@@ -165,16 +170,15 @@ const RsvpSection: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className='w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500'
+                  className='w-full px-4 py-2 border border-amber-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:bg-gray-700 dark:text-white'
                   placeholder='Nama'
                 />
               </div>
 
-              {/* Pilihan Hadir */}
               <div className='mb-6'>
                 <label
                   htmlFor='willAttend'
-                  className='block text-amber-800 text-sm font-medium mb-2'
+                  className='block text-amber-800 dark:text-gray-300 text-sm font-medium mb-2'
                 >
                   Apakah Anda akan hadir?{' '}
                   <span className='text-red-500'>*</span>
@@ -185,7 +189,7 @@ const RsvpSection: React.FC = () => {
                   value={formData.willAttend}
                   onChange={handleChange}
                   required
-                  className='w-full px-4 py-2 border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500'
+                  className='w-full px-4 py-2 border border-amber-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:bg-gray-700 dark:text-white'
                 >
                   <option value=''>Pilih salah satu</option>
                   <option value='yes'>Ya, saya akan hadir</option>
@@ -193,12 +197,11 @@ const RsvpSection: React.FC = () => {
                 </select>
               </div>
 
-              {/* Tombol Kirim */}
               <div className='text-center mt-6'>
                 <button
                   type='submit'
                   disabled={isSubmitting}
-                  className='inline-flex items-center px-6 py-3 bg-amber-600 text-white font-semibold rounded-md shadow-md hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400 transition'
+                  className='inline-flex items-center px-6 py-3 bg-amber-600 text-white font-semibold rounded-md shadow-md hover:bg-amber-500 dark:hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 transition'
                 >
                   {isSubmitting ? 'Mengirim...' : 'Kirim RSVP'}
                 </button>
@@ -206,19 +209,17 @@ const RsvpSection: React.FC = () => {
             </motion.form>
           )}
 
-          {/* Tombol Lihat Buku Tamu */}
           <div className='text-center mt-8'>
             <button
               type='button'
               onClick={toggleGuestbook}
-              className='inline-flex items-center px-5 py-2 bg-amber-700 text-white font-semibold rounded-md shadow hover:bg-amber-800 transition mt-2'
+              className='inline-flex items-center px-5 py-2 bg-amber-700 text-white font-semibold rounded-md shadow hover:bg-amber-800 dark:hover:bg-amber-600 transition mt-2'
             >
               <Users size={20} className='mr-2' />
               {showGuestbook ? 'Tutup Buku Tamu' : 'Lihat Buku Tamu'}
             </button>
           </div>
 
-          {/* Buku Tamu */}
           <AnimatePresence>
             {showGuestbook && (
               <motion.div
@@ -229,14 +230,14 @@ const RsvpSection: React.FC = () => {
                 className='overflow-hidden mt-4'
               >
                 {loadingGuestbook ? (
-                  <p className='text-center text-amber-800 mt-4'>
+                  <p className='text-center text-amber-800 dark:text-gray-300 mt-4'>
                     Memuat buku tamu...
                   </p>
                 ) : guestbook.length > 0 ? (
-                  <div className='overflow-y-auto max-h-64 mt-4 rounded-md border border-amber-300'>
+                  <div className='overflow-y-auto max-h-64 mt-4 rounded-md border border-amber-300 dark:border-gray-600'>
                     <table className='w-full text-sm'>
                       <thead>
-                        <tr className='bg-amber-900 text-white opacity-90'>
+                        <tr className='bg-amber-900 dark:bg-gray-700 text-white opacity-90'>
                           <th className='py-2 px-3 text-center'>No.</th>
                           <th className='py-2 px-3 text-center'>Nama</th>
                           <th className='py-2 px-3 text-center'>Status</th>
@@ -247,16 +248,18 @@ const RsvpSection: React.FC = () => {
                           <tr
                             key={entry._id}
                             className={`${
-                              index % 2 === 0 ? 'bg-gray-50' : 'bg-amber-50'
+                              index % 2 === 0
+                                ? 'bg-gray-50 dark:bg-gray-800'
+                                : 'bg-amber-50 dark:bg-gray-700'
                             } border-b last:border-none opacity-90`}
                           >
-                            <td className='py-2 px-3 text-center text-amber-800'>
+                            <td className='py-2 px-3 text-center text-amber-800 dark:text-gray-200'>
                               {index + 1}
                             </td>
-                            <td className='py-2 px-3 text-center text-amber-800'>
+                            <td className='py-2 px-3 text-center text-amber-800 dark:text-gray-200'>
                               {entry.name}
                             </td>
-                            <td className='py-2 px-3 text-center text-amber-800'>
+                            <td className='py-2 px-3 text-center text-amber-800 dark:text-gray-200'>
                               {entry.willAttend === 'yes'
                                 ? 'Hadir'
                                 : 'Tidak Hadir'}
@@ -267,7 +270,7 @@ const RsvpSection: React.FC = () => {
                     </table>
                   </div>
                 ) : (
-                  <p className='text-center text-amber-800 mt-4'>
+                  <p className='text-center text-amber-800 dark:text-gray-300 mt-4'>
                     Buku tamu masih kosong
                   </p>
                 )}
