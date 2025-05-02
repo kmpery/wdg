@@ -86,11 +86,11 @@ const HeroSection: React.FC = () => {
           transition={{ duration: 1 }}
           className='z-10 px-8 py-12 bg-amber-50 bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 rounded-lg shadow-2xl max-w-2xl mx-4 md:mx-auto'
         >
-          <h3 className='text-lg text-amber-800 dark:text-amber-300 mb-6 font-light'>
+          <h3 className='text-lg text-amber-800 dark:text-sky-100 mb-6 font-light'>
             Undangan
           </h3>
 
-          <p className='text-amber-800 dark:text-amber-200 mb-8'>
+          <p className='text-amber-800 dark:text-sky-200 mb-8'>
             Kepada {pronoun}{' '}
             <span className='font-semibold'>{recipientName}</span>,
           </p>
@@ -99,14 +99,18 @@ const HeroSection: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className='text-4xl md:text-6xl font-serif font-bold text-amber-900 dark:text-white mb-2'
+            className='text-4xl md:text-6xl font-serif font-bold text-amber-900 dark:text-sky-100 mb-2'
           >
-            Alim <span className='font-light'>&</span> Risa
+            Alim{' '}
+            <span className='font-light text-amber-700 dark:text-sky-300'>
+              &
+            </span>{' '}
+            Risa
           </motion.h1>
 
-          <div className='w-16 h-1 bg-amber-800 dark:bg-amber-300 mx-auto my-6'></div>
+          <div className='w-16 h-1 bg-amber-800 dark:bg-sky-300 mx-auto my-6'></div>
 
-          <p className='text-amber-800 dark:text-amber-200 mb-6'>
+          <p className='text-amber-800 dark:text-sky-200 mb-6'>
             Akan melangsungkan resepsi pernikahan dalam :
           </p>
 
@@ -116,7 +120,7 @@ const HeroSection: React.FC = () => {
             onClick={handleOpenInvitation}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className='mt-8 bg-amber-800 text-white px-6 py-3 rounded-full flex items-center justify-center mx-auto transition-all duration-300 hover:bg-amber-900 dark:hover:bg-amber-700'
+            className='mt-8 bg-amber-800 text-white dark:text-sky-200 px-6 py-3 rounded-full flex items-center justify-center mx-auto transition-all duration-300 hover:bg-amber-900 dark:bg-sky-700 dark:hover:bg-sky-600'
           >
             {isOpen ? (
               <>

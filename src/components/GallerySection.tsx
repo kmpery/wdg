@@ -8,6 +8,7 @@ import {
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
+import { useSwipeable } from 'react-swipeable';
 
 interface Image {
   src: string;
@@ -111,7 +112,9 @@ const GallerySection: React.FC = () => {
 
   const handleImageTap = () => {
     setShowControls(true);
-    clearTimeout(timeoutRef.current); // agar tidak dobel
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current); // agar tidak dobel
+    }
     timeoutRef.current = setTimeout(() => {
       setShowControls(false);
     }, 3000);
@@ -119,8 +122,15 @@ const GallerySection: React.FC = () => {
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: nextImage, // Pindah ke gambar berikutnya saat swipe ke kiri
+    onSwipedRight: prevImage, // Pindah ke gambar sebelumnya saat swipe ke kanan
+    preventScrollOnSwipe: true, // Mencegah scroll saat swipe
+    trackMouse: true, // Mendukung swipe dengan mouse
+  });
+
   return (
-    <section className='py-20 bg-amber-950 dark:bg-neutral-900' id='gallery'>
+    <section className='py-20 bg-amber-950 dark:bg-gray-900' id='gallery'>
       <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0 }}
@@ -211,6 +221,7 @@ const GallerySection: React.FC = () => {
             onClick={closeLightbox}
           >
             <motion.div
+              {...swipeHandlers} // Tambahkan swipe handlers di sini
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
@@ -233,22 +244,6 @@ const GallerySection: React.FC = () => {
                 )}
               </AnimatePresence>
 
-              {/* Prev Button */}
-              <AnimatePresence>
-                {showControls && (
-                  <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    onClick={prevImage}
-                    className='absolute top-1/2 left-4 transform -translate-y-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
-                  >
-                    <FaChevronLeft size={30} />
-                  </motion.button>
-                )}
-              </AnimatePresence>
-
               {/* Image */}
               <motion.img
                 src={images[selectedImageIndex].src}
@@ -257,22 +252,6 @@ const GallerySection: React.FC = () => {
                 onClick={handleImageTap}
                 whileTap={{ scale: 1.2 }}
               />
-
-              {/* Next Button */}
-              <AnimatePresence>
-                {showControls && (
-                  <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    onClick={nextImage}
-                    className='absolute top-1/2 right-4 transform -translate-y-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
-                  >
-                    <FaChevronRight size={30} />
-                  </motion.button>
-                )}
-              </AnimatePresence>
             </motion.div>
           </motion.div>
         )}

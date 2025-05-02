@@ -4,27 +4,56 @@ import { MapPin, Calendar, Clock } from 'lucide-react';
 import MapLocation from './MapLocation';
 
 const EventSection: React.FC = () => {
-  // Fungsi untuk buka Google Calendar
-  const addToGoogleCalendar = () => {
+  // Fungsi untuk Google Calendar atau .ics file
+  const addToCalendar = () => {
+    const isUsingGoogle = confirm(
+      'Klik OK untuk simpan di Google Calendar.\nKlik cancle untuk download ke kalender lain (iOS/Android/Outlook).'
+    );
+
     const title = 'Pernikahan Nursalim & Risa Indasari';
     const location =
       "Kediaman Mempelai Wanita, Pare'-pare' Maradekaya, Kabupaten Gowa, Sulawesi Selatan";
     const details =
       'Kami mengundang Anda untuk hadir dalam acara pernikahan kami.';
-
     const start = '20250618T013000Z';
     const end = '20250618T030000Z';
 
-    const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-      title
-    )}&dates=${start}/${end}&details=${encodeURIComponent(
-      details
-    )}&location=${encodeURIComponent(location)}`;
-    window.open(url, '_blank');
+    if (isUsingGoogle) {
+      const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+        title
+      )}&dates=${start}/${end}&details=${encodeURIComponent(
+        details
+      )}&location=${encodeURIComponent(location)}`;
+      window.open(url, '_blank');
+    } else {
+      const icsContent = `
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${title}
+DESCRIPTION:${details}
+LOCATION:${location}
+DTSTART:${start}
+DTEND:${end}
+END:VEVENT
+END:VCALENDAR
+    `.trim();
+
+      const blob = new Blob([icsContent], {
+        type: 'text/calendar;charset=utf-8',
+      });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'pernikahan-nursalim-risa.ics';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   return (
-    <section className='py-20 bg-amber-100 dark:bg-neutral-900' id='event'>
+    <section className='py-20 bg-amber-100 dark:bg-gray-900' id='event'>
       <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0 }}
@@ -54,12 +83,16 @@ const EventSection: React.FC = () => {
             className='bg-amber-50 dark:bg-neutral-800 p-8 rounded-lg shadow-md'
           >
             <div className='w-16 h-16 bg-amber-100 dark:bg-neutral-700 rounded-full flex items-center justify-center mx-auto mb-6'>
-              <Calendar
-                onClick={addToGoogleCalendar}
-                className='text-amber-800 dark:text-white cursor-pointer hover:scale-110 transition-transform'
-                size={28}
-                data-tooltip='Klik untuk simpan ke Google Calendar'
-              />
+              <div
+                title='Klik untuk simpan ke kalender Anda (Google / iOS / Android)'
+                className='inline-block'
+              >
+                <Calendar
+                  onClick={addToCalendar}
+                  className='text-amber-800 dark:text-white cursor-pointer hover:scale-110 transition-transform'
+                  size={28}
+                />
+              </div>
             </div>
             <h3 className='text-2xl font-bold text-amber-900 dark:text-white text-center mb-4'>
               Akad Nikah
@@ -93,12 +126,13 @@ const EventSection: React.FC = () => {
             className='bg-amber-50 dark:bg-neutral-800 p-8 rounded-lg shadow-md'
           >
             <div className='w-16 h-16 bg-amber-100 dark:bg-neutral-700 rounded-full flex items-center justify-center mx-auto mb-6'>
-              <Calendar
-                onClick={addToGoogleCalendar}
-                className='text-amber-800 dark:text-white cursor-pointer hover:scale-110 transition-transform'
-                size={28}
-                data-tooltip='Klik untuk simpan ke Google Calendar'
-              />
+              <div title='Klik untuk simpan ke kalender Anda (Google / iOS / Android)'>
+                <Calendar
+                  onClick={addToCalendar}
+                  className='text-amber-800 dark:text-white cursor-pointer hover:scale-110 transition-transform'
+                  size={28}
+                />
+              </div>
             </div>
             <h3 className='text-2xl font-bold text-amber-900 dark:text-white text-center mb-4'>
               Resepsi

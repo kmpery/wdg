@@ -29,7 +29,7 @@ const StorySection: React.FC = () => {
   ];
 
   return (
-    <section id='story' className='py-20 px-4 bg-amber-100 dark:bg-neutral-900'>
+    <section id='story' className='py-20 px-4 bg-amber-100 dark:bg-gray-900'>
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

@@ -21,7 +21,10 @@ const Navbar: React.FC = () => {
       href: '#footer',
       label: (
         <div className='flex justify-center items-center'>
-          <FaRegHeart size={16} className='text-red-400' />
+          <FaRegHeart
+            size={16}
+            className='text-red-400 dark:text-sky-400 hover:text-amber-600 dark:hover:text-sky-200'
+          />
         </div>
       ),
     },
@@ -69,7 +72,7 @@ const Navbar: React.FC = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/30 dark:bg-black/30 backdrop-blur-lg shadow-md'
+          ? 'bg-white/30 dark:bg-sky-950/70 backdrop-blur-lg shadow-md'
           : 'bg-transparent'
       }`}
     >
@@ -81,11 +84,14 @@ const Navbar: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection('#hero')}
-            className='text-2xl font-serif font-bold text-amber-900 dark:text-white hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer transition-all duration-300'
+            className='text-2xl font-serif font-bold text-amber-900 dark:text-sky-200 hover:text-amber-700 dark:hover:text-sky-300 cursor-pointer transition-all duration-300'
           >
             A
             <span className='inline-flex items-center align-middle mx-1'>
-              <FaRegHeart size={16} className='text-red-400' />
+              <FaRegHeart
+                size={16}
+                className='text-red-400 dark:text-sky-400'
+              />
             </span>
             R
           </motion.h1>
@@ -98,7 +104,7 @@ const Navbar: React.FC = () => {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className='text-amber-900 dark:text-white hover:text-amber-700 dark:hover:text-amber-300 transition-colors duration-300 py-2'
+                    className='text-amber-900 dark:text-sky-200 hover:text-amber-700 dark:hover:text-sky-400 transition-colors duration-300 py-2'
                   >
                     {item.label}
                   </button>
@@ -122,7 +128,7 @@ const Navbar: React.FC = () => {
                   className='absolute'
                 >
                   {darkMode ? (
-                    <FaSun size={20} className='text-white' />
+                    <FaSun size={20} className='text-sky-200' />
                   ) : (
                     <FaMoon size={20} />
                   )}
@@ -137,12 +143,12 @@ const Navbar: React.FC = () => {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 <span
-                  className={`absolute block w-6 h-0.5 bg-amber-900 dark:bg-white transition-all duration-300 ease-in-out ${
+                  className={`absolute block w-6 h-0.5 bg-amber-900 dark:bg-sky-200 transition-all duration-300 ease-in-out ${
                     isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
                   }`}
                 ></span>
                 <span
-                  className={`absolute block w-6 h-0.5 bg-amber-900 dark:bg-white transition-all duration-300 ease-in-out ${
+                  className={`absolute block w-6 h-0.5 bg-amber-900 dark:bg-sky-200 transition-all duration-300 ease-in-out ${
                     isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
                   }`}
                 ></span>
@@ -160,14 +166,14 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className='absolute top-16 left-0 right-0 bg-white/80 dark:bg-black/80 backdrop-blur-lg rounded-b-3xl shadow-lg md:hidden'
+            className='absolute top-16 left-0 right-0 bg-white/80 dark:bg-sky-950/80 backdrop-blur-lg rounded-b-3xl shadow-lg md:hidden'
           >
             <div className='container mx-auto px-4 py-8'>
               {menuItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
-                  className='block w-full text-center py-4 text-lg font-extrabold text-amber-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-300 transition-colors duration-300'
+                  className='block w-full text-center py-4 text-lg font-extrabold text-amber-900 dark:text-sky-200 hover:text-amber-500 dark:hover:text-sky-400 transition-colors duration-300'
                 >
                   {item.label}
                 </button>
