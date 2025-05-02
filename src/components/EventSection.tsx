@@ -1,134 +1,184 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaInstagram } from 'react-icons/fa';
+import { MapPin, Calendar, Clock } from 'lucide-react';
+import MapLocation from './MapLocation';
 
-const HomeSection: React.FC = () => {
+const EventSection: React.FC = () => {
+  // Fungsi untuk Google Calendar atau .ics file
+  const addToCalendar = () => {
+    const isUsingGoogle = confirm(
+      'Klik OK untuk simpan di Google Calendar.\nKlik cancle untuk download ke kalender lain (iOS/Android/Outlook).'
+    );
+
+    const title = 'Pernikahan Nursalim & Risa Indasari';
+    const location =
+      "Kediaman Mempelai Wanita, Pare'-pare' Maradekaya, Kabupaten Gowa, Sulawesi Selatan";
+    const details =
+      'Kami mengundang Anda untuk hadir dalam acara pernikahan kami.';
+    const start = '20250618T013000Z';
+    const end = '20250618T030000Z';
+
+    if (isUsingGoogle) {
+      const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+        title
+      )}&dates=${start}/${end}&details=${encodeURIComponent(
+        details
+      )}&location=${encodeURIComponent(location)}`;
+      window.open(url, '_blank');
+    } else {
+      const icsContent = `
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${title}
+DESCRIPTION:${details}
+LOCATION:${location}
+DTSTART:${start}
+DTEND:${end}
+END:VEVENT
+END:VCALENDAR
+    `.trim();
+
+      const blob = new Blob([icsContent], {
+        type: 'text/calendar;charset=utf-8',
+      });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'pernikahan-nursalim-risa.ics';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
-    <section className='py-20 bg-amber-50 dark:bg-gray-900' id='home'>
+    <section className='py-20 bg-amber-100 dark:bg-gray-900' id='event'>
       <div className='container mx-auto px-4'>
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className='text-center mb-12'
         >
           <h2 className='text-4xl font-bold text-amber-900 dark:text-sky-400 mb-4'>
-            The Wedding
+            Wedding Ceremony & Reception
           </h2>
-          <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-10'></div>
-
-          <h3 className='mb-2 font-bold text-amber-800 dark:text-sky-300'>
-            بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْم
-          </h3>
-          <h3 className='mb-2 font-bold text-amber-800 dark:text-sky-300'>
-            Assalamu'alaikum Warohmatullahi Wabarokatuh
-          </h3>
+          <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-8'></div>
           <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto'>
-            Dengan memohon Ridho serta Rahmat Allah SWT dan tanpa mengurangi
-            rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk
-            menghadiri acara pernikahan kami
+            Dengan segala kerendahan hati kami berharap kehadiran
+            Bapak/Ibu/Saudara/i dalam acara pernikahan kami yang akan
+            diselenggarakan pada:
           </p>
         </motion.div>
 
-        <div className='max-w-4xl mx-auto'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-12 items-center'>
-            {/* Groom */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className='text-center'
-            >
-              <div className='mb-6'>
-                <img
-                  src='https://images.pexels.com/photos/8100784/pexels-photo-8100784.jpeg'
-                  alt='Groom'
-                  className='w-64 h-64 rounded-full mx-auto mt-4 object-cover border-4 border-amber-200 dark:border-sky-700'
-                />
-              </div>
-              <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-100 mb-2'>
-                Nursalim S.H Dg.Nuntung
-              </h3>
-              <a
-                href='https://www.instagram.com/_aaaalim?igsh=MmFjYTZhYjBvOWxk&utm_source=qr'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='inline-flex items-center text-amber-800 hover:text-amber-600 dark:text-sky-200 dark:hover:text-sky-400 transition-colors duration-300'
-              >
-                <FaInstagram size={20} className='mr-1' />
-                @_aaaalim
-              </a>
-              <p className='mt-4 text-amber-800 dark:text-sky-200'>
-                <br />
-                Putra Pertama dari Bapak Haeruddin dg. Gassing <br />
-                dan <br />
-                Ibu Hj. Nurbaya dg. Sabbe
-              </p>
-            </motion.div>
-
-            {/* Bride */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className='text-center'
-            >
-              <div className='mb-6'>
-                <img
-                  src='https://images.pexels.com/photos/8100584/pexels-photo-8100584.jpeg'
-                  alt='Bride'
-                  className='w-64 h-64 rounded-full mx-auto mt-4 object-cover border-4 border-amber-200 dark:border-sky-700'
-                />
-              </div>
-              <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-100 mb-2'>
-                Risa Inda Sari Dg.Nginga
-              </h3>
-              <a
-                href='https://www.instagram.com/rhisaaaaaaa_?utm_source=qr&igsh=MXZnanV1ZW9tcDBqOQ=='
-                target='_blank'
-                rel='noopener noreferrer'
-                className='inline-flex items-center text-amber-800 hover:text-amber-600 dark:text-sky-200 dark:hover:text-sky-400 transition-colors duration-300'
-              >
-                <FaInstagram size={20} className='mr-1' />
-                @rhisaaaaaaa_
-              </a>
-              <p className='mt-4 text-amber-800 dark:text-sky-200'>
-                <br />
-                Putri ke 3 dari Bapak Muh. Rusydi Dg.Ngudding
-                <br />
-                dan <br />
-                Ibu Rahma dg. Baji
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Quotes */}
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto'>
+          {/* Akad Nikah */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='mt-16 text-center bg-amber-200 dark:bg-sky-950 p-8 rounded-lg'
+            className='bg-amber-50 dark:bg-sky-950 p-8 rounded-lg shadow-md'
           >
-            <h3 className='text-2xl font-semibold text-amber-800 dark:text-sky-400 mb-4'>
-              (Q.S. Ar-Rum: 21)
+            <div className='w-16 h-16 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-6'>
+              <div
+                title='Klik untuk simpan ke kalender Anda (Google / iOS / Android)'
+                className='inline-block'
+              >
+                <Calendar
+                  onClick={addToCalendar}
+                  className='text-amber-800 dark:text-sky-200 cursor-pointer hover:scale-110 transition-transform'
+                  size={28}
+                />
+              </div>
+            </div>
+            <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-4'>
+              Akad Nikah
             </h3>
-            <p className='text-amber-800 dark:text-sky-200'>
-              وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا
-              لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً
-              إِنَّ فِي ذَلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ
+            <div className='flex items-center justify-center space-x-2 mb-3'>
+              <Calendar
+                size={16}
+                className='text-amber-700 dark:text-sky-300'
+              />
+              <span className='text-amber-800 dark:text-sky-200'>
+                Rabu, 18 Juni 2025
+              </span>
+            </div>
+            <div className='flex items-center justify-center space-x-2 mb-3'>
+              <Clock size={16} className='text-amber-700 dark:text-sky-300' />
+              <span className='text-amber-800 dark:text-sky-200'>
+                09:30 - 11:00 WITA
+              </span>
+            </div>
+            <div className='flex items-center justify-center space-x-2 mb-6'>
+              <MapPin size={16} className='text-amber-700 dark:text-sky-300' />
+              <span className='text-amber-800 dark:text-sky-200'>
+                Kediaman Mempelai Wanita
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Resepsi */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className='bg-amber-50 dark:bg-sky-950 p-8 rounded-lg shadow-md'
+          >
+            <div className='w-16 h-16 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-6'>
+              <div title='Klik untuk simpan ke kalender Anda (Google / iOS / Android)'>
+                <Calendar
+                  onClick={addToCalendar}
+                  className='text-amber-800 dark:text-sky-200 cursor-pointer hover:scale-110 transition-transform'
+                  size={28}
+                />
+              </div>
+            </div>
+            <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-4'>
+              Resepsi
+            </h3>
+            <div className='flex items-center justify-center space-x-2 mb-3'>
+              <Calendar
+                size={16}
+                className='text-amber-700 dark:text-sky-300'
+              />
+              <span className='text-amber-800 dark:text-sky-200'>
+                Rabu, 18 Juni 2025
+              </span>
+            </div>
+            <div className='flex items-center justify-center space-x-2 mb-3'>
+              <Clock size={16} className='text-amber-700 dark:text-sky-300' />
+              <span className='text-amber-800 dark:text-sky-200'>
+                11.00 WITA - Selesai
+              </span>
+            </div>
+            <div className='flex items-center justify-center space-x-2 mb-6'>
+              <MapPin size={16} className='text-amber-700 dark:text-sky-300' />
+              <span className='text-amber-800 dark:text-sky-200'>
+                Kediaman Mempelai Wanita
+              </span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Lokasi */}
+        <div className='mt-16 max-w-5xl mx-auto'>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-6'>
+              Lokasi Acara
+            </h3>
+            <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto mb-4 text-center'>
+              Alamat: Pare'-pare' Maradekaya, Kabupaten Gowa, Sulawesi Selatan
             </p>
-            <p className='italic text-amber-700 dark:text-sky-300 mt-2'>
-              " Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan
-              pasangan-pasangan untukmu dari jenismu sendiri, agar kamu
-              cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di
-              antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu
-              benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang
-              berpikir."
-            </p>
+            <MapLocation />
           </motion.div>
         </div>
       </div>
@@ -136,4 +186,4 @@ const HomeSection: React.FC = () => {
   );
 };
 
-export default HomeSection;
+export default EventSection;
