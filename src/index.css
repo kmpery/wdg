@@ -45,24 +45,6 @@ h6 {
   background-color: var(--color-cream);
 }
 
-/* Add special scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-amber-50);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-amber-800);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-amber-900);
-}
-
 /* Transitions */
 .transition-all {
   transition-property: all;

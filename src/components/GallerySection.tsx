@@ -217,11 +217,11 @@ const GallerySection: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className='fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50'
+            className='fixed inset-0 bg-black flex items-center justify-center z-50'
             onClick={closeLightbox}
           >
             <motion.div
-              {...swipeHandlers} // gesture swipe
+              {...swipeHandlers}
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
@@ -234,10 +234,9 @@ const GallerySection: React.FC = () => {
                   <motion.button
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     onClick={closeLightbox}
-                    className='absolute top-4 right-4 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
+                    className='absolute bottom-6 left-1/2 -translate-x-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
                   >
                     <IoCloseOutline size={24} />
                   </motion.button>
