@@ -86,7 +86,7 @@ const HeroSection: React.FC = () => {
           transition={{ duration: 1 }}
           className='z-10 px-8 py-12 bg-amber-50 bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 rounded-lg shadow-2xl max-w-2xl mx-4 md:mx-auto'
         >
-          <h3 className='text-lg text-amber-800 dark:text-sky-100 mb-6 font-light'>
+          <h3 className='text-lg text-amber-800 dark:text-sky-400 mb-6 font-light'>
             Undangan
           </h3>
 

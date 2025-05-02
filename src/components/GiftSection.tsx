@@ -65,11 +65,11 @@ const GiftSection: React.FC = () => {
           viewport={{ once: true }}
           className='text-center mb-12'
         >
-          <h2 className='text-4xl font-bold text-amber-900 dark:text-white mb-4'>
+          <h2 className='text-4xl font-bold text-amber-900 dark:text-sky-400 mb-4'>
             Gifts
           </h2>
-          <div className='w-16 h-1 bg-amber-800 dark:bg-white mx-auto mb-8'></div>
-          <p className='text-amber-800 dark:text-gray-300 max-w-2xl mx-auto'>
+          <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-8'></div>
+          <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto'>
             Doa restu Bapak/Ibu sekalian merupakan karunia yang sangat berarti
             bagi kami. Dan jika memberi merupakan ungkapan tanda kasih,
             Bapak/Ibu dapat memberi kado secara cashless.
@@ -86,28 +86,26 @@ const GiftSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className='bg-amber-50 dark:bg-gray-800 rounded-lg p-8 shadow-md'
+              className='bg-amber-50 dark:bg-sky-950 rounded-lg p-8 shadow-md'
             >
-              <div className='w-16 h-16 bg-amber-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-6'>
+              <div className='w-16 h-16 text-amber-800 dark:text-sky-950 bg-amber-100 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-6'>
                 {option.icon}
               </div>
-              <h3 className='text-2xl font-semibold text-amber-900 dark:text-white text-center mb-4'>
-                {option.titleDisplay}
-              </h3>
-              <p className='text-amber-800 dark:text-gray-300 text-center mb-6'>
+              <h3 className=' text-center mb-1'>{option.titleDisplay}</h3>
+              <p className='text-amber-800 dark:text-sky-300 text-center mb-6'>
                 {option.description}
               </p>
 
               {option.details && (
-                <div className='bg-white dark:bg-gray-700 p-4 rounded-md border border-amber-200 dark:border-gray-600'>
-                  <p className='text-amber-800 dark:text-gray-100 whitespace-pre-line text-center font-mono'>
+                <div className='bg-white dark:bg-sky-900 p-4 rounded-md border border-amber-200 dark:border-sky-700'>
+                  <p className='text-amber-800 dark:text-sky-200 whitespace-pre-line text-center font-sans'>
                     {option.details}
                   </p>
                   <button
                     onClick={() =>
                       copyToClipboard(option.details ?? '', option.title)
                     }
-                    className='mt-4 flex items-center justify-center px-4 py-2 bg-amber-700 hover:bg-amber-800 dark:hover:bg-amber-600 text-white rounded-md transition-colors duration-300 mx-auto'
+                    className='mt-4 flex items-center justify-center px-4 py-2 bg-amber-700 hover:bg-amber-800 dark:bg-sky-700 dark:hover:bg-sky-600 text-white dark:text-sky-200 rounded-md transition-colors duration-300 mx-auto'
                   >
                     {copiedDetail === option.title ? (
                       <>

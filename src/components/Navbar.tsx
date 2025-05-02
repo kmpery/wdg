@@ -166,7 +166,7 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className='absolute top-16 left-0 right-0 bg-white/80 dark:bg-sky-950/80 backdrop-blur-lg rounded-b-3xl shadow-lg md:hidden'
+            className='absolute top-16 left-0 right-0 bg-amber-50/80 dark:bg-sky-950/80 backdrop-blur-lg rounded-b-3xl shadow-lg md:hidden'
           >
             <div className='container mx-auto px-4 py-8'>
               {menuItems.map((item) => (

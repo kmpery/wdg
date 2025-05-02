@@ -38,15 +38,15 @@ const StorySection: React.FC = () => {
         className='max-w-4xl mx-auto text-center'
       >
         <div className='mb-8 flex justify-center'>
-          <Heart className='text-amber-400 dark:text-white h-8 w-8' />
+          <Heart className='text-amber-400 dark:text-sky-500 h-8 w-8' />
         </div>
 
-        <h2 className='text-4xl font-bold text-amber-900 dark:text-white mb-4'>
+        <h2 className='text-4xl font-bold text-amber-900 dark:text-sky-400 mb-4'>
           Our Love Story
         </h2>
-        <div className='w-16 h-1 bg-amber-800 dark:bg-white mx-auto mb-8'></div>
+        <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-8'></div>
 
-        <p className='text-amber-800 dark:text-neutral-300 max-w-2xl mx-auto mb-8'>
+        <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto mb-8'>
           Banyak cerita yang kami lalui sehingga akhirnya kami bisa bersatu,
           cerita yang akan kami kenang selalu, dan cerita itu kami bagi untuk
           anda.
@@ -54,7 +54,7 @@ const StorySection: React.FC = () => {
 
         <div className='relative'>
           {/* Timeline line */}
-          <div className='absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-amber-200 dark:bg-neutral-700 z-0'></div>
+          <div className='absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-amber-200 dark:bg-sky-700 z-0'></div>
 
           {timelineEvents.map((event, index) => (
             <motion.div
@@ -68,7 +68,7 @@ const StorySection: React.FC = () => {
               }`}
             >
               {/* Timeline dot */}
-              <div className='absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-amber-200 dark:bg-neutral-700 rounded-full border-4 border-amber-50 dark:border-neutral-300 z-20 hidden md:block'></div>
+              <div className='absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-amber-200 dark:bg-sky-700 rounded-full border-4 border-amber-50 dark:border-sky-300 z-20 hidden md:block'></div>
 
               {/* Image */}
               <div
@@ -76,7 +76,7 @@ const StorySection: React.FC = () => {
                   index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'
                 }`}
               >
-                <div className='w-64 h-64 rounded-full overflow-hidden border-4 border-amber-200 dark:border-neutral-600 shadow-lg'>
+                <div className='w-64 h-64 rounded-full overflow-hidden border-4 border-amber-200 dark:border-sky-700 shadow-lg'>
                   <div
                     className='w-full h-full bg-cover bg-center'
                     style={{ backgroundImage: `url(${event.image})` }}
@@ -85,14 +85,14 @@ const StorySection: React.FC = () => {
               </div>
 
               {/* Content */}
-              <div className='w-full md:w-1/2 text-left p-6 bg-amber-50 dark:bg-neutral-800 rounded-lg shadow-md'>
-                <div className='inline-block px-3 py-1 bg-amber-100 dark:bg-neutral-700 text-amber-800 dark:text-white text-sm rounded-full mb-2 font-serif'>
+              <div className='w-full md:w-1/2 text-left p-6 bg-amber-50 dark:bg-sky-950 rounded-lg shadow-md'>
+                <div className='inline-block px-3 py-1 bg-amber-100 dark:bg-sky-800 text-amber-800 dark:text-sky-300 text-sm rounded-full mb-2 font-serif'>
                   {event.date}
                 </div>
-                <h3 className='text-xl font-serif text-amber-900 dark:text-white mb-2'>
+                <h3 className='text-xl font-serif text-amber-900 dark:text-sky-300 mb-2'>
                   {event.title}
                 </h3>
-                <p className='text-amber-800 dark:text-neutral-300 font-serif'>
+                <p className='text-amber-800 dark:text-sky-200 font-serif'>
                   {event.description}
                 </p>
               </div>

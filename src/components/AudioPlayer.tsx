@@ -54,7 +54,7 @@ const AudioPlayer: React.FC = () => {
             repeat: isPlaying ? Infinity : 0,
             ease: 'linear',
           }}
-          className='flex items-center justify-center w-14 h-14 bg-amber-800 text-white dark:text-sky-200 rounded-full shadow-lg hover:bg-amber-900 transition-colors duration-300 dark:bg-sky-900 dark:hover:bg-sky-700'
+          className='flex items-center justify-center w-14 h-14 bg-amber-800 text-white dark:text-sky-200 rounded-full shadow-lg hover:bg-amber-900 transition-colors duration-300 dark:bg-sky-900 dark:hover:bg-sky-700 border-2 border-amber-200 dark:border-amber-200/60'
         >
           {isPlaying ? (
             <>

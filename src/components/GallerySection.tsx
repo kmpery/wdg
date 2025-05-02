@@ -137,11 +137,11 @@ const GallerySection: React.FC = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className='text-center mb-12 text-amber-100 dark:text-white'
+          className='text-center mb-12 text-amber-100 dark:text-sky-400'
         >
           <h2 className='text-4xl font-bold mb-4'>Our Gallery</h2>
-          <div className='w-16 h-1 bg-amber-100 dark:bg-white mx-auto mb-8'></div>
-          <p className='text-lg max-w-2xl mx-auto'>
+          <div className='w-16 h-1 bg-amber-100 dark:bg-sky-400 mx-auto mb-8'></div>
+          <p className='text-lg max-w-2xl mx-auto dark:text-sky-200'>
             Gallery foto kebahagiaan kami yang kami kenang selalu.
           </p>
         </motion.div>
@@ -221,14 +221,14 @@ const GallerySection: React.FC = () => {
             onClick={closeLightbox}
           >
             <motion.div
-              {...swipeHandlers} // Tambahkan swipe handlers di sini
+              {...swipeHandlers} // gesture swipe
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()}
-              className='relative max-w-5xl w-full mx-4 flex flex-col items-center'
+              className='relative w-screen h-screen flex items-center justify-center'
             >
-              {/* Close Button */}
+              {/* Tombol Close */}
               <AnimatePresence>
                 {showControls && (
                   <motion.button
@@ -244,13 +244,12 @@ const GallerySection: React.FC = () => {
                 )}
               </AnimatePresence>
 
-              {/* Image */}
+              {/* Gambar Fullscreen */}
               <motion.img
                 src={images[selectedImageIndex].src}
                 alt={images[selectedImageIndex].alt}
-                className='rounded-2xl max-h-[90vh] w-full object-contain cursor-zoom-in'
+                className='w-screen h-screen object-contain'
                 onClick={handleImageTap}
-                whileTap={{ scale: 1.2 }}
               />
             </motion.div>
           </motion.div>

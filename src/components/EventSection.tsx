@@ -62,11 +62,11 @@ END:VCALENDAR
           viewport={{ once: true }}
           className='text-center mb-12'
         >
-          <h2 className='text-4xl font-bold text-amber-900 dark:text-white mb-4'>
+          <h2 className='text-4xl font-bold text-amber-900 dark:text-sky-400 mb-4'>
             Wedding Ceremony & Reception
           </h2>
-          <div className='w-16 h-1 bg-amber-800 dark:bg-white mx-auto mb-8'></div>
-          <p className='text-amber-800 dark:text-gray-300 max-w-2xl mx-auto'>
+          <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-8'></div>
+          <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto'>
             Dengan segala kerendahan hati kami berharap kehadiran
             Bapak/Ibu/Saudara/i dalam acara pernikahan kami yang akan
             diselenggarakan pada:
@@ -80,38 +80,41 @@ END:VCALENDAR
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='bg-amber-50 dark:bg-neutral-800 p-8 rounded-lg shadow-md'
+            className='bg-amber-50 dark:bg-sky-950 p-8 rounded-lg shadow-md'
           >
-            <div className='w-16 h-16 bg-amber-100 dark:bg-neutral-700 rounded-full flex items-center justify-center mx-auto mb-6'>
+            <div className='w-16 h-16 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-6'>
               <div
                 title='Klik untuk simpan ke kalender Anda (Google / iOS / Android)'
                 className='inline-block'
               >
                 <Calendar
                   onClick={addToCalendar}
-                  className='text-amber-800 dark:text-white cursor-pointer hover:scale-110 transition-transform'
+                  className='text-amber-800 dark:text-sky-200 cursor-pointer hover:scale-110 transition-transform'
                   size={28}
                 />
               </div>
             </div>
-            <h3 className='text-2xl font-bold text-amber-900 dark:text-white text-center mb-4'>
+            <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-4'>
               Akad Nikah
             </h3>
             <div className='flex items-center justify-center space-x-2 mb-3'>
-              <Calendar size={16} className='text-amber-700 dark:text-white' />
-              <span className='text-amber-800 dark:text-gray-300'>
+              <Calendar
+                size={16}
+                className='text-amber-700 dark:text-sky-300'
+              />
+              <span className='text-amber-800 dark:text-sky-200'>
                 Rabu, 18 Juni 2025
               </span>
             </div>
             <div className='flex items-center justify-center space-x-2 mb-3'>
-              <Clock size={16} className='text-amber-700 dark:text-white' />
-              <span className='text-amber-800 dark:text-gray-300'>
+              <Clock size={16} className='text-amber-700 dark:text-sky-300' />
+              <span className='text-amber-800 dark:text-sky-200'>
                 09:30 - 11:00 WITA
               </span>
             </div>
             <div className='flex items-center justify-center space-x-2 mb-6'>
-              <MapPin size={16} className='text-amber-700 dark:text-white' />
-              <span className='text-amber-800 dark:text-gray-300'>
+              <MapPin size={16} className='text-amber-700 dark:text-sky-300' />
+              <span className='text-amber-800 dark:text-sky-200'>
                 Kediaman Mempelai Wanita
               </span>
             </div>
@@ -123,35 +126,38 @@ END:VCALENDAR
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='bg-amber-50 dark:bg-neutral-800 p-8 rounded-lg shadow-md'
+            className='bg-amber-50 dark:bg-sky-950 p-8 rounded-lg shadow-md'
           >
-            <div className='w-16 h-16 bg-amber-100 dark:bg-neutral-700 rounded-full flex items-center justify-center mx-auto mb-6'>
+            <div className='w-16 h-16 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-6'>
               <div title='Klik untuk simpan ke kalender Anda (Google / iOS / Android)'>
                 <Calendar
                   onClick={addToCalendar}
-                  className='text-amber-800 dark:text-white cursor-pointer hover:scale-110 transition-transform'
+                  className='text-amber-800 dark:text-sky-200 cursor-pointer hover:scale-110 transition-transform'
                   size={28}
                 />
               </div>
             </div>
-            <h3 className='text-2xl font-bold text-amber-900 dark:text-white text-center mb-4'>
+            <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-4'>
               Resepsi
             </h3>
             <div className='flex items-center justify-center space-x-2 mb-3'>
-              <Calendar size={16} className='text-amber-700 dark:text-white' />
-              <span className='text-amber-800 dark:text-gray-300'>
+              <Calendar
+                size={16}
+                className='text-amber-700 dark:text-sky-300'
+              />
+              <span className='text-amber-800 dark:text-sky-200'>
                 Rabu, 18 Juni 2025
               </span>
             </div>
             <div className='flex items-center justify-center space-x-2 mb-3'>
-              <Clock size={16} className='text-amber-700 dark:text-white' />
-              <span className='text-amber-800 dark:text-gray-300'>
+              <Clock size={16} className='text-amber-700 dark:text-sky-300' />
+              <span className='text-amber-800 dark:text-sky-200'>
                 11.00 WITA - Selesai
               </span>
             </div>
             <div className='flex items-center justify-center space-x-2 mb-6'>
-              <MapPin size={16} className='text-amber-700 dark:text-white' />
-              <span className='text-amber-800 dark:text-gray-300'>
+              <MapPin size={16} className='text-amber-700 dark:text-sky-300' />
+              <span className='text-amber-800 dark:text-sky-200'>
                 Kediaman Mempelai Wanita
               </span>
             </div>
@@ -166,10 +172,10 @@ END:VCALENDAR
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h3 className='text-2xl font-bold text-amber-900 dark:text-white text-center mb-6'>
+            <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-6'>
               Lokasi Acara
             </h3>
-            <p className='text-amber-800 dark:text-gray-300 max-w-2xl mx-auto mb-4 text-center'>
+            <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto mb-4 text-center'>
               Alamat: Pare'-pare' Maradekaya, Kabupaten Gowa, Sulawesi Selatan
             </p>
             <MapLocation />

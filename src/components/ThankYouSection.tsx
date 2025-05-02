@@ -142,7 +142,7 @@ const ThankYouSection: React.FC = () => {
   };
 
   return (
-    <section className='py-20 bg-amber-100 dark:bg-black' id='thankyou'>
+    <section className='py-20 bg-amber-100 dark:bg-gray-900' id='thankyou'>
       <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0 }}
@@ -151,11 +151,11 @@ const ThankYouSection: React.FC = () => {
           viewport={{ once: true }}
           className='text-center mb-12'
         >
-          <h2 className='text-4xl font-bold text-amber-900 dark:text-white mb-4'>
+          <h2 className='text-4xl font-bold text-amber-900 dark:text-sky-400 mb-4'>
             Thank You
           </h2>
-          <div className='w-16 h-1 bg-amber-800 dark:bg-yellow-400 mx-auto mb-8'></div>
-          <p className='text-amber-800 dark:text-gray-300 max-w-2xl mx-auto'>
+          <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-8'></div>
+          <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto'>
             Tinggalkan doa terbaik Anda untuk momen bahagia kami
           </p>
         </motion.div>
@@ -166,12 +166,12 @@ const ThankYouSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='bg-amber-50 dark:bg-gray-900 rounded-lg shadow-md p-8 mb-8'
+            className='bg-amber-50 dark:bg-sky-950 rounded-lg shadow-md p-8 mb-8'
           >
             <form onSubmit={handleSubmit}>
               <div className='mb-4'>
                 <label
-                  className='block text-amber-800 dark:text-gray-300 text-sm font-medium mb-2'
+                  className='block text-amber-800 dark:text-sky-300 text-sm font-medium mb-2'
                   htmlFor='name'
                 >
                   Nama
@@ -182,14 +182,14 @@ const ThankYouSection: React.FC = () => {
                   value={commentName}
                   onChange={(e) => setCommentName(e.target.value)}
                   required
-                  className='w-full px-4 py-2 border border-amber-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-yellow-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400'
+                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-sky-950 dark:text-sky-200 bg-white text-gray-900 placeholder-gray-400 dark:placeholder-sky-400'
                   placeholder='Nama Anda'
                 />
               </div>
 
               <div className='mb-6'>
                 <label
-                  className='block text-amber-800 dark:text-gray-300 text-sm font-medium mb-2'
+                  className='block text-amber-800 dark:text-sky-300 text-sm font-medium mb-2'
                   htmlFor='message'
                 >
                   Pesan
@@ -200,7 +200,7 @@ const ThankYouSection: React.FC = () => {
                   onChange={(e) => setCommentMessage(e.target.value)}
                   required
                   rows={4}
-                  className='w-full px-4 py-2 border border-amber-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-yellow-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400'
+                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white dark:focus:ring-sky-400 dark:bg-sky-950 dark:text-sky-200 text-gray-900 placeholder-gray-400 dark:placeholder-sky-400'
                   placeholder='Tulis Ucapan'
                 ></textarea>
               </div>
@@ -208,7 +208,7 @@ const ThankYouSection: React.FC = () => {
               <button
                 type='submit'
                 disabled={isSubmitting}
-                className={`flex items-center justify-center px-6 py-3 bg-amber-800 hover:bg-amber-900 dark:hover:bg-yellow-700 text-white rounded-md transition-colors duration-300 ${
+                className={`flex items-center justify-center px-6 py-3 bg-amber-800 dark:bg-sky-700 dark:hover:bg-sky-600 text-white dark:text-sky-200 rounded-md transition-colors duration-300 ${
                   isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
                 }`}
               >
@@ -217,7 +217,7 @@ const ThankYouSection: React.FC = () => {
               </button>
             </form>
 
-            <h3 className='text-2xl font-semibold text-amber-900 dark:text-white mt-8 flex items-center'>
+            <h3 className='text-2xl font-semibold text-amber-900 dark:text-sky-300 mt-8 flex items-center'>
               <FaCommentDots className='mr-2' />
               <span>({comments.length}) Ucapan</span>
             </h3>
@@ -232,7 +232,7 @@ const ThankYouSection: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                   viewport={{ once: true }}
-                  className='bg-amber-50 dark:bg-gray-900 rounded-lg shadow-sm p-6 border-l-4 border-amber-500 dark:border-yellow-400'
+                  className='bg-amber-50 dark:bg-sky-950/50 rounded-lg shadow-sm p-6 border-l-4 border-amber-500 dark:border-sky-400/50'
                 >
                   <div className='flex justify-between items-start mb-2'>
                     <h4
@@ -242,11 +242,11 @@ const ThankYouSection: React.FC = () => {
                     >
                       {comment.name}
                     </h4>
-                    <span className='text-xs text-gray-500 dark:text-gray-400'>
+                    <span className='text-xs text-gray-500 dark:text-sky-700'>
                       {formatDateToIndonesian(comment.createdAt)}
                     </span>
                   </div>
-                  <p className='text-amber-800 dark:text-gray-300'>
+                  <p className='text-amber-800 dark:text-sky-200/50'>
                     {comment.message}
                   </p>
                 </motion.div>

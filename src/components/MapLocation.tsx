@@ -9,7 +9,7 @@ const MapLocation: React.FC = () => {
   const googleMapsUrl = 'https://maps.app.goo.gl/4kw6z5nDqvNiNxFw9';
 
   return (
-    <div className='bg-amber-50 dark:bg-neutral-800 rounded-lg shadow-lg overflow-hidden'>
+    <div className='bg-amber-50 dark:bg-sky-950 rounded-lg shadow-lg overflow-hidden'>
       <div className='h-96 w-full'>
         <iframe
           src={mapSrc}
@@ -30,7 +30,7 @@ const MapLocation: React.FC = () => {
           rel='noopener noreferrer'
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className='inline-flex items-center justify-center px-6 py-3 bg-amber-800 text-white rounded-full hover:bg-amber-900 transition-colors duration-300 dark:bg-white dark:text-black dark:hover:bg-neutral-300'
+          className='inline-flex items-center justify-center px-6 py-3 bg-amber-800 text-white rounded-full hover:bg-amber-900 transition-colors duration-300 dark:bg-sky-800 dark:text-sky-100 dark:hover:bg-sky-600'
         >
           <ExternalLink size={16} className='mr-2' />
           <span>View Map</span>
