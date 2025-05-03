@@ -188,7 +188,7 @@ const RsvpSection: React.FC = () => {
                   value={formData.willAttend}
                   onChange={handleChange}
                   required
-                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-sky-950 dark:text-sky-200'
+                  className='w-full px-4 py-2 border bg-white border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-sky-950 dark:text-sky-200'
                 >
                   <option value=''>Pilih salah satu</option>
                   <option value='yes'>Ya, saya akan hadir</option>
@@ -233,10 +233,10 @@ const RsvpSection: React.FC = () => {
                     Memuat buku tamu...
                   </p>
                 ) : guestbook.length > 0 ? (
-                  <div className='overflow-y-auto max-h-64 mt-4 rounded-md border border-amber-700 dark:border-sky-700'>
+                  <div className='overflow-y-auto max-h-64 mt-4 rounded-md border border-amber-900 dark:border-sky-700'>
                     <table className='w-full text-sm'>
                       <thead>
-                        <tr className='bg-amber-900 dark:bg-sky-950 text-white dark:text-sky-200 opacity-90'>
+                        <tr className='bg-amber-900 dark:bg-sky-950 text-white dark:text-sky-200 font-extrabold opacity-90 border-b dark:last:border-sky-400'>
                           <th className='py-2 px-3 text-center'>No.</th>
                           <th className='py-2 px-3 text-center'>Nama</th>
                           <th className='py-2 px-3 text-center'>Status</th>
@@ -250,7 +250,7 @@ const RsvpSection: React.FC = () => {
                               index % 2 === 0
                                 ? 'bg-gray-50 dark:bg-sky-900'
                                 : 'bg-amber-50 dark:bg-sky-800'
-                            } border-b last:border-none first:border-gray-400 opacity-90`}
+                            } border-b last:border-none first:border-black/30 opacity-90`}
                           >
                             <td className='py-2 px-3 text-center text-amber-800 dark:text-sky-200'>
                               {index + 1}

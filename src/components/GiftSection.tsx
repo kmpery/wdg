@@ -88,7 +88,7 @@ const GiftSection: React.FC = () => {
               viewport={{ once: true }}
               className='bg-amber-50 dark:bg-sky-950 rounded-lg p-8 shadow-md'
             >
-              <div className='w-16 h-16 text-amber-800 dark:text-sky-950 bg-amber-100 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-6'>
+              <div className='w-16 h-16 text-amber-800 dark:text-sky-300 bg-amber-100 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-6'>
                 {option.icon}
               </div>
               <h3 className=' text-center mb-1'>{option.titleDisplay}</h3>
