@@ -45,38 +45,6 @@ const RsvpSection: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setErrorMessage('');
-
-    if (!formData.name || !formData.willAttend) {
-      setErrorMessage('Mohon lengkapi semua field yang wajib diisi.');
-      setIsSubmitting(false);
-      return;
-    }
-
-    try {
-      const res = await fetch(`${backendUrl}/api/rsvp`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (!res.ok) {
-        throw new Error('Gagal mengirim RSVP');
-      }
-
-      setIsSubmitted(true);
-      await fetchGuestbook();
-    } catch (error) {
-      console.error(error);
-      setErrorMessage('Gagal mengirimkan RSVP. Silakan coba lagi.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   const fetchGuestbook = async () => {
     setLoadingGuestbook(true);
     try {
@@ -98,6 +66,44 @@ const RsvpSection: React.FC = () => {
       await fetchGuestbook();
     }
     setShowGuestbook((prev) => !prev);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage('');
+
+    if (!formData.name || !formData.willAttend) {
+      setErrorMessage('Mohon lengkapi semua field yang wajib diisi.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const res = await fetch(`${backendUrl}/api/rsvp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.status === 409) {
+        setErrorMessage('Kamu sudah pernah mengisi RSVP. Terima kasih!');
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error('Gagal mengirim RSVP');
+      }
+
+      setIsSubmitted(true);
+      await fetchGuestbook();
+    } catch (error) {
+      console.error(error);
+      setErrorMessage('Gagal mengirimkan RSVP. Silakan coba lagi.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
