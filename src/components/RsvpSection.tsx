@@ -175,7 +175,8 @@ const RsvpSection: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-sky-950 dark:text-sky-200'
+                  readOnly={!!recipientName}
+                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-sky-950 dark:text-sky-200 disabled:opacity-60'
                   placeholder='Nama'
                 />
               </div>
