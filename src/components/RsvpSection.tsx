@@ -256,7 +256,7 @@ const RsvpSection: React.FC = () => {
                               index % 2 === 0
                                 ? 'bg-gray-50 dark:bg-sky-900'
                                 : 'bg-amber-50 dark:bg-sky-800'
-                            } border-b last:border-none first:border-black/30 opacity-90`}
+                            } border-b border-amber-200 dark:border-sky-700 last:border-none opacity-90`}
                           >
                             <td className='py-2 px-3 text-center text-amber-800 dark:text-sky-200'>
                               {index + 1}
