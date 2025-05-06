@@ -88,32 +88,31 @@ const HeroSection: React.FC = () => {
   return (
     <section
       id='hero'
-      className='h-screen w-full flex flex-col md:flex-row text-center bg-cover bg-center bg-repeat bg-amber-100 dark:bg-gray-800'
+      className='min-h-screen w-full flex flex-col md:flex-row text-center bg-cover bg-center bg-repeat bg-amber-100 dark:bg-gray-800'
       style={{
         backgroundImage: isDarkMode
           ? "url('/hero/bg-dark-1.png')"
           : "url('/hero/bg-light-1.png')",
       }}
     >
-      {/* Container Gambar */}
-      <div className='flex-1 flex items-center justify-center'>
-        <div className='w-[80%] aspect-square rounded-full overflow-hidden border-4 border-amber-200 dark:border-sky-700'>
+      {/* Gambar & Konten dalam 1 kolom (untuk layar kecil) */}
+      <div className='flex-1 flex flex-col items-center justify-start md:justify-center pt-6 md:pt-0'>
+        {/* Gambar */}
+        <div className='w-[60vw] max-w-xs aspect-square rounded-full overflow-hidden border-4 border-amber-200 dark:border-sky-700 mb-4'>
           <img
             src='gallery/8.jpg'
             alt='Pengantin'
             className='w-full h-full object-cover'
           />
         </div>
-      </div>
 
-      {/* Container Konten */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className='flex-1 flex items-center justify-center'
-      >
-        <div className='bg-amber-50 bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 rounded-lg shadow-2xl p-6 w-[80%] max-w-md'>
+        {/* Konten */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className='w-[80%] max-w-md bg-amber-50 bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 rounded-lg shadow-2xl p-6 mb-10'
+        >
           <h3 className='text-lg text-amber-800 dark:text-sky-400 mb-4 font-light'>
             Undangan
           </h3>
@@ -162,8 +161,8 @@ const HeroSection: React.FC = () => {
               </>
             )}
           </motion.button>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };
