@@ -17,40 +17,40 @@ interface Image {
 
 const images: Image[] = [
   {
-    src: 'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg',
-    alt: 'Couple photo 1',
+    src: 'gallery/1.jpg',
+    alt: 'Gallery 1',
   },
   {
-    src: 'https://images.pexels.com/photos/1730877/pexels-photo-1730877.jpeg',
-    alt: 'Couple photo 2',
+    src: 'gallery/2.jpg',
+    alt: 'Gallery 2',
   },
   {
-    src: 'https://images.pexels.com/photos/3352398/pexels-photo-3352398.jpeg',
-    alt: 'Couple photo 3',
+    src: 'gallery/3.jpg',
+    alt: 'Gallery 3',
   },
   {
-    src: 'https://images.pexels.com/photos/1405761/pexels-photo-1405761.jpeg',
-    alt: 'Couple photo 4',
+    src: 'gallery/4.jpg',
+    alt: 'Gallery 4',
   },
   {
-    src: 'https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg',
-    alt: 'Couple photo 5',
+    src: 'gallery/5.jpg',
+    alt: 'Gallery 5',
   },
   {
-    src: 'https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg',
-    alt: 'Couple photo 5',
+    src: 'gallery/6.jpg',
+    alt: 'Gallery 6',
   },
   {
-    src: 'https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg',
-    alt: 'Couple photo 5',
+    src: 'gallery/7.jpg',
+    alt: 'Gallery 7',
   },
   {
-    src: 'https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg',
-    alt: 'Couple photo 5',
+    src: 'gallery/8.jpg',
+    alt: 'Gallery 8',
   },
   {
-    src: 'https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg',
-    alt: 'Couple photo 5',
+    src: 'gallery/9.jpg',
+    alt: 'Gallery 9',
   },
 ];
 

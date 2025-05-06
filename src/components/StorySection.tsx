@@ -8,23 +8,20 @@ const StorySection: React.FC = () => {
       date: 'Mei, 2019',
       title: 'Pertama kali bertemu',
       description: `Dia adalah kakak kelasku di tahun 2018, dan awal kedekatan kami terjadi pada Mei 2019, tepatnya di bulan puasa. Di bulan yang penuh berkah ini, dia memberanikan diri untuk membawa sekantong gorengan dan martabak, sebagai tanda niat baiknya, untuk pertama kali bertemu dengan keluargaku.`,
-      image:
-        'https://images.pexels.com/photos/1415131/pexels-photo-1415131.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: 'story/1.jpg',
     },
     {
       date: 'Maret, 2024',
       title: 'Mulai Serius',
       description:
         'Setelah Lebaran, keluarganya datang dalam tradisi Makassar yang dikenal dengan istilah ma’manu’ manu’, untuk berbicara serius tentang masa depan kami. Mereka menyampaikan niat baik untuk melamar di tahun depan, 2025.',
-      image:
-        'https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: 'story/2.jpg',
     },
     {
       date: 'April, 2025',
       title: 'Tunangan',
       description: `Dan dia menepati janjinya. Setelah 6 tahun penantian, akhirnya dia melamarku. Insya Allah, dengan doa dan restu dari keluarga, hubungan ini akan terus langgeng dan abadi, sampai kita menua bersama.`,
-      image:
-        'https://images.pexels.com/photos/3387577/pexels-photo-3387577.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: 'story/3.jpg',
     },
   ];
 
