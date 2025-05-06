@@ -96,16 +96,7 @@ const HeroSection: React.FC = () => {
       }}
     >
       {/* Gambar & Konten dalam 1 kolom (untuk layar kecil) */}
-      <div className='flex-1 flex flex-col items-center justify-start md:justify-center pt-6 md:pt-0'>
-        {/* Gambar */}
-        <div className='w-[60vw] max-w-xs aspect-square rounded-full overflow-hidden border-4 border-amber-200 dark:border-sky-700 mb-4'>
-          <img
-            src='gallery/8.jpg'
-            alt='Pengantin'
-            className='w-full h-full object-cover'
-          />
-        </div>
-
+      <div className='flex-1 flex flex-col items-center justify-center md:justify-center pt-6 md:pt-0'>
         {/* Konten */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
