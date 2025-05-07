@@ -81,11 +81,43 @@ const HeroSection: React.FC = () => {
         <div className='absolute inset-0 bg-black bg-opacity-40'></div>
 
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className='z-10 px-8 py-12 bg-amber-50 bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 rounded-lg shadow-2xl max-w-2xl mx-4 md:mx-auto'
+          initial={{ opacity: 0, y: 50, filter: 'blur(8px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 1.2 }}
+          className='relative z-10 px-8 py-12 rounded-3xl shadow-xl max-w-2xl mx-4 md:mx-auto border border-amber-300 dark:border-sky-700 backdrop-blur-md bg-gradient-to-br from-amber-50 to-amber-100 dark:from-sky-900 dark:to-sky-950 bg-opacity-90 overflow-hidden'
         >
+          {/* SVG Bingkai */}
+          <svg
+            className='absolute inset-0 w-full h-full pointer-events-none z-0'
+            viewBox='0 0 800 600'
+            preserveAspectRatio='none'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <rect
+              x='10'
+              y='10'
+              width='780'
+              height='580'
+              rx='30'
+              ry='30'
+              fill='none'
+              stroke='url(#grad1)'
+              strokeWidth='5'
+              className='animate-draw'
+            />
+            <defs>
+              <linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='0%'>
+                <stop
+                  offset='0%'
+                  style={{ stopColor: '#FBBF24', stopOpacity: 1 }}
+                />
+                <stop
+                  offset='100%'
+                  style={{ stopColor: '#3B82F6', stopOpacity: 1 }}
+                />
+              </linearGradient>
+            </defs>
+          </svg>
           <h3 className='text-lg text-amber-800 dark:text-sky-400 mb-6 font-light'>
             Undangan
           </h3>

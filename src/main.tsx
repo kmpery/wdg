@@ -1,3 +1,5 @@
+import { applyInitialTheme } from './utils/theme';
+applyInitialTheme();
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';

@@ -1,4 +1,7 @@
-import React, { useEffect } from 'react';
+'use client';
+
+import type React from 'react';
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import Navbar from '../components/Navbar';
@@ -26,9 +29,8 @@ const HomePage: React.FC = () => {
   }, [isOpen]);
 
   return (
-    <div className='min-h-screen bg-cream text-amber-900 font-serif'>
-      {isOpen && <Navbar />}
-
+    <div className='min-h-screen bg-cream dark:bg-gray-900 text-amber-900 dark:text-white font-serif transition-colors duration-300'>
+      {/* Hero section is always visible */}
       <HeroSection />
 
       <AnimatePresence>
@@ -39,6 +41,7 @@ const HomePage: React.FC = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.5 }}
           >
+            <Navbar />
             <HomeSection />
             <EventSection />
             <StorySection />
