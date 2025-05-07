@@ -92,7 +92,7 @@ function HeroSection() {
             style={{ transform: 'scale(1.2)' }}
             preserveAspectRatio='xMidYMid slice'
           />
-          <div className='relative z-10 p-8 md:p-12'>
+          <div className='relative p-2 md:p-12 mt-10'>
             {' '}
             <h3 className='text-lg text-amber-800 dark:text-sky-400 mb-4 font-light'>
               Undangan
