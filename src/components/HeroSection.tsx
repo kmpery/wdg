@@ -85,11 +85,11 @@ function HeroSection() {
           initial={{ opacity: 0, y: 50, filter: 'blur(8px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1.2 }}
-          className='relative z-10 px-10 py-16 md:px-8 md:py-20 rounded-3xl shadow-xl max-w-2xl mx-6 md:mx-auto border backdrop-blur-md bg-gradient-to-br from-amber-50 to-amber-100 dark:from-sky-900 dark:to-sky-950 bg-opacity-90 overflow-hidden'
+          className='relative z-10 px-6 py-12 md:px-8 md:py-20 rounded-3xl shadow-xl max-w-2xl mx-6 md:mx-auto border backdrop-blur-md bg-gradient-to-br from-amber-50 to-amber-100 dark:from-sky-900 dark:to-sky-950 bg-opacity-90 overflow-hidden'
         >
           <OrnamentFrame
             className='absolute inset-0 w-full h-full z-0 pointer-events-none text-amber-800 dark:text-sky-300'
-            style={{ transform: 'scale(1.3)' }}
+            style={{ transform: 'scale(1.2)' }}
             preserveAspectRatio='xMidYMid slice'
           />
           <div className='relative z-10 p-8 md:p-12'>
