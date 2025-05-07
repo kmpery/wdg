@@ -27,7 +27,6 @@ const HomePage: React.FC = () => {
 
   return (
     <div className='min-h-screen bg-cream text-amber-900 font-serif'>
-      {/* Only show navbar when invitation is opened */}
       {isOpen && <Navbar />}
 
       <HeroSection />

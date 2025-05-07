@@ -1,7 +1,4 @@
-'use client';
-
-import type React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Parallax } from 'react-parallax';
 import { motion } from 'framer-motion';
 import { Mail, MailOpen } from 'lucide-react';
@@ -72,314 +69,72 @@ const HeroSection: React.FC = () => {
   return (
     <Parallax
       blur={{ min: -15, max: 15 }}
-      bgImage='https://images.pexels.com/photos/19861141/pexels-photo-19861141.jpeg'
-      bgImageAlt='Wedding background with wisteria'
+      bgImage='hero/bg.png'
+      bgImageAlt='Wedding background'
       strength={300}
       className='h-screen'
     >
-      <div className='h-screen flex items-center justify-center relative'>
-        <div className='absolute'></div>
+      <div
+        className='h-screen flex flex-col items-center justify-center text-center relative opacity-90'
+        id='hero'
+      >
+        <div className='absolute inset-0 bg-black bg-opacity-40'></div>
 
-        <div className='z-10 flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto px-4 gap-6 md:gap-12'>
-          {/* Ornate Frame with Photo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className='z-10 px-8 py-12 bg-amber-50 bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 rounded-lg shadow-2xl max-w-2xl mx-4 md:mx-auto'
+        >
+          <h3 className='text-lg text-amber-800 dark:text-sky-400 mb-6 font-light'>
+            Undangan
+          </h3>
+
+          <p className='text-amber-800 dark:text-sky-200 mb-8'>
+            Kepada {pronoun}{' '}
+            <span className='font-semibold'>{recipientName}</span>,
+          </p>
+
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.2 }}
-            className='relative mb-8 md:mb-0'
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className='text-4xl md:text-6xl font-serif font-bold text-amber-900 dark:text-sky-100 mb-2'
           >
-            <div className='w-64 h-64 md:w-96 md:h-96 relative'>
-              {/* SVG Decorative Frame */}
-              <svg className='absolute w-full h-full' viewBox='0 0 400 400'>
-                {/* Outer decorative circle with animation */}
-                <motion.circle
-                  cx='200'
-                  cy='200'
-                  r='190'
-                  fill='none'
-                  stroke='url(#goldGradient)'
-                  strokeWidth='2'
-                  strokeDasharray='15,10'
-                  initial={{ rotate: 0 }}
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 120,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: 'linear',
-                  }}
-                />
+            Alim{' '}
+            <span className='font-light text-amber-700 dark:text-sky-300'>
+              &
+            </span>{' '}
+            Risa
+          </motion.h1>
 
-                {/* Decorative elements around the circle */}
-                {[...Array(12)].map((_, i) => (
-                  <motion.g
-                    key={i}
-                    transform={`rotate(${i * 30} 200 200) translate(200 30)`}
-                    initial={{ scale: 0.8, opacity: 0.6 }}
-                    animate={{
-                      scale: [0.8, 1, 0.8],
-                      opacity: [0.6, 1, 0.6],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Number.POSITIVE_INFINITY,
-                      delay: i * 0.3,
-                      ease: 'easeInOut',
-                    }}
-                  >
-                    <path
-                      d='M0,0 L5,10 L0,20 L-5,10 Z'
-                      // fill='url(#goldGradient)'
-                      opacity='0.8'
-                    />
-                  </motion.g>
-                ))}
+          <div className='w-16 h-1 bg-amber-800 dark:bg-sky-300 mx-auto my-6'></div>
 
-                {/* Elegant floral corner decorations */}
-                {[45, 135, 225, 315].map((angle, i) => (
-                  <motion.g
-                    key={`corner-${i}`}
-                    transform={`rotate(${angle} 200 200) translate(240 0)`}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 1.5, delay: 0.8 + i * 0.2 }}
-                  >
-                    <path
-                      d='M0,0 C10,-15 20,-10 15,0 C25,-5 30,5 20,10 C30,15 25,25 15,20 C20,30 10,35 0,25 C-10,35 -20,30 -15,20 C-25,25 -30,15 -20,10 C-30,5 -25,-5 -15,0 C-20,-10 -10,-15 0,0 Z'
-                      fill='url(#goldGradient)'
-                      opacity='0.7'
-                    />
-                  </motion.g>
-                ))}
+          <p className='text-amber-800 dark:text-sky-200 mb-6'>
+            Akan melangsungkan resepsi pernikahan dalam :
+          </p>
 
-                {/* Gradient definitions */}
-                <defs>
-                  <linearGradient
-                    id='goldGradient'
-                    x1='0%'
-                    y1='0%'
-                    x2='100%'
-                    y2='100%'
-                  >
-                    <stop offset='0%' stopColor='#f9d29d' />
-                    <stop offset='50%' stopColor='#eac786' />
-                    <stop offset='100%' stopColor='#d4af37' />
-                  </linearGradient>
-                </defs>
-              </svg>
+          <CountdownTimer targetDate={weddingDate} />
 
-              {/* Ornate border with gradient and decorative elements */}
-              <div className='absolute inset-0 bg-gradient-to-br from-amber-100/90 via-amber-200/90 to-amber-300/90 rounded-full border-[12px] border-amber-200/80 shadow-xl overflow-hidden transform -rotate-3'>
-                {/* Inner decorative ring */}
-                <div className='absolute inset-0 rounded-full border-[8px] border-amber-100/40'></div>
-
-                {/* Couple photo */}
-                <img
-                  src='https://images.pexels.com/photos/1415131/pexels-photo-1415131.jpeg'
-                  alt='Wedding Couple'
-                  className='w-full h-full object-cover scale-110'
-                />
-
-                {/* Subtle overlay gradient */}
-                <div className='absolute inset-0 bg-gradient-to-t from-amber-500/20 to-transparent'></div>
-              </div>
-
-              {/* Animated decorative elements */}
-              <motion.div
-                className='absolute -top-8 -right-8 text-amber-200 text-6xl filter drop-shadow-lg'
-                initial={{ rotate: 0, scale: 0.8 }}
-                animate={{
-                  rotate: 360,
-                  scale: [0.8, 1.1, 0.8],
-                }}
-                transition={{
-                  rotate: {
-                    duration: 20,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: 'linear',
-                  },
-                  scale: {
-                    duration: 4,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: 'easeInOut',
-                  },
-                }}
-              >
-                ✦
-              </motion.div>
-              <motion.div
-                className='absolute -bottom-8 -left-8 text-amber-200 text-6xl filter drop-shadow-lg'
-                initial={{ rotate: 0, scale: 0.8 }}
-                animate={{
-                  rotate: -360,
-                  scale: [0.8, 1.1, 0.8],
-                }}
-                transition={{
-                  rotate: {
-                    duration: 20,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: 'linear',
-                  },
-                  scale: {
-                    duration: 4,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: 'easeInOut',
-                    delay: 1,
-                  },
-                }}
-              >
-                ✦
-              </motion.div>
-
-              {/* Additional smaller decorative elements */}
-              <motion.div
-                className='absolute top-1/4 -right-4 text-amber-200 text-3xl filter drop-shadow-lg'
-                animate={{
-                  opacity: [0.4, 1, 0.4],
-                  scale: [0.8, 1, 0.8],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: 'easeInOut',
-                  delay: 0.5,
-                }}
-              >
-                ✧
-              </motion.div>
-              <motion.div
-                className='absolute bottom-1/4 -left-4 text-amber-200 text-3xl filter drop-shadow-lg'
-                animate={{
-                  opacity: [0.4, 1, 0.4],
-                  scale: [0.8, 1, 0.8],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: 'easeInOut',
-                  delay: 1.5,
-                }}
-              >
-                ✧
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Invitation Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className='z-10 px-8 py-12 relative overflow-hidden rounded-lg shadow-2xl max-w-lg'
-            style={{
-              background:
-                'linear-gradient(135deg, rgba(255,248,240,0.95) 0%, rgba(255,243,224,0.9) 50%, rgba(253,230,190,0.85) 100%)',
-            }}
+          <motion.button
+            onClick={handleOpenInvitation}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className='mt-8 bg-amber-800 text-white dark:text-sky-200 px-6 py-3 rounded-full flex items-center justify-center mx-auto transition-all duration-300 hover:bg-amber-900 dark:bg-sky-700 dark:hover:bg-sky-600'
           >
-            {/* Decorative background patterns */}
-            <div className='absolute inset-0 opacity-10'>
-              <svg
-                width='100%'
-                height='100%'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <pattern
-                  id='pattern-circles'
-                  x='0'
-                  y='0'
-                  width='40'
-                  height='40'
-                  patternUnits='userSpaceOnUse'
-                  patternContentUnits='userSpaceOnUse'
-                >
-                  <circle
-                    id='pattern-circle'
-                    cx='20'
-                    cy='20'
-                    r='3.5'
-                    fill='#b45309'
-                  />
-                </pattern>
-                <rect
-                  x='0'
-                  y='0'
-                  width='100%'
-                  height='100%'
-                  fill='url(#pattern-circles)'
-                />
-              </svg>
-            </div>
-
-            {/* Decorative corner flourishes */}
-            <div className='absolute top-0 left-0 w-16 h-16 opacity-30'>
-              <svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  d='M0,0 C30,10 40,30 30,50 C50,40 70,50 80,80 C50,70 30,50 10,80 C30,50 10,30 0,0 Z'
-                  fill='#b45309'
-                />
-              </svg>
-            </div>
-            <div className='absolute bottom-0 right-0 w-16 h-16 opacity-30 rotate-180'>
-              <svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  d='M0,0 C30,10 40,30 30,50 C50,40 70,50 80,80 C50,70 30,50 10,80 C30,50 10,30 0,0 Z'
-                  fill='#b45309'
-                />
-              </svg>
-            </div>
-            <div className='text-center'>
-              <h3 className='text-lg text-amber-800 dark:text-sky-400 font-light relative z-10'>
-                Undangan
-              </h3>
-
-              <p className='text-amber-800 dark:text-sky-200 mb-2 relative z-10'>
-                Kepada {pronoun}{' '}
-                <span className='font-semibold'>{recipientName}</span>,
-              </p>
-
-              <motion.h1
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-                className='text-4xl md:text-6xl font-serif font-bold text-amber-900 dark:text-sky-100 mb-2 relative z-10'
-              >
-                Alim{' '}
-                <span className='font-light text-amber-700 dark:text-sky-300'>
-                  &
-                </span>{' '}
-                Risa
-              </motion.h1>
-
-              <div className='w-16 h-1 bg-gradient-to-r from-amber-600 via-amber-800 to-amber-600 dark:from-sky-400 dark:via-sky-300 dark:to-sky-400 mx-auto my-6 relative z-10'></div>
-
-              <p className='text-amber-800 dark:text-sky-200 mb-2 relative z-10'>
-                Akan melangsungkan resepsi pernikahan dalam:
-              </p>
-            </div>
-
-            <div className='relative z-10'>
-              <CountdownTimer targetDate={weddingDate} />
-            </div>
-
-            <motion.button
-              onClick={handleOpenInvitation}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className='mt-8 bg-gradient-to-r from-amber-700 via-amber-800 to-amber-700 text-white dark:from-sky-800 dark:via-sky-700 dark:to-sky-800 dark:text-sky-200 px-6 py-3 rounded-full flex items-center justify-center mx-auto transition-all duration-300 hover:from-amber-800 hover:to-amber-900 dark:hover:from-sky-700 dark:hover:to-sky-600 shadow-lg relative z-10'
-            >
-              {isOpen ? (
-                <>
-                  <MailOpen className='mr-2' size={20} />
-                  <span>Di Buka</span>
-                </>
-              ) : (
-                <>
-                  <Mail className='mr-2' size={20} />
-                  <span>Buka Undangan</span>
-                </>
-              )}
-            </motion.button>
-          </motion.div>
-        </div>
+            {isOpen ? (
+              <>
+                <MailOpen className='mr-2' size={20} />
+                <span>Di Buka</span>
+              </>
+            ) : (
+              <>
+                <Mail className='mr-2' size={20} />
+                <span>Buka Undangan</span>
+              </>
+            )}
+          </motion.button>
+        </motion.div>
       </div>
     </Parallax>
   );
