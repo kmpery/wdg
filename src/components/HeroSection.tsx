@@ -94,7 +94,7 @@ function HeroSection() {
           />
           <div className='relative p-2 md:p-12 mt-10'>
             {' '}
-            <h3 className='text-lg text-amber-800 dark:text-sky-400 mb-4 font-light'>
+            <h3 className='text-lg text-amber-800 dark:text-sky-400 mt-6 font-light'>
               Undangan
             </h3>
             <p className='text-amber-800 dark:text-sky-200 mb-6'>
