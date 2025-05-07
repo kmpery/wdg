@@ -69,7 +69,10 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav
+    <motion.nav
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/30 dark:bg-sky-950/70 backdrop-blur-lg shadow-md'
@@ -98,19 +101,17 @@ const Navbar: React.FC = () => {
 
           <div className='flex items-center gap-4'>
             {/* Desktop Menu */}
-            {isOpen && (
-              <div className='hidden md:flex space-x-8'>
-                {menuItems.map((item) => (
-                  <button
-                    key={item.href}
-                    onClick={() => scrollToSection(item.href)}
-                    className='text-amber-900 dark:text-sky-200 hover:text-amber-700 dark:hover:text-sky-400 transition-colors duration-300 py-2'
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className='hidden md:flex space-x-8'>
+              {menuItems.map((item) => (
+                <button
+                  key={item.href}
+                  onClick={() => scrollToSection(item.href)}
+                  className='text-amber-900 dark:text-sky-200 hover:text-amber-700 dark:hover:text-sky-400 transition-colors duration-300 py-2'
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
 
             {/* Toggle Theme Button */}
             <motion.button
@@ -137,30 +138,28 @@ const Navbar: React.FC = () => {
             </motion.button>
 
             {/* Mobile Menu Button */}
-            {isOpen && (
-              <button
-                className='relative w-10 h-10 flex flex-col justify-center items-center md:hidden'
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                <span
-                  className={`absolute block w-6 h-0.5 bg-amber-900 dark:bg-sky-200 transition-all duration-300 ease-in-out ${
-                    isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
-                  }`}
-                ></span>
-                <span
-                  className={`absolute block w-6 h-0.5 bg-amber-900 dark:bg-sky-200 transition-all duration-300 ease-in-out ${
-                    isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
-                  }`}
-                ></span>
-              </button>
-            )}
+            <button
+              className='relative w-10 h-10 flex flex-col justify-center items-center md:hidden'
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <span
+                className={`absolute block w-6 h-0.5 bg-amber-900 dark:bg-sky-200 transition-all duration-300 ease-in-out ${
+                  isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
+                }`}
+              ></span>
+              <span
+                className={`absolute block w-6 h-0.5 bg-amber-900 dark:bg-sky-200 transition-all duration-300 ease-in-out ${
+                  isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
+                }`}
+              ></span>
+            </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
-        {isOpen && isMenuOpen && (
+        {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -182,7 +181,7 @@ const Navbar: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 

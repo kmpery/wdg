@@ -366,7 +366,7 @@ const GallerySection: React.FC = () => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
                     onClick={closeLightbox}
-                    className='absolute bottom-6 left-1/2 -translate-x-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
+                    className='absolute bottom-24 left-1/2 -translate-x-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
                   >
                     <IoCloseOutline size={24} />
                   </motion.button>

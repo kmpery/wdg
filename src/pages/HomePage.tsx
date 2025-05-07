@@ -17,7 +17,7 @@ import useStore from '../store/useStore';
 const HomePage: React.FC = () => {
   const isOpen = useStore((state) => state.isOpen);
 
-  // Lock scroll sebelum undangan dibuka
+  // Lock scroll before invitation is opened
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'auto' : 'hidden';
     return () => {
@@ -27,7 +27,9 @@ const HomePage: React.FC = () => {
 
   return (
     <div className='min-h-screen bg-cream text-amber-900 font-serif'>
-      <Navbar />
+      {/* Only show navbar when invitation is opened */}
+      {isOpen && <Navbar />}
+
       <HeroSection />
 
       <AnimatePresence>
