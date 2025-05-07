@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  IoCloseOutline,
-  IoPlayCircleOutline,
-  IoPauseCircleOutline,
-} from 'react-icons/io5';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+  X as IoCloseOutline,
+  PlayCircle as IoPlayCircleOutline,
+  PauseCircle as IoPauseCircleOutline,
+} from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
-import { useSwipeable } from 'react-swipeable';
 
 interface Image {
   src: string;
@@ -17,42 +16,55 @@ interface Image {
 
 const images: Image[] = [
   {
-    src: 'gallery/1.jpg',
+    src: 'https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     alt: 'Gallery 1',
   },
   {
-    src: 'gallery/2.jpg',
+    src: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     alt: 'Gallery 2',
   },
   {
-    src: 'gallery/3.jpg',
+    src: 'https://images.pexels.com/photos/2469122/pexels-photo-2469122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     alt: 'Gallery 3',
   },
   {
-    src: 'gallery/4.jpg',
+    src: 'https://images.pexels.com/photos/1231230/pexels-photo-1231230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     alt: 'Gallery 4',
   },
   {
-    src: 'gallery/5.jpg',
+    src: 'https://images.pexels.com/photos/1266810/pexels-photo-1266810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     alt: 'Gallery 5',
   },
   {
-    src: 'gallery/6.jpg',
+    src: 'https://images.pexels.com/photos/3933881/pexels-photo-3933881.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     alt: 'Gallery 6',
   },
   {
-    src: 'gallery/7.jpg',
+    src: 'https://images.pexels.com/photos/2403568/pexels-photo-2403568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     alt: 'Gallery 7',
   },
   {
-    src: 'gallery/8.jpg',
+    src: 'https://images.pexels.com/photos/1261731/pexels-photo-1261731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     alt: 'Gallery 8',
   },
   {
-    src: 'gallery/9.jpg',
+    src: 'https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     alt: 'Gallery 9',
   },
 ];
+
+const useIsLargeScreen = () => {
+  const [isLarge, setIsLarge] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsLarge(window.innerWidth >= 1024);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return isLarge;
+};
 
 const GallerySection: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -61,6 +73,9 @@ const GallerySection: React.FC = () => {
     null
   );
   const [autoSlide, setAutoSlide] = useState(true);
+  const [showControls, setShowControls] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isLargeScreen = useIsLargeScreen();
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
@@ -74,11 +89,27 @@ const GallerySection: React.FC = () => {
     let interval: NodeJS.Timeout;
     if (autoSlide) {
       interval = setInterval(() => {
-        instanceRef.current?.next();
+        if (isLargeScreen) {
+          setCurrentSlide((prev) => (prev + 1) % images.length);
+        } else {
+          instanceRef.current?.next();
+        }
       }, 4000);
     }
     return () => clearInterval(interval);
-  }, [instanceRef, autoSlide]);
+  }, [autoSlide, instanceRef, isLargeScreen]);
+
+  // Add scroll lock effect
+  useEffect(() => {
+    if (lightboxOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [lightboxOpen]);
 
   const openLightbox = (index: number) => {
     setSelectedImageIndex(index);
@@ -104,30 +135,16 @@ const GallerySection: React.FC = () => {
     }
   };
 
-  const toggleAutoSlide = () => {
-    setAutoSlide(!autoSlide);
-  };
-
-  const [showControls, setShowControls] = useState(false);
+  const toggleAutoSlide = () => setAutoSlide(!autoSlide);
 
   const handleImageTap = () => {
     setShowControls(true);
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current); // agar tidak dobel
-    }
-    timeoutRef.current = setTimeout(() => {
-      setShowControls(false);
-    }, 3000);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setShowControls(false), 3000);
   };
 
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: nextImage, // Pindah ke gambar berikutnya saat swipe ke kiri
-    onSwipedRight: prevImage, // Pindah ke gambar sebelumnya saat swipe ke kanan
-    preventScrollOnSwipe: true, // Mencegah scroll saat swipe
-    trackMouse: true, // Mendukung swipe dengan mouse
-  });
+  const handleSwipeLeft = () => nextImage();
+  const handleSwipeRight = () => prevImage();
 
   return (
     <section className='py-20 bg-amber-950 dark:bg-gray-900' id='gallery'>
@@ -146,62 +163,150 @@ const GallerySection: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Slider */}
-        <div className='relative group'>
-          <div
-            ref={sliderRef}
-            className='keen-slider rounded-2xl overflow-hidden relative'
-          >
-            {images.map((image, index) => (
-              <div
-                className='keen-slider__slide flex justify-center cursor-pointer'
-                key={index}
-                onClick={() => openLightbox(index)}
+        {isLargeScreen ? (
+          <div className='relative w-full overflow-hidden h-[700px] bg-black/5 rounded-2xl'>
+            <div className='absolute inset-0 flex items-center justify-center'>
+              {images.map((image, index) => {
+                const isActive = index === currentSlide;
+                const isPrev =
+                  index === (currentSlide - 1 + images.length) % images.length;
+                const isNext = index === (currentSlide + 1) % images.length;
+                const isVisible = isActive || isPrev || isNext;
+
+                let xPosition = '50%';
+                let opacity = 0;
+                let scale = 0.8;
+                let zIndex = 0;
+                let blur = 0;
+
+                if (isActive) {
+                  xPosition = '50%';
+                  opacity = 1;
+                  scale = 1;
+                  zIndex = 30;
+                  blur = 0;
+                } else if (isPrev) {
+                  xPosition = '25%';
+                  opacity = 0.7;
+                  scale = 0.85;
+                  zIndex = 20;
+                  blur = 3;
+                } else if (isNext) {
+                  xPosition = '75%';
+                  opacity = 0.7;
+                  scale = 0.85;
+                  zIndex = 20;
+                  blur = 3;
+                }
+
+                return isVisible ? (
+                  <motion.div
+                    key={index}
+                    onClick={() => openLightbox(index)}
+                    className='absolute cursor-pointer'
+                    initial={false}
+                    animate={{
+                      x: `calc(${xPosition} - 50%)`,
+                      opacity,
+                      scale,
+                      zIndex,
+                      filter: `blur(${blur}px)`,
+                    }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 300,
+                      damping: 30,
+                    }}
+                    style={{
+                      width: '50%',
+                      transformOrigin: 'center center',
+                    }}
+                  >
+                    <img
+                      src={image.src || '/placeholder.svg'}
+                      alt={image.alt}
+                      className='rounded-xl object-cover w-full h-[550px] shadow-lg'
+                    />
+                  </motion.div>
+                ) : null;
+              })}
+            </div>
+
+            <button
+              onClick={() =>
+                setCurrentSlide(
+                  (currentSlide - 1 + images.length) % images.length
+                )
+              }
+              className='absolute left-8 top-1/2 -translate-y-1/2 bg-white/90 text-black p-3 rounded-full shadow-lg hover:scale-110 transition z-40'
+              aria-label='Previous image'
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={() =>
+                setCurrentSlide((currentSlide + 1) % images.length)
+              }
+              className='absolute right-8 top-1/2 -translate-y-1/2 bg-white/90 text-black p-3 rounded-full shadow-lg hover:scale-110 transition z-40'
+              aria-label='Next image'
+            >
+              <ChevronRight size={18} />
+            </button>
+
+            <div className='absolute bottom-8 right-8 z-40'>
+              <button
+                onClick={toggleAutoSlide}
+                className='flex items-center justify-center w-12 h-12 text-white rounded-full bg-black/50 hover:bg-black/70 transition'
+                aria-label={autoSlide ? 'Pause slideshow' : 'Play slideshow'}
               >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className='rounded-2xl max-h-[700px] md:max-h-[500px] sm:max-h-[300px] object-cover w-full'
-                />
-              </div>
-            ))}
-
-            {/* Navigation Arrows */}
-            <button
-              onClick={() => instanceRef.current?.prev()}
-              className='hidden group-hover:flex absolute top-1/2 left-4 transform -translate-y-1/2 bg-amber-50 text-amber-950 p-2 rounded-full shadow-md hover:scale-110 transition'
-            >
-              <FaChevronLeft size={24} />
-            </button>
-            <button
-              onClick={() => instanceRef.current?.next()}
-              className='hidden group-hover:flex absolute top-1/2 right-4 transform -translate-y-1/2 bg-amber-50 text-amber-950 p-2 rounded-full shadow-md hover:scale-110 transition'
-            >
-              <FaChevronRight size={24} />
-            </button>
+                {autoSlide ? (
+                  <IoPauseCircleOutline size={28} />
+                ) : (
+                  <IoPlayCircleOutline size={28} />
+                )}
+              </button>
+            </div>
           </div>
-
-          {/* Play/Pause Button Outside */}
-          <div className='flex justify-end mt-2'>
-            <button
-              onClick={toggleAutoSlide}
-              className='flex items-center justify-center w-8 h-8 border border-none text-white rounded-full hover:bg-white/10 transition'
+        ) : (
+          <div className='relative group'>
+            <div
+              ref={sliderRef}
+              className='keen-slider rounded-2xl overflow-hidden relative'
             >
-              {autoSlide ? (
-                <IoPauseCircleOutline size={24} />
-              ) : (
-                <IoPlayCircleOutline size={24} />
-              )}
-            </button>
+              {images.map((image, index) => (
+                <div
+                  className='keen-slider__slide flex justify-center cursor-pointer'
+                  key={index}
+                  onClick={() => openLightbox(index)}
+                >
+                  <img
+                    src={image.src || '/placeholder.svg'}
+                    alt={image.alt}
+                    className='rounded-2xl max-h-[700px] md:max-h-[500px] sm:max-h-[300px] object-cover w-full'
+                  />
+                </div>
+              ))}
+            </div>
+            <div className='flex justify-end mt-2'>
+              <button
+                onClick={toggleAutoSlide}
+                className='flex items-center justify-center w-8 h-8 border border-none text-white rounded-full hover:bg-white/10 transition'
+              >
+                {autoSlide ? (
+                  <IoPauseCircleOutline size={24} />
+                ) : (
+                  <IoPlayCircleOutline size={24} />
+                )}
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Dots */}
         <div className='flex justify-center mt-6 gap-2'>
           {images.map((_, idx) => (
             <button
               key={idx}
-              onClick={() => instanceRef.current?.moveToIdx(idx)}
+              onClick={() => setCurrentSlide(idx)}
               className={`w-2.5 h-2.5 rounded-full ${
                 currentSlide === idx ? 'bg-white' : 'bg-white/50'
               } transition`}
@@ -210,7 +315,6 @@ const GallerySection: React.FC = () => {
         </div>
       </div>
 
-      {/* Lightbox Modal */}
       <AnimatePresence>
         {lightboxOpen && selectedImageIndex !== null && (
           <motion.div
@@ -221,14 +325,40 @@ const GallerySection: React.FC = () => {
             onClick={closeLightbox}
           >
             <motion.div
-              {...swipeHandlers}
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()}
               className='relative w-screen h-screen flex items-center justify-center'
+              onTouchStart={(e) => {
+                const touch = e.touches[0];
+                const startX = touch.clientX;
+
+                const handleTouchMove = (e: TouchEvent) => {
+                  const touch = e.touches[0];
+                  const diffX = touch.clientX - startX;
+
+                  if (diffX > 50) {
+                    handleSwipeRight();
+                    document.removeEventListener('touchmove', handleTouchMove);
+                  } else if (diffX < -50) {
+                    handleSwipeLeft();
+                    document.removeEventListener('touchmove', handleTouchMove);
+                  }
+                };
+
+                document.addEventListener('touchmove', handleTouchMove, {
+                  passive: true,
+                });
+                document.addEventListener(
+                  'touchend',
+                  () => {
+                    document.removeEventListener('touchmove', handleTouchMove);
+                  },
+                  { once: true }
+                );
+              }}
             >
-              {/* Tombol Close */}
               <AnimatePresence>
                 {showControls && (
                   <motion.button
@@ -243,7 +373,6 @@ const GallerySection: React.FC = () => {
                 )}
               </AnimatePresence>
 
-              {/* Gambar Fullscreen */}
               <motion.img
                 src={images[selectedImageIndex].src}
                 alt={images[selectedImageIndex].alt}
