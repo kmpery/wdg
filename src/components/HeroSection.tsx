@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Parallax } from 'react-parallax';
 import { motion } from 'framer-motion';
 import { Mail, MailOpen } from 'lucide-react';
 import CountdownTimer from './CountdownTimer';
 import useStore from '../store/useStore';
 import { useSearchParams } from 'react-router-dom';
+import OrnamentFrame from '../assets/ornament-frame.svg?react';
 
-const HeroSection: React.FC = () => {
+function HeroSection() {
   const {
     isOpen,
     setIsOpen,
@@ -84,92 +85,62 @@ const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 50, filter: 'blur(8px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1.2 }}
-          className='relative z-10 px-8 py-12 rounded-3xl shadow-xl max-w-2xl mx-4 md:mx-auto border border-amber-300 dark:border-sky-700 backdrop-blur-md bg-gradient-to-br from-amber-50 to-amber-100 dark:from-sky-900 dark:to-sky-950 bg-opacity-90 overflow-hidden'
+          className='relative z-10 px-10 py-16 md:px-8 md:py-20 rounded-3xl shadow-xl max-w-2xl mx-6 md:mx-auto border backdrop-blur-md bg-gradient-to-br from-amber-50 to-amber-100 dark:from-sky-900 dark:to-sky-950 bg-opacity-90 overflow-hidden'
         >
-          {/* SVG Bingkai */}
-          <svg
-            className='absolute inset-0 w-full h-full pointer-events-none z-0'
-            viewBox='0 0 800 600'
-            preserveAspectRatio='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <rect
-              x='10'
-              y='10'
-              width='780'
-              height='580'
-              rx='30'
-              ry='30'
-              fill='none'
-              stroke='url(#grad1)'
-              strokeWidth='5'
-              className='animate-draw'
-            />
-            <defs>
-              <linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='0%'>
-                <stop
-                  offset='0%'
-                  style={{ stopColor: '#FBBF24', stopOpacity: 1 }}
-                />
-                <stop
-                  offset='100%'
-                  style={{ stopColor: '#3B82F6', stopOpacity: 1 }}
-                />
-              </linearGradient>
-            </defs>
-          </svg>
-          <h3 className='text-lg text-amber-800 dark:text-sky-400 mb-6 font-light'>
-            Undangan
-          </h3>
-
-          <p className='text-amber-800 dark:text-sky-200 mb-8'>
-            Kepada {pronoun}{' '}
-            <span className='font-semibold'>{recipientName}</span>,
-          </p>
-
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className='text-4xl md:text-6xl font-serif font-bold text-amber-900 dark:text-sky-100 mb-2'
-          >
-            Alim{' '}
-            <span className='font-light text-amber-700 dark:text-sky-300'>
-              &
-            </span>{' '}
-            Risa
-          </motion.h1>
-
-          <div className='w-16 h-1 bg-amber-800 dark:bg-sky-300 mx-auto my-6'></div>
-
-          <p className='text-amber-800 dark:text-sky-200 mb-6'>
-            Akan melangsungkan resepsi pernikahan dalam :
-          </p>
-
-          <CountdownTimer targetDate={weddingDate} />
-
-          <motion.button
-            onClick={handleOpenInvitation}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            className='mt-8 bg-amber-800 text-white dark:text-sky-200 px-6 py-3 rounded-full flex items-center justify-center mx-auto transition-all duration-300 hover:bg-amber-900 dark:bg-sky-700 dark:hover:bg-sky-600'
-          >
-            {isOpen ? (
-              <>
-                <MailOpen className='mr-2' size={20} />
-                <span>Di Buka</span>
-              </>
-            ) : (
-              <>
-                <Mail className='mr-2' size={20} />
-                <span>Buka Undangan</span>
-              </>
-            )}
-          </motion.button>
+          <OrnamentFrame
+            className='absolute inset-0 w-full h-full z-0 pointer-events-none text-amber-800 dark:text-sky-300'
+            style={{ transform: 'scale(1.3)' }}
+            preserveAspectRatio='xMidYMid slice'
+          />
+          <div className='relative z-10 p-8 md:p-12'>
+            {' '}
+            <h3 className='text-lg text-amber-800 dark:text-sky-400 mb-4 font-light'>
+              Undangan
+            </h3>
+            <p className='text-amber-800 dark:text-sky-200 mb-6'>
+              Kepada {pronoun}{' '}
+              <span className='font-semibold'>{recipientName}</span>,
+            </p>
+            <motion.h1
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className='text-4xl md:text-6xl font-serif font-bold text-amber-900 dark:text-sky-100 mb-2'
+            >
+              Alim{' '}
+              <span className='font-light text-amber-700 dark:text-sky-300'>
+                &
+              </span>{' '}
+              Risa
+            </motion.h1>
+            <div className='w-16 h-1 bg-amber-800 dark:bg-sky-300 mx-auto my-6'></div>
+            <p className='text-amber-800 dark:text-sky-200 mb-6'>
+              Akan melangsungkan resepsi pernikahan dalam :
+            </p>
+            <CountdownTimer targetDate={weddingDate} />
+            <motion.button
+              onClick={handleOpenInvitation}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              className='mt-8 bg-amber-800 text-white dark:text-sky-200 px-6 py-3 rounded-full flex items-center justify-center mx-auto transition-all duration-300 hover:bg-amber-900 dark:bg-sky-700 dark:hover:bg-sky-600'
+            >
+              {isOpen ? (
+                <>
+                  <MailOpen className='mr-2' size={20} />
+                  <span>Di Buka</span>
+                </>
+              ) : (
+                <>
+                  <Mail className='mr-2' size={20} />
+                  <span>Buka Undangan</span>
+                </>
+              )}
+            </motion.button>
+          </div>
         </motion.div>
       </div>
     </Parallax>
   );
-};
+}
 
 export default HeroSection;
