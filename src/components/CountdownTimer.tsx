@@ -62,7 +62,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
           transition={{ delay: 0.5 + index * 0.1 }}
           className='flex flex-col items-center'
         >
-          <div className='bg-amber-100 dark:bg-sky-900 rounded-lg w-16 h-16 md:w-20 md:h-20 flex items-center justify-center border border-amber-200 dark:border-sky-700 shadow-sm'>
+          <div className='bg-amber-100 dark:bg-sky-900 rounded-lg w-16 h-16 md:w-20 md:h-20 flex items-center justify-center border border-amber-400 dark:border-sky-600 shadow-sm'>
             <span className='text-2xl md:text-3xl font-bold text-amber-900 dark:text-sky-200'>
               {component.value}
             </span>

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaRegHeart, FaMoon, FaSun } from 'react-icons/fa';
+import { FaRegHeart } from 'react-icons/fa';
+import { BsSun, BsMoon } from 'react-icons/bs';
 import useStore from '../store/useStore';
 
 const Navbar: React.FC = () => {
@@ -9,18 +10,23 @@ const Navbar: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
   const isOpen = useStore((state) => state.isOpen);
 
+  const topOpenRef = useRef<SVGAnimateElement>(null);
+  const topCloseRef = useRef<SVGAnimateElement>(null);
+  const bottomOpenRef = useRef<SVGAnimateElement>(null);
+  const bottomCloseRef = useRef<SVGAnimateElement>(null);
+
   const menuItems = [
     { href: '#home', label: 'Home' },
     { href: '#event', label: 'Event' },
     { href: '#story', label: 'Story' },
     { href: '#gallery', label: 'Gallery' },
-    { href: '#rsvp', label: 'RSVP' },
+    { href: '#rsvp', label: 'Rsvp' },
     { href: '#gifts', label: 'Gifts' },
     { href: '#thankyou', label: 'Lives' },
     {
       href: '#footer',
       label: (
-        <div className='flex justify-center items-center'>
+        <div className='flex'>
           <FaRegHeart
             size={16}
             className='text-red-400 dark:text-sky-400 hover:text-amber-600 dark:hover:text-sky-200'
@@ -68,120 +74,182 @@ const Navbar: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      topOpenRef.current?.beginElement();
+      bottomOpenRef.current?.beginElement();
+    } else {
+      topCloseRef.current?.beginElement();
+      bottomCloseRef.current?.beginElement();
+    }
+  }, [isMenuOpen]);
+
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/30 dark:bg-sky-950/70 backdrop-blur-lg shadow-md'
-          : 'bg-transparent'
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md bg-white/60 dark:bg-gray-900/60 ${
+        isScrolled ? 'border-b border-gray-300 dark:border-gray-700' : ''
       }`}
     >
-      <div className='container mx-auto px-4'>
-        <div className='flex items-center justify-between h-16'>
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection('#hero')}
-            className='text-2xl font-serif font-bold text-amber-900 dark:text-sky-200 hover:text-amber-700 dark:hover:text-sky-300 cursor-pointer transition-all duration-300'
-          >
-            A
-            <span className='inline-flex items-center align-middle mx-1'>
-              <FaRegHeart
-                size={16}
-                className='text-red-400 dark:text-sky-400'
-              />
-            </span>
-            R
-          </motion.h1>
-
-          <div className='flex items-center gap-4'>
-            {/* Desktop Menu */}
-            <div className='hidden md:flex space-x-8'>
-              {menuItems.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className='text-amber-900 dark:text-sky-200 hover:text-amber-700 dark:hover:text-sky-400 transition-colors duration-300 py-2'
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Toggle Theme Button */}
-            <motion.button
-              onClick={toggleDarkMode}
-              whileTap={{ scale: 0.9 }}
-              className='relative w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300'
+      <nav className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='flex justify-between items-center h-14'>
+          {/* Logo */}
+          <div className='flex-shrink-0'>
+            <a
+              href='#'
+              className='flex items-center gap-x-1 text-gray-900 dark:text-white text-base font-medium tracking-wide hover:opacity-80 transition leading-tight'
             >
-              <AnimatePresence mode='wait' initial={false}>
-                <motion.div
-                  key={darkMode ? 'sun' : 'moon'}
-                  initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-                  transition={{ duration: 0.3 }}
-                  className='absolute'
-                >
-                  {darkMode ? (
-                    <FaSun size={20} className='text-sky-200' />
-                  ) : (
-                    <FaMoon size={20} />
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </motion.button>
+              <span>A</span>
+              <FaRegHeart
+                size={14}
+                className='text-red-400 dark:text-sky-400 hover:text-amber-600 dark:hover:text-sky-200'
+              />
+              <span>R</span>
+            </a>
+          </div>
 
-            {/* Mobile Menu Button */}
+          {/* Desktop Menu */}
+          <div className='hidden md:flex space-x-6 text-sm'>
+            {menuItems.map((item) => (
+              <button
+                key={item.href}
+                onClick={() => scrollToSection(item.href)}
+                className='text-gray-800 dark:text-gray-200 hover:text-sky-500 dark:hover:text-sky-400 transition-colors font-light'
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Actions */}
+          <div className='flex items-center space-x-3'>
+            {/* Theme Toggle Button */}
             <button
-              className='relative w-10 h-10 flex flex-col justify-center items-center md:hidden'
+              onClick={toggleDarkMode}
+              className={`relative w-10 h-6 rounded-full transition-colors duration-300 focus:outline-none shadow-custom-inset ${
+                darkMode ? 'bg-gray-300' : 'bg-gray-50'
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${
+                  darkMode
+                    ? 'translate-x-4 bg-sky-950 text-sky-400'
+                    : 'translate-x-0 bg-amber-950 text-amber-400'
+                }`}
+              >
+                {darkMode ? (
+                  <BsMoon className='w-4 h-4' />
+                ) : (
+                  <BsSun className='w-4 h-4' />
+                )}
+              </span>
+            </button>
+
+            {/* Hamburger */}
+            <button
+              className='relative w-12 h-6 flex items-center justify-center rounded-full focus:outline-none md:hidden'
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <span
-                className={`absolute block w-6 h-0.5 bg-amber-900 dark:bg-sky-200 transition-all duration-300 ease-in-out ${
-                  isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
-                }`}
-              ></span>
-              <span
-                className={`absolute block w-6 h-0.5 bg-amber-900 dark:bg-sky-200 transition-all duration-300 ease-in-out ${
-                  isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
-                }`}
-              ></span>
+              <svg
+                className='w-6 h-6 stroke-sky-950 dark:stroke-sky-50'
+                viewBox='0 0 18 18'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                {/* Bottom Line */}
+                <polyline
+                  id='globalnav-menutrigger-bread-bottom'
+                  fill='none'
+                  strokeWidth='1.5'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  points='2 12, 16 12'
+                >
+                  <animate
+                    ref={bottomOpenRef}
+                    attributeName='points'
+                    keyTimes='0;0.5;1'
+                    dur='0.24s'
+                    begin='indefinite'
+                    fill='freeze'
+                    calcMode='spline'
+                    keySplines='0.42,0,1,1;0,0,0.58,1'
+                    values='2 12, 16 12; 2 9, 16 9; 3.5 15, 15 3.5'
+                  />
+                  <animate
+                    ref={bottomCloseRef}
+                    attributeName='points'
+                    keyTimes='0;0.5;1'
+                    dur='0.24s'
+                    begin='indefinite'
+                    fill='freeze'
+                    calcMode='spline'
+                    keySplines='0.42,0,1,1;0,0,0.58,1'
+                    values='3.5 15, 15 3.5; 2 9, 16 9; 2 12, 16 12'
+                  />
+                </polyline>
+
+                {/* Top Line */}
+                <polyline
+                  id='globalnav-menutrigger-bread-top'
+                  fill='none'
+                  strokeWidth='1.5'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  points='2 5, 16 5'
+                >
+                  <animate
+                    ref={topOpenRef}
+                    attributeName='points'
+                    keyTimes='0;0.5;1'
+                    dur='0.24s'
+                    begin='indefinite'
+                    fill='freeze'
+                    calcMode='spline'
+                    keySplines='0.42,0,1,1;0,0,0.58,1'
+                    values='2 5, 16 5; 2 9, 16 9; 3.5 3.5, 15 15'
+                  />
+                  <animate
+                    ref={topCloseRef}
+                    attributeName='points'
+                    keyTimes='0;0.5;1'
+                    dur='0.24s'
+                    begin='indefinite'
+                    fill='freeze'
+                    calcMode='spline'
+                    keySplines='0.42,0,1,1;0,0,0.58,1'
+                    values='3.5 3.5, 15 15; 2 9, 16 9; 2 5, 16 5'
+                  />
+                </polyline>
+              </svg>
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className='absolute top-16 left-0 right-0 bg-amber-50/80 dark:bg-sky-950/80 backdrop-blur-lg rounded-b-3xl shadow-lg md:hidden'
-          >
-            <div className='container mx-auto px-4 py-8'>
-              {menuItems.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className='block w-full text-center py-4 text-lg font-extrabold text-amber-900 dark:text-sky-200 hover:text-amber-500 dark:hover:text-sky-400 transition-colors duration-300'
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+        {/* Mobile Menu */}
+        <div
+          className={`md:hidden transition-all overflow-hidden duration-1000 ease-in-out ${
+            isMenuOpen ? 'h-screen py-20' : 'max-h-0'
+          }`}
+        >
+          <div className='flex flex-col justify-start h-full px-10 space-y-6'>
+            {menuItems.map((item, index) => (
+              <button
+                key={item.href}
+                onClick={() => scrollToSection(item.href)}
+                style={{ transitionDelay: `${index * 100}ms` }}
+                className={`text-left w-full text-4xl transition-all duration-500 transform ${
+                  isMenuOpen
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-4'
+                } text-gray-800 dark:text-gray-200 hover:text-sky-500 dark:hover:text-sky-400 font-light`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 };
 

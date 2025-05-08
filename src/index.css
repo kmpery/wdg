@@ -78,3 +78,9 @@ h6 {
 .animate-fadeIn {
   animation: fadeIn 1s ease-in-out;
 }
+
+@layer utilities {
+  .shadow-custom-inset {
+    box-shadow: inset -4px 4px 15px rgba(0, 0, 0, 0.5);
+  }
+}
