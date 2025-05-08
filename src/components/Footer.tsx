@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
             />
             <a
               className='transition-colors duration-300 hover:text-red-400 dark:hover:text-sky-400'
-              href='https://euphonious-fudge-2467ed.netlify.app/#about'
+              href=''
               target='_blank'
             >
               @kmpery
