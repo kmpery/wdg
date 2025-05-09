@@ -20,7 +20,8 @@ const StorySection: React.FC = () => {
     {
       date: 'April, 2025',
       title: 'Tunangan',
-      description: `Dan dia menepati janjinya. Setelah 6 tahun penantian, akhirnya dia melamarku. Insya Allah, dengan doa dan restu dari keluarga, hubungan ini akan terus langgeng dan abadi, sampai kita menua bersama.`,
+      description: `Setelah berkelana dan melewati persimpangan yang berliku, akhirnya kita bertemu di pemberhentian terakhir untuk pulang ke rumah yang sama. terima kasih sudah menemui dan memilih ku"
+Untuk ibadah terpanjang yang akan kita lalui,semoga kita banyak cara untuk jatuh cinta setiap harinya.`,
       image: 'story/3.jpg',
     },
   ];
