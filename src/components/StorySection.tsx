@@ -20,8 +20,8 @@ const StorySection: React.FC = () => {
     {
       date: 'April, 2025',
       title: 'Tunangan',
-      description: `Setelah berkelana dan melewati persimpangan yang berliku, akhirnya kita bertemu di pemberhentian terakhir untuk pulang ke rumah yang sama. terima kasih sudah menemui dan memilih ku"
-Untuk ibadah terpanjang yang akan kita lalui,semoga kita banyak cara untuk jatuh cinta setiap harinya.`,
+      description: `Setelah berkelana dan melewati persimpangan yang berliku, akhirnya kita bertemu di pemberhentian terakhir untuk pulang ke rumah yang sama. "terima kasih sudah menemui dan memilih ku"
+untuk ibadah terpanjang yang akan kita lalui,semoga kita punya banyak cara untuk jatuh cinta setiap harinya.`,
       image: 'story/3.jpg',
     },
   ];
