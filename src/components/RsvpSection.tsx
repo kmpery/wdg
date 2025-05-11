@@ -1,8 +1,15 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import {
+  MdOutlineForwardToInbox,
+  MdOutlineMarkEmailRead,
+  MdOutlineMarkAsUnread,
+  MdDiversity1,
+  MdOutlineDiversity3,
+} from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, Users } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import useStore from '../store/useStore';
 
 interface FormData {
@@ -207,9 +214,18 @@ const RsvpSection: React.FC = () => {
                 <button
                   type='submit'
                   disabled={isSubmitting}
-                  className='inline-flex items-center px-6 py-3 bg-amber-700 text-white dark:text-sky-200 font-semibold rounded-md shadow-md hover:bg-amber-600 dark:bg-sky-700 dark:hover:bg-sky-600 focus:outline-none focus:ring-2 transition'
+                  className='inline-flex items-center px-4 py-2 bg-amber-700 text-white dark:text-sky-200 font-semibold rounded-md shadow-md hover:bg-amber-600 dark:bg-sky-700 dark:hover:bg-sky-600 focus:outline-none focus:ring-2 transition'
                 >
-                  {isSubmitting ? 'Mengirim...' : 'Kirim RSVP'}
+                  {isSubmitting ? (
+                    <MdOutlineMarkAsUnread
+                      size={30}
+                      className='animate-pulse'
+                    />
+                  ) : isSubmitted ? (
+                    <MdOutlineMarkEmailRead size={30} />
+                  ) : (
+                    <MdOutlineForwardToInbox size={30} />
+                  )}
                 </button>
               </div>
             </motion.form>
@@ -219,10 +235,13 @@ const RsvpSection: React.FC = () => {
             <button
               type='button'
               onClick={toggleGuestbook}
-              className='inline-flex items-center px-5 py-2 bg-amber-700 text-white dark:text-sky-200 font-semibold rounded-md shadow hover:bg-amber-800 dark:bg-sky-700 dark:hover:bg-sky-600 transition mt-2'
+              className='inline-flex items-center text-amber-800 dark:text-sky-200 transition mt-2'
             >
-              <Users size={20} className='mr-2' />
-              {showGuestbook ? 'Tutup Buku Tamu' : 'Lihat Buku Tamu'}
+              {showGuestbook ? (
+                <MdOutlineDiversity3 size={30} />
+              ) : (
+                <MdDiversity1 size={30} />
+              )}
             </button>
           </div>
 

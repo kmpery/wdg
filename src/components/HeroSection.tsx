@@ -123,7 +123,7 @@ function HeroSection() {
               onClick={handleOpenInvitation}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className='mt-8 bg-amber-800 text-white dark:text-sky-200 px-6 py-3 rounded-full flex items-center justify-center mx-auto transition-all duration-300 hover:bg-amber-900 dark:bg-sky-700 dark:hover:bg-sky-600'
+              className='mt-8 bg-amber-800 text-white dark:text-sky-200 px-4 py-2 rounded-md flex items-center justify-center mx-auto transition-all duration-300 hover:bg-amber-900 dark:bg-sky-700 dark:hover:bg-sky-600'
             >
               {isOpen ? (
                 <>
