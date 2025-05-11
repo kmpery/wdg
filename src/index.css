@@ -12,6 +12,17 @@
   --color-amber-100: #fef3c7;
   --color-amber-800: #92400e;
   --color-amber-900: #78350f;
+  --fill-color: #065f46;
+  --leaf-color: #28974f;
+  --lineflower-color: #c24b02;
+  --flower-color: #fcd34d;
+}
+
+.dark {
+  --fill-color: #003816;
+  --leaf-color: #035722;
+  --lineflower-color: #0275af;
+  --flower-color: #8bd7fb;
 }
 
 html {

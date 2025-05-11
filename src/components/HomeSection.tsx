@@ -93,7 +93,7 @@ const HomeSection: React.FC = () => {
                 <BorderFrame
                   className='absolute inset-0 w-full h-full z-10 pointer-events-none'
                   style={{
-                    transform: 'scale(1.9)',
+                    transform: 'scale(1.9) scaleX(-1)',
                   }}
                   preserveAspectRatio='xMidYMid meet'
                 />
