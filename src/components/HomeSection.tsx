@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaInstagram } from 'react-icons/fa';
-import BorderFrame from '../assets/border.svg?react';
+import BorderFrame from '../assets/border2.svg?react';
 
 const HomeSection: React.FC = () => {
   return (
@@ -46,13 +46,12 @@ const HomeSection: React.FC = () => {
                 <img
                   src='gallery/1.jpg'
                   alt='Groom'
-                  className='w-64 h-64 rounded-full object-cover border-2 relative z-0'
+                  className='w-64 h-64 rounded-full object-cover relative z-0'
                 />
                 <BorderFrame
                   className='absolute inset-0 w-full h-full z-10 pointer-events-none'
                   style={{
-                    transform: 'scale(1.5) translateY(12%)',
-                    filter: 'drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1))',
+                    transform: 'scale(1.9)',
                   }}
                   preserveAspectRatio='xMidYMid meet'
                 />
@@ -89,13 +88,12 @@ const HomeSection: React.FC = () => {
                 <img
                   src='gallery/1.jpg'
                   alt='Groom'
-                  className='w-64 h-64 rounded-full object-cover border-2 relative z-10'
+                  className='w-64 h-64 rounded-full object-cover relative z-0'
                 />
                 <BorderFrame
-                  className='absolute inset-0 w-full h-full z-10 pointer-events-none text-amber-800'
+                  className='absolute inset-0 w-full h-full z-10 pointer-events-none'
                   style={{
-                    transform: 'scale(1.5) translateY(12%)',
-                    filter: 'drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1))',
+                    transform: 'scale(1.9)',
                   }}
                   preserveAspectRatio='xMidYMid meet'
                 />
