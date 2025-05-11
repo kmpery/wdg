@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { LiaExternalLinkAltSolid } from 'react-icons/lia';
 import { motion } from 'framer-motion';
 
 const MapLocation: React.FC = () => {
@@ -32,8 +32,7 @@ const MapLocation: React.FC = () => {
           whileTap={{ scale: 0.95 }}
           className='inline-flex items-center justify-center px-6 py-3 bg-amber-800 text-white rounded-full hover:bg-amber-900 transition-colors duration-300 dark:bg-sky-800 dark:text-sky-100 dark:hover:bg-sky-600'
         >
-          <ExternalLink size={16} className='mr-2' />
-          <span>View Map</span>
+          <LiaExternalLinkAltSolid size={30} />
         </motion.a>
       </div>
     </div>

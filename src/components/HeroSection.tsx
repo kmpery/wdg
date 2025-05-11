@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Parallax } from 'react-parallax';
 import { motion } from 'framer-motion';
-import { Mail, MailOpen } from 'lucide-react';
+import { IoMailUnreadOutline, IoMailOpenOutline } from 'react-icons/io5';
 import CountdownTimer from './CountdownTimer';
 import useStore from '../store/useStore';
 import { useSearchParams } from 'react-router-dom';
@@ -92,6 +92,7 @@ function HeroSection() {
             style={{ transform: 'scale(1.2)' }}
             preserveAspectRatio='xMidYMid slice'
           />
+
           <div className='relative p-2 md:p-12 mt-10'>
             {' '}
             <h3 className='text-lg text-amber-800 dark:text-sky-400 mt-6 font-light'>
@@ -126,13 +127,11 @@ function HeroSection() {
             >
               {isOpen ? (
                 <>
-                  <MailOpen className='mr-2' size={20} />
-                  <span>Di Buka</span>
+                  <IoMailOpenOutline size={30} />
                 </>
               ) : (
                 <>
-                  <Mail className='mr-2' size={20} />
-                  <span>Buka Undangan</span>
+                  <IoMailUnreadOutline size={30} />
                 </>
               )}
             </motion.button>
