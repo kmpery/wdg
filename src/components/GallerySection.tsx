@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { X as IoCloseOutline } from 'lucide-react';
 import {
-  X as IoCloseOutline,
-  PlayCircle as IoPlayCircleOutline,
-  PauseCircle as IoPauseCircleOutline,
-} from 'lucide-react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+  MdOutlinePlayCircle,
+  MdOutlinePauseCircle,
+  MdOutlineChevronLeft,
+  MdOutlineChevronRight,
+} from 'react-icons/md';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 
@@ -238,31 +239,31 @@ const GallerySection: React.FC = () => {
                   (currentSlide - 1 + images.length) % images.length
                 )
               }
-              className='absolute left-8 top-1/2 -translate-y-1/2 bg-white/90 text-black p-3 rounded-full shadow-lg hover:scale-110 transition z-40'
+              className='absolute left-8 top-1/2 -translate-y-1/2 text-white shadow-lg hover:scale-110 transition z-40'
               aria-label='Previous image'
             >
-              <ChevronLeft size={18} />
+              <MdOutlineChevronLeft size={60} />
             </button>
             <button
               onClick={() =>
                 setCurrentSlide((currentSlide + 1) % images.length)
               }
-              className='absolute right-8 top-1/2 -translate-y-1/2 bg-white/90 text-black p-3 rounded-full shadow-lg hover:scale-110 transition z-40'
+              className='absolute right-8 top-1/2 -translate-y-1/2 bg-none text-white shadow-lg hover:scale-110 transition z-40'
               aria-label='Next image'
             >
-              <ChevronRight size={18} />
+              <MdOutlineChevronRight size={60} />
             </button>
 
             <div className='absolute bottom-8 right-8 z-40'>
               <button
                 onClick={toggleAutoSlide}
-                className='flex items-center justify-center w-12 h-12 text-white rounded-full bg-black/50 hover:bg-black/70 transition'
+                className='flex items-center justify-center w-12 h-12 text-white rounded-full transition'
                 aria-label={autoSlide ? 'Pause slideshow' : 'Play slideshow'}
               >
                 {autoSlide ? (
-                  <IoPauseCircleOutline size={28} />
+                  <MdOutlinePauseCircle size={28} />
                 ) : (
-                  <IoPlayCircleOutline size={28} />
+                  <MdOutlinePlayCircle size={28} />
                 )}
               </button>
             </div>
@@ -293,9 +294,9 @@ const GallerySection: React.FC = () => {
                 className='flex items-center justify-center w-8 h-8 border border-none text-white rounded-full hover:bg-white/10 transition'
               >
                 {autoSlide ? (
-                  <IoPauseCircleOutline size={24} />
+                  <MdOutlinePauseCircle size={24} />
                 ) : (
-                  <IoPlayCircleOutline size={24} />
+                  <MdOutlinePlayCircle size={24} />
                 )}
               </button>
             </div>

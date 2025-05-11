@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Gift, Copy, Check } from 'lucide-react';
+import {
+  MdOutlineFileCopy,
+  MdOutlineInventory,
+  MdOutlineCardGiftcard,
+} from 'react-icons/md';
 
 interface GiftOption {
   title: string; // untuk copy
@@ -25,7 +29,7 @@ const GiftSection: React.FC = () => {
           />
         </div>
       ),
-      icon: <Gift size={24} />,
+      icon: <MdOutlineCardGiftcard size={24} />,
       description: 'Risa Inda Sari',
       details: '7990360582',
     },
@@ -40,7 +44,7 @@ const GiftSection: React.FC = () => {
           />
         </div>
       ),
-      icon: <Gift size={24} />,
+      icon: <MdOutlineCardGiftcard size={24} />,
       description: 'Risa Inda Sari',
       details: '085298614812',
     },
@@ -105,17 +109,15 @@ const GiftSection: React.FC = () => {
                     onClick={() =>
                       copyToClipboard(option.details ?? '', option.title)
                     }
-                    className='mt-4 flex items-center justify-center px-4 py-2 bg-amber-700 hover:bg-amber-800 dark:bg-sky-700 dark:hover:bg-sky-600 text-white dark:text-sky-200 rounded-md transition-colors duration-300 mx-auto'
+                    className='mt-4 flex items-center justify-center text-amber-900 dark:text-sky-200 transition-colors duration-300 mx-auto'
                   >
                     {copiedDetail === option.title ? (
                       <>
-                        <Check size={16} className='mr-2' />
-                        <span>Disalin</span>
+                        <MdOutlineInventory size={24} />
                       </>
                     ) : (
                       <>
-                        <Copy size={16} className='mr-2' />
-                        <span>Salin</span>
+                        <MdOutlineFileCopy size={24} />
                       </>
                     )}
                   </button>

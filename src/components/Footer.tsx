@@ -4,7 +4,7 @@ import { FaLinkedin, FaInstagram, FaRegHeart, FaGithub } from 'react-icons/fa';
 const Footer: React.FC = () => {
   return (
     <footer
-      className='py-8 bg-amber-900 text-amber-100 dark:bg-gray-950 dark:text-sky-200'
+      className='py-8 bg-amber-950 text-amber-100 dark:bg-gray-950 dark:text-sky-200'
       id='footer'
     >
       <div className='container mx-auto px-4'>

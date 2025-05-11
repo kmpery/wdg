@@ -114,12 +114,12 @@ const Navbar: React.FC = () => {
               </div>
 
               {/* Desktop Menu */}
-              <div className='hidden md:flex space-x-6 text-sm'>
+              <div className='hidden md:flex space-x-12 text-sm'>
                 {menuItems.map((item) => (
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className='text-gray-800 dark:text-gray-200 hover:text-sky-500 dark:hover:text-sky-400 transition-colors font-light'
+                    className='text-gray-800 dark:text-gray-200 hover:text-amber-800 dark:hover:text-sky-400 transition-colors font-light'
                   >
                     {item.label}
                   </button>

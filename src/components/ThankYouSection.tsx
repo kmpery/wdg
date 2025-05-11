@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Send } from 'lucide-react';
+import { BsSendFill, BsSendCheckFill } from 'react-icons/bs';
 import axios from 'axios';
-import { FaCommentDots } from 'react-icons/fa';
+import { MdOutlineComment } from 'react-icons/md';
 import useStore from '../store/useStore';
 
 interface Comment {
@@ -182,11 +182,10 @@ const ThankYouSection: React.FC = () => {
                   value={commentName}
                   onChange={(e) => setCommentName(e.target.value)}
                   required
-                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-sky-950 dark:text-sky-200 bg-white text-gray-900 placeholder-gray-400 dark:placeholder-sky-400'
+                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-gray-900 dark:text-sky-200 bg-white text-gray-900 placeholder-gray-400 dark:placeholder-sky-400'
                   placeholder='Nama Anda'
                 />
               </div>
-
               <div className='mb-6'>
                 <label
                   className='block text-amber-800 dark:text-sky-300 text-sm font-medium mb-2'
@@ -200,25 +199,29 @@ const ThankYouSection: React.FC = () => {
                   onChange={(e) => setCommentMessage(e.target.value)}
                   required
                   rows={4}
-                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white dark:focus:ring-sky-400 dark:bg-sky-950 dark:text-sky-200 text-gray-900 placeholder-gray-400 dark:placeholder-sky-400'
+                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white dark:focus:ring-sky-400 dark:bg-gray-900 dark:text-sky-200 text-gray-900 placeholder-gray-400 dark:placeholder-sky-400'
                   placeholder='Tulis Ucapan'
                 ></textarea>
               </div>
-
               <button
                 type='submit'
                 disabled={isSubmitting}
-                className={`flex items-center justify-center px-6 py-3 bg-amber-800 dark:bg-sky-700 dark:hover:bg-sky-600 text-white dark:text-sky-200 rounded-md transition-colors duration-300 ${
-                  isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
-                }`}
+                className={`flex items-center justify-center px-4 py-2 rounded-md transition-colors duration-300 
+    bg-amber-800 hover:bg-amber-700 
+    dark:bg-sky-700 dark:hover:bg-sky-600 
+    text-white dark:text-sky-200 
+    ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
               >
-                <Send size={16} className='mr-2' />
-                <span>{isSubmitting ? 'Mengirim...' : 'Kirim'}</span>
+                {isSubmitting ? (
+                  <BsSendCheckFill className='animate-pulse' size={24} />
+                ) : (
+                  <BsSendFill size={24} />
+                )}
               </button>
             </form>
 
             <h3 className='text-2xl font-semibold text-amber-900 dark:text-sky-300 mt-8 flex items-center'>
-              <FaCommentDots className='mr-2' />
+              <MdOutlineComment className='mr-2' />
               <span>({comments.length}) Ucapan</span>
             </h3>
           </motion.div>

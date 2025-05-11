@@ -183,7 +183,7 @@ const RsvpSection: React.FC = () => {
                   onChange={handleChange}
                   required
                   readOnly={!!recipientName}
-                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-sky-950 dark:text-sky-200 disabled:opacity-60'
+                  className='w-full px-4 py-2 border border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-gray-900 dark:text-sky-200 disabled:opacity-60'
                   placeholder='Nama'
                 />
               </div>
@@ -202,7 +202,7 @@ const RsvpSection: React.FC = () => {
                   value={formData.willAttend}
                   onChange={handleChange}
                   required
-                  className='w-full px-4 py-2 border bg-white border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-sky-950 dark:text-sky-200'
+                  className='w-full px-4 py-2 border bg-white border-amber-300 dark:border-sky-600 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-sky-400 dark:bg-gray-900 dark:text-sky-200'
                 >
                   <option value=''>Pilih salah satu</option>
                   <option value='yes'>Ya, saya akan hadir</option>
@@ -214,7 +214,7 @@ const RsvpSection: React.FC = () => {
                 <button
                   type='submit'
                   disabled={isSubmitting}
-                  className='inline-flex items-center px-4 py-2 bg-amber-700 text-white dark:text-sky-200 font-semibold rounded-md shadow-md hover:bg-amber-600 dark:bg-sky-700 dark:hover:bg-sky-600 focus:outline-none focus:ring-2 transition'
+                  className='inline-flex items-center px-4 py-2 bg-amber-900 text-white dark:text-sky-200 font-semibold rounded-md shadow-md hover:bg-amber-800 dark:bg-sky-700 dark:hover:bg-sky-600 focus:outline-none focus:ring-2 transition'
                 >
                   {isSubmitting ? (
                     <MdOutlineMarkAsUnread
@@ -235,7 +235,7 @@ const RsvpSection: React.FC = () => {
             <button
               type='button'
               onClick={toggleGuestbook}
-              className='inline-flex items-center text-amber-800 dark:text-sky-200 transition mt-2'
+              className='inline-flex items-center text-amber-900 dark:text-sky-200 transition mt-2'
             >
               {showGuestbook ? (
                 <MdOutlineDiversity3 size={30} />

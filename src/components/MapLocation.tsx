@@ -30,7 +30,7 @@ const MapLocation: React.FC = () => {
           rel='noopener noreferrer'
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className='inline-flex items-center justify-center px-4 py-1 bg-amber-800 text-white rounded-md hover:bg-amber-900 transition-colors duration-300 dark:bg-sky-800 dark:text-sky-100 dark:hover:bg-sky-600'
+          className='inline-flex items-center justify-center px-4 py-1 bg-amber-900 text-white rounded-md hover:bg-amber-800 transition-colors duration-300 dark:bg-sky-800 dark:text-sky-100 dark:hover:bg-sky-600'
         >
           <LiaExternalLinkAltSolid size={30} />
         </motion.a>
