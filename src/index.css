@@ -14,8 +14,8 @@
   --color-amber-900: #78350f;
   --fill-color: #065f46;
   --leaf-color: #28974f;
-  --lineflower-color: #c24b02;
-  --flower-color: #fcd34d;
+  --lineflower-color: #c0430d;
+  --flower-color: #edf944;
 }
 
 .dark {
@@ -33,6 +33,7 @@ body {
   font-family: var(--font-sans);
   background-color: var(--color-cream);
   color: var(--color-amber-900);
+  overflow-x: hidden;
 }
 
 h1,

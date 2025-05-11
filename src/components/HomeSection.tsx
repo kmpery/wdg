@@ -48,13 +48,14 @@ const HomeSection: React.FC = () => {
                   alt='Groom'
                   className='w-64 h-64 rounded-full object-cover relative z-0'
                 />
-                <BorderFrame
-                  className='absolute inset-0 w-full h-full z-10 pointer-events-none'
-                  style={{
-                    transform: 'scale(1.9)',
-                  }}
-                  preserveAspectRatio='xMidYMid meet'
-                />
+                <div className='absolute inset-0 w-full h-full scale-[1.4] z-10 pointer-events-none'>
+                  <div className='w-full h-full origin-center'>
+                    <BorderFrame
+                      className='w-full h-full'
+                      preserveAspectRatio='xMidYMid meet'
+                    />
+                  </div>
+                </div>
               </div>
               <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-100 mb-2 mt-10'>
                 Nursalim S.H Dg.Nuntung
@@ -90,13 +91,17 @@ const HomeSection: React.FC = () => {
                   alt='Groom'
                   className='w-64 h-64 rounded-full object-cover relative z-0'
                 />
-                <BorderFrame
-                  className='absolute inset-0 w-full h-full z-10 pointer-events-none'
-                  style={{
-                    transform: 'scale(1.9) scaleX(-1)',
-                  }}
-                  preserveAspectRatio='xMidYMid meet'
-                />
+                <div className='absolute inset-0 w-full h-full z-10 pointer-events-none'>
+                  <div className='w-full h-full scale-[1.4] origin-center'>
+                    <BorderFrame
+                      className='w-full h-full'
+                      style={{
+                        transform: 'scaleX(-1)',
+                      }}
+                      preserveAspectRatio='xMidYMid meet'
+                    />
+                  </div>
+                </div>
               </div>
               <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-100 mt-10 mb-2'>
                 Risa Inda Sari Dg.Nginga
