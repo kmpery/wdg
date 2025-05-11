@@ -206,8 +206,8 @@ const ThankYouSection: React.FC = () => {
               <button
                 type='submit'
                 disabled={isSubmitting}
-                className={`flex items-center justify-center px-4 py-2 rounded-md transition-colors duration-300 
-    bg-amber-800 hover:bg-amber-700 
+                className={`flex items-center justify-center px-7 py-2 rounded-md transition-colors duration-300 
+    bg-amber-950 hover:bg-amber-800 
     dark:bg-sky-700 dark:hover:bg-sky-600 
     text-white dark:text-sky-200 
     ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
