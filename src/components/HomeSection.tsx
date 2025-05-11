@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaInstagram } from 'react-icons/fa';
+import BorderFrame from '../assets/border.svg?react';
 
 const HomeSection: React.FC = () => {
   return (
@@ -41,14 +42,22 @@ const HomeSection: React.FC = () => {
               viewport={{ once: true }}
               className='text-center'
             >
-              <div className='mb-6'>
+              <div className='relative w-64 h-64 mx-auto mb-6'>
                 <img
-                  src='https://images.pexels.com/photos/8100784/pexels-photo-8100784.jpeg'
+                  src='gallery/1.jpg'
                   alt='Groom'
-                  className='w-64 h-64 rounded-full mx-auto mt-4 object-cover border-4 border-amber-200 dark:border-sky-700'
+                  className='w-64 h-64 rounded-full object-cover border-2 relative z-0'
+                />
+                <BorderFrame
+                  className='absolute inset-0 w-full h-full z-10 pointer-events-none'
+                  style={{
+                    transform: 'scale(1.5) translateY(12%)',
+                    filter: 'drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1))',
+                  }}
+                  preserveAspectRatio='xMidYMid meet'
                 />
               </div>
-              <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-100 mb-2'>
+              <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-100 mb-2 mt-10'>
                 Nursalim S.H Dg.Nuntung
               </h3>
               <a
@@ -76,14 +85,22 @@ const HomeSection: React.FC = () => {
               viewport={{ once: true }}
               className='text-center'
             >
-              <div className='mb-6'>
+              <div className='relative w-64 h-64 mx-auto mb-6'>
                 <img
-                  src='https://images.pexels.com/photos/8100584/pexels-photo-8100584.jpeg'
-                  alt='Bride'
-                  className='w-64 h-64 rounded-full mx-auto mt-4 object-cover border-4 border-amber-200 dark:border-sky-700'
+                  src='gallery/1.jpg'
+                  alt='Groom'
+                  className='w-64 h-64 rounded-full object-cover border-2 relative z-10'
+                />
+                <BorderFrame
+                  className='absolute inset-0 w-full h-full z-10 pointer-events-none text-amber-800'
+                  style={{
+                    transform: 'scale(1.5) translateY(12%)',
+                    filter: 'drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1))',
+                  }}
+                  preserveAspectRatio='xMidYMid meet'
                 />
               </div>
-              <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-100 mb-2'>
+              <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-100 mt-10 mb-2'>
                 Risa Inda Sari Dg.Nginga
               </h3>
               <a
