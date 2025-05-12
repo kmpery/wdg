@@ -142,7 +142,7 @@ const ThankYouSection: React.FC = () => {
   };
 
   return (
-    <section className='py-20 bg-amber-100 dark:bg-gray-900' id='thankyou'>
+    <section className='py-20 bg-amber-100 dark:bg-gray-900' id='greetings'>
       <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0 }}
@@ -152,7 +152,7 @@ const ThankYouSection: React.FC = () => {
           className='text-center mb-12'
         >
           <h2 className='text-4xl font-bold text-amber-900 dark:text-sky-400 mb-4'>
-            Thank You
+            Greetings
           </h2>
           <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-8'></div>
           <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto'>

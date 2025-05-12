@@ -127,7 +127,8 @@ const RsvpSection: React.FC = () => {
         </h2>
         <div className='w-16 h-1 bg-amber-900 dark:bg-sky-400 mx-auto mb-8'></div>
         <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto'>
-          Mohon isi form dibawah ini untuk melakukan konfirmasi kehadiran.
+          Kami mohon kesediaannya untuk mengisi formulir di bawah ini sebagai
+          konfirmasi kehadiran.
         </p>
       </motion.div>
 

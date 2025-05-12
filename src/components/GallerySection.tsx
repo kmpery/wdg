@@ -157,10 +157,10 @@ const GallerySection: React.FC = () => {
           viewport={{ once: true }}
           className='text-center mb-12 text-amber-100 dark:text-sky-400'
         >
-          <h2 className='text-4xl font-bold mb-4'>Our Gallery</h2>
+          <h2 className='text-4xl font-bold mb-4'>Moments</h2>
           <div className='w-16 h-1 bg-amber-100 dark:bg-sky-400 mx-auto mb-8'></div>
           <p className='text-lg max-w-2xl mx-auto dark:text-sky-200'>
-            Gallery foto kebahagiaan kami yang kami kenang selalu.
+            Galeri momen kebahagiaan kami yang akan selalu kami kenang.
           </p>
         </motion.div>
 

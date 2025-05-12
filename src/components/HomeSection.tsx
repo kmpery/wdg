@@ -71,9 +71,9 @@ const HomeSection: React.FC = () => {
               </a>
               <p className='mt-4 text-amber-800 dark:text-sky-200'>
                 <br />
-                Putra Pertama dari Bapak Haeruddin dg. Gassing <br />
+                Putra Pertama dari Bapak Haeruddin Dg. Gassing <br />
                 dan <br />
-                Ibu Hj. Nurbaya dg. Sabbe
+                Ibu Hj. Nurbaya Dg. Sabbe
               </p>
             </motion.div>
 
@@ -120,7 +120,7 @@ const HomeSection: React.FC = () => {
                 Putri ke 3 dari Bapak Muh. Rusydi Dg.Ngudding
                 <br />
                 dan <br />
-                Ibu Rahma dg. Baji
+                Ibu Rahma Dg. Baji
               </p>
             </motion.div>
           </div>

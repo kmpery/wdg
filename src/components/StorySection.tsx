@@ -40,14 +40,14 @@ untuk ibadah terpanjang yang akan kita lalui, semoga kita punya banyak cara untu
         </div>
 
         <h2 className='text-4xl font-bold text-amber-900 dark:text-sky-400 mb-4'>
-          Our Love Story
+          Our Story
         </h2>
         <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-8'></div>
 
         <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto mb-8'>
-          Banyak cerita yang kami lalui sehingga akhirnya kami bisa bersatu,
-          cerita yang akan kami kenang selalu, dan cerita itu kami bagi untuk
-          anda.
+          Banyak cerita yang kami lalui hingga akhirnya dipersatukan. Cerita
+          yang akan selalu kami kenang, dan kini kami ingin membagikannya kepada
+          Anda.
         </p>
 
         <div className='relative'>

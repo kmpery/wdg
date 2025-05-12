@@ -63,7 +63,7 @@ END:VCALENDAR
           className='text-center mb-12'
         >
           <h2 className='text-4xl font-bold text-amber-900 dark:text-sky-400 mb-4'>
-            Wedding Ceremony & Reception
+            Wedding Day
           </h2>
           <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-8'></div>
           <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto'>
@@ -173,7 +173,7 @@ END:VCALENDAR
             viewport={{ once: true }}
           >
             <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-6'>
-              Lokasi Acara
+              Location
             </h3>
             <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto mb-4 text-center'>
               Alamat: Pare'-pare' Maradekaya, Kabupaten Gowa, Sulawesi Selatan

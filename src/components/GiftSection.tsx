@@ -74,11 +74,11 @@ const GiftSection: React.FC = () => {
           </h2>
           <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-8'></div>
           <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto'>
-            Doa restu Bapak/Ibu sekalian merupakan karunia yang sangat berarti
-            bagi kami. Dan jika memberi merupakan ungkapan tanda kasih,
-            Bapak/Ibu dapat memberi kado secara cashless.
+            Doa restu Bapak/Ibu sekalian adalah karunia yang sangat berarti bagi
+            kami. Jika Bapak/Ibu ingin memberikan tanda kasih, kami menyediakan
+            pilihan pemberian kado secara cashless.
             <br />
-            Terima kasih
+            Terima kasih atas perhatian dan dukungannya.
           </p>
         </motion.div>
 
