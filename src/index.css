@@ -65,6 +65,47 @@ h6 {
 }
 
 /* Special animations */
+@keyframes macDockBounce {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.5, 0.05, 0.2, 0.99);
+  }
+  10% {
+    transform: translateY(-15px);
+    animation-timing-function: cubic-bezier(0.5, 0.05, 0.2, 0.99);
+  }
+  20% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.5, 0.05, 0.2, 0.99);
+  }
+  30% {
+    transform: translateY(-10px);
+    animation-timing-function: cubic-bezier(0.5, 0.05, 0.2, 0.99);
+  }
+  40% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.5, 0.05, 0.2, 0.99);
+  }
+  50% {
+    transform: translateY(-5px);
+    animation-timing-function: cubic-bezier(0.5, 0.05, 0.2, 0.99);
+  }
+  60% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.5, 0.05, 0.2, 0.99);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.icon-ultra-bounce {
+  display: inline-block;
+  animation: macDockBounce 2s infinite;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

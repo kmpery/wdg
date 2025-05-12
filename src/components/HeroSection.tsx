@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Parallax } from 'react-parallax';
 import { motion } from 'framer-motion';
-import { IoMailUnread, IoMailOpen } from 'react-icons/io5';
+import { IoMailOpenOutline, IoMailUnreadOutline } from 'react-icons/io5';
 import CountdownTimer from './CountdownTimer';
 import useStore from '../store/useStore';
 import { useSearchParams } from 'react-router-dom';
@@ -124,11 +124,15 @@ function HeroSection() {
             >
               {isOpen ? (
                 <>
-                  <IoMailOpen size={60} />
+                  <IoMailOpenOutline size={40} />
                 </>
               ) : (
                 <>
-                  <IoMailUnread size={60} />
+                  <IoMailUnreadOutline
+                    size={40}
+                    name='mail-unread-outline'
+                    className='icon-ultra-bounce'
+                  />
                 </>
               )}
             </motion.button>
