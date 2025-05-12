@@ -76,7 +76,7 @@ function HeroSection() {
       className='h-screen overflow-hidden bg-cover'
     >
       <div
-        className='h-screen flex flex-col items-center justify-center text-center relative opacity-90 backdrop-blur-md bg-gradient-to-br from-amber-50 to-amber-100 dark:from-sky-900 dark:to-sky-950 bg-opacity-90'
+        className='h-screen flex flex-col items-center justify-between text-center relative opacity-90 backdrop-blur-md bg-gradient-to-br from-amber-50 to-amber-100 dark:from-sky-900 dark:to-sky-950 bg-opacity-90'
         id='hero'
       >
         <motion.div
