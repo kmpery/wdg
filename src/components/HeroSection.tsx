@@ -68,13 +68,7 @@ function HeroSection() {
   };
 
   return (
-    <Parallax
-      blur={{ min: -15, max: 15 }}
-      // bgImage='hero/bg.jpg'
-      bgImageAlt='Wedding background'
-      strength={300}
-      className='h-screen overflow-hidden bg-cover'
-    >
+    <Parallax blur={{ min: -15, max: 15 }} strength={300}>
       <div
         className='h-screen flex flex-col items-center justify-between text-center relative opacity-90 backdrop-blur-md bg-gradient-to-br from-amber-50 to-amber-100 dark:from-sky-900 dark:to-sky-950 bg-opacity-90'
         id='hero'

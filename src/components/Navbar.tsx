@@ -101,7 +101,7 @@ const Navbar: React.FC = () => {
               {/* Logo */}
               <div className='flex-shrink-0'>
                 <a
-                  href='#'
+                  href='#hero'
                   className='flex items-center gap-x-1 text-gray-900 dark:text-white text-base font-medium tracking-wide hover:opacity-80 transition leading-tight'
                 >
                   <span>A</span>
