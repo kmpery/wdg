@@ -87,7 +87,7 @@ const HomeSection: React.FC = () => {
             >
               <div className='relative w-64 h-64 mx-auto mb-6'>
                 <img
-                  src='https://ibb.co/album/nqtLtT'
+                  src='https://i.ibb.co.com/20BmsjXb/2.jpg'
                   alt='Groom'
                   className='w-64 h-64 rounded-full object-cover relative z-0'
                 />
