@@ -17,39 +17,39 @@ interface Image {
 
 const images: Image[] = [
   {
-    src: 'https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    src: 'gallery/1.JPG',
     alt: 'Gallery 1',
   },
   {
-    src: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    src: 'gallery/2.JPG',
     alt: 'Gallery 2',
   },
   {
-    src: 'https://images.pexels.com/photos/2469122/pexels-photo-2469122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    src: 'gallery/3.JPG',
     alt: 'Gallery 3',
   },
   {
-    src: 'https://images.pexels.com/photos/1231230/pexels-photo-1231230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    src: 'gallery/4.JPG',
     alt: 'Gallery 4',
   },
   {
-    src: 'https://images.pexels.com/photos/1266810/pexels-photo-1266810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    src: 'gallery/5.JPG',
     alt: 'Gallery 5',
   },
   {
-    src: 'https://images.pexels.com/photos/3933881/pexels-photo-3933881.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    src: 'gallery/6.JPG',
     alt: 'Gallery 6',
   },
   {
-    src: 'https://images.pexels.com/photos/2403568/pexels-photo-2403568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    src: 'gallery/7.JPG',
     alt: 'Gallery 7',
   },
   {
-    src: 'https://images.pexels.com/photos/1261731/pexels-photo-1261731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    src: 'gallery/8.JPG',
     alt: 'Gallery 8',
   },
   {
-    src: 'https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    src: 'gallery/9.JPG',
     alt: 'Gallery 9',
   },
 ];
