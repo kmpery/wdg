@@ -17,39 +17,39 @@ interface Image {
 
 const images: Image[] = [
   {
-    src: 'gallery/1.JPG',
+    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0258.JPG?',
     alt: 'Gallery 1',
   },
   {
-    src: 'gallery/2.JPG',
+    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0278.JPG?',
     alt: 'Gallery 2',
   },
   {
-    src: 'gallery/3.JPG',
+    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0297.JPG?',
     alt: 'Gallery 3',
   },
   {
-    src: 'gallery/4.JPG',
+    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0313.JPG?',
     alt: 'Gallery 4',
   },
   {
-    src: 'gallery/5.JPG',
+    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0320.JPG?',
     alt: 'Gallery 5',
   },
   {
-    src: 'gallery/6.JPG',
+    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0318.JPG?',
     alt: 'Gallery 6',
   },
   {
-    src: 'gallery/7.JPG',
+    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0248.JPG?',
     alt: 'Gallery 7',
   },
   {
-    src: 'gallery/8.JPG',
+    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0249.JPG?',
     alt: 'Gallery 8',
   },
   {
-    src: 'gallery/9.JPG',
+    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0247.JPG?',
     alt: 'Gallery 9',
   },
 ];
@@ -138,7 +138,7 @@ const GallerySection: React.FC = () => {
 
   const toggleAutoSlide = () => setAutoSlide(!autoSlide);
 
-  const handleImageTap = () => {
+  const showControlsTemporarily = () => {
     setShowControls(true);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => setShowControls(false), 3000);
@@ -224,9 +224,17 @@ const GallerySection: React.FC = () => {
                     }}
                   >
                     <img
-                      src={image.src || '/placeholder.svg'}
+                      src={`${image.src}tr=w-auto,dpr-auto,q-95,f-auto`}
                       alt={image.alt}
+                      loading={index !== currentSlide ? 'lazy' : 'eager'}
                       className='rounded-xl object-cover w-full h-[550px] shadow-lg'
+                      srcSet={`
+    ${image.src}tr=w-480,dpr-auto,q-80,f-auto 480w,
+    ${image.src}tr=w-768,dpr-auto,q-85,f-auto 768w,
+    ${image.src}tr=w-1024,dpr-auto,q-90,f-auto 1024w,
+    ${image.src}tr=w-1280,dpr-auto,q-95,f-auto 1280w
+  `}
+                      sizes='(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 50vw'
                     />
                   </motion.div>
                 ) : null;
@@ -281,9 +289,17 @@ const GallerySection: React.FC = () => {
                   onClick={() => openLightbox(index)}
                 >
                   <img
-                    src={image.src || '/placeholder.svg'}
+                    src={`${image.src}tr=w-auto,dpr-auto,q-95,f-auto`}
                     alt={image.alt}
+                    loading={index !== 0 ? 'lazy' : 'eager'}
                     className='rounded-2xl max-h-[700px] md:max-h-[500px] sm:max-h-[300px] object-cover w-full'
+                    srcSet={`
+    ${image.src}tr=w-480,dpr-auto,q-80,f-auto 480w,
+    ${image.src}tr=w-768,dpr-auto,q-85,f-auto 768w,
+    ${image.src}tr=w-1024,dpr-auto,q-90,f-auto 1024w,
+    ${image.src}tr=w-1280,dpr-auto,q-95,f-auto 1280w
+  `}
+                    sizes='(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 100vw'
                   />
                 </div>
               ))}
@@ -341,9 +357,11 @@ const GallerySection: React.FC = () => {
 
                   if (diffX > 50) {
                     handleSwipeRight();
+                    showControlsTemporarily();
                     document.removeEventListener('touchmove', handleTouchMove);
                   } else if (diffX < -50) {
                     handleSwipeLeft();
+                    showControlsTemporarily();
                     document.removeEventListener('touchmove', handleTouchMove);
                   }
                 };
@@ -375,10 +393,11 @@ const GallerySection: React.FC = () => {
               </AnimatePresence>
 
               <motion.img
-                src={images[selectedImageIndex].src}
+                src={`${images[selectedImageIndex].src}?tr=w-auto,dpr-auto,q-95,f-auto`}
                 alt={images[selectedImageIndex].alt}
                 className='w-screen h-screen object-contain'
-                onClick={handleImageTap}
+                onClick={showControlsTemporarily}
+                decoding='async'
               />
             </motion.div>
           </motion.div>
