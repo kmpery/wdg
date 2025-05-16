@@ -17,39 +17,39 @@ interface Image {
 
 const images: Image[] = [
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0258.JPG?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/1.jpg?',
     alt: 'Gallery 1',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0278.JPG?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/2.jpg?',
     alt: 'Gallery 2',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0297.JPG?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/3.jpg?',
     alt: 'Gallery 3',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0313.JPG?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/4.jpg?',
     alt: 'Gallery 4',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0320.JPG?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/5.jpg?',
     alt: 'Gallery 5',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0318.JPG?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/6.jpg?',
     alt: 'Gallery 6',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0248.JPG?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/7.jpg?',
     alt: 'Gallery 7',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0249.JPG?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/8.jpg?',
     alt: 'Gallery 8',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/DSC_0247.JPG?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/9.jpg?',
     alt: 'Gallery 9',
   },
 ];
@@ -224,17 +224,17 @@ const GallerySection: React.FC = () => {
                     }}
                   >
                     <img
-                      src={`${image.src}tr=w-auto,dpr-auto,q-95,f-auto`}
+                      src={`${image.src}tr=w-1280,q-95,f-auto`}
                       alt={image.alt}
                       loading={index !== currentSlide ? 'lazy' : 'eager'}
                       className='rounded-xl object-cover w-full h-[550px] shadow-lg'
                       srcSet={`
-    ${image.src}tr=w-480,dpr-auto,q-80,f-auto 480w,
-    ${image.src}tr=w-768,dpr-auto,q-85,f-auto 768w,
-    ${image.src}tr=w-1024,dpr-auto,q-90,f-auto 1024w,
-    ${image.src}tr=w-1280,dpr-auto,q-95,f-auto 1280w
+    ${image.src}tr=w-480,q-80,f-auto 480w,
+    ${image.src}tr=w-768,q-85,f-auto 768w,
+    ${image.src}tr=w-1024,q-90,f-auto 1024w,
+    ${image.src}tr=w-1280,q-95,f-auto 1280w
   `}
-                      sizes='(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 50vw'
+                      sizes='(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 1280px'
                     />
                   </motion.div>
                 ) : null;
@@ -289,17 +289,10 @@ const GallerySection: React.FC = () => {
                   onClick={() => openLightbox(index)}
                 >
                   <img
-                    src={`${image.src}tr=w-auto,dpr-auto,q-95,f-auto`}
+                    src={`${image.src}tr=w-1280,q-95,f-auto`}
                     alt={image.alt}
                     loading={index !== 0 ? 'lazy' : 'eager'}
                     className='rounded-2xl max-h-[700px] md:max-h-[500px] sm:max-h-[300px] object-cover w-full'
-                    srcSet={`
-    ${image.src}tr=w-480,dpr-auto,q-80,f-auto 480w,
-    ${image.src}tr=w-768,dpr-auto,q-85,f-auto 768w,
-    ${image.src}tr=w-1024,dpr-auto,q-90,f-auto 1024w,
-    ${image.src}tr=w-1280,dpr-auto,q-95,f-auto 1280w
-  `}
-                    sizes='(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 100vw'
                   />
                 </div>
               ))}
@@ -393,11 +386,12 @@ const GallerySection: React.FC = () => {
               </AnimatePresence>
 
               <motion.img
-                src={`${images[selectedImageIndex].src}?tr=w-auto,dpr-auto,q-95,f-auto`}
+                src={`${images[selectedImageIndex].src}?tr=w-1920,q-90,f-auto`}
                 alt={images[selectedImageIndex].alt}
                 className='w-screen h-screen object-contain'
                 onClick={showControlsTemporarily}
                 decoding='async'
+                loading='lazy'
               />
             </motion.div>
           </motion.div>

@@ -16,7 +16,7 @@ const StorySection: React.FC = () => {
       description:
         'Setelah Lebaran, keluarganya datang dalam tradisi Makassar yang dikenal dengan istilah ma’manu’ manu’, untuk berbicara serius tentang masa depan kami. Mereka menyampaikan niat baik untuk melamar di tahun depan, 2025.',
       image:
-        'https://ik.imagekit.io/kmpery/story/DSC_0279.JPG?tr=w-auto,dpr-auto,q-80,f-auto',
+        'https://ik.imagekit.io/kmpery/story/2.jpg?tr=w-auto,dpr-auto,q-80,f-auto',
     },
     {
       date: 'April, 2025',
@@ -24,7 +24,7 @@ const StorySection: React.FC = () => {
       description: `Setelah berkelana dan melewati persimpangan yang berliku, akhirnya kita bertemu di pemberhentian terakhir untuk pulang ke rumah yang sama. "terima kasih sudah menemui dan memilih ku"
 untuk ibadah terpanjang yang akan kita lalui, semoga kita punya banyak cara untuk jatuh cinta setiap harinya.`,
       image:
-        'https://ik.imagekit.io/kmpery/story/DSC_0283.JPG?tr=w-auto,dpr-auto,q-80,f-auto',
+        'https://ik.imagekit.io/kmpery/story/3.jpg?tr=w-auto,dpr-auto,q-80,f-auto',
     },
   ];
 

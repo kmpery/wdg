@@ -44,7 +44,7 @@ const HomeSection: React.FC = () => {
             >
               <div className='relative w-64 h-64 mx-auto mb-6'>
                 <img
-                  src='https://ik.imagekit.io/kmpery/home/DSC_0275.JPG?tr=w-auto,dpr-auto,q-95,f-auto'
+                  src=''
                   alt='Groom'
                   className='w-64 h-64 rounded-full object-cover relative z-0'
                 />
@@ -87,7 +87,7 @@ const HomeSection: React.FC = () => {
             >
               <div className='relative w-64 h-64 mx-auto mb-6'>
                 <img
-                  src='https://ik.imagekit.io/kmpery/home/DSC_0240.JPG?tr=w-auto,dpr-auto,q-95,f-auto'
+                  src=''
                   alt='Groom'
                   className='w-64 h-64 rounded-full object-cover relative z-0'
                 />
