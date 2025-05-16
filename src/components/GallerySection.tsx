@@ -226,7 +226,7 @@ const GallerySection: React.FC = () => {
                     <img
                       src={`${image.src}tr=w-auto,dpr-auto,q-95,f-auto`}
                       alt={image.alt}
-                      // loading={index !== currentSlide ? 'lazy' : 'eager'}
+                      loading={index !== currentSlide ? 'lazy' : 'eager'}
                       className='rounded-xl object-cover w-full h-[550px] shadow-lg'
                       srcSet={`
     ${image.src}tr=w-480,dpr-auto,q-80,f-auto 480w,
@@ -291,7 +291,7 @@ const GallerySection: React.FC = () => {
                   <img
                     src={`${image.src}tr=w-auto,dpr-auto,q-95,f-auto`}
                     alt={image.alt}
-                    // loading={index !== 0 ? 'lazy' : 'eager'}
+                    loading={index !== 0 ? 'lazy' : 'eager'}
                     className='rounded-2xl max-h-[700px] md:max-h-[500px] sm:max-h-[300px] object-cover w-full'
                     srcSet={`
     ${image.src}tr=w-480,dpr-auto,q-80,f-auto 480w,
