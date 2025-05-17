@@ -52,6 +52,46 @@ const images: Image[] = [
     src: 'https://ik.imagekit.io/kmpery/gallery/9.jpg?',
     alt: 'Gallery 9',
   },
+  {
+    src: 'https://ik.imagekit.io/kmpery/gallery/10.jpg?',
+    alt: 'Gallery 9',
+  },
+  {
+    src: 'https://ik.imagekit.io/kmpery/gallery/11.jpg?',
+    alt: 'Gallery 9',
+  },
+  {
+    src: 'https://ik.imagekit.io/kmpery/gallery/12.jpg?',
+    alt: 'Gallery 9',
+  },
+  {
+    src: 'https://ik.imagekit.io/kmpery/gallery/13.jpg?',
+    alt: 'Gallery 9',
+  },
+  {
+    src: 'https://ik.imagekit.io/kmpery/gallery/14.jpg?',
+    alt: 'Gallery 9',
+  },
+  {
+    src: 'https://ik.imagekit.io/kmpery/gallery/15.jpg?',
+    alt: 'Gallery 9',
+  },
+  {
+    src: 'https://ik.imagekit.io/kmpery/gallery/16.jpg?',
+    alt: 'Gallery 9',
+  },
+  {
+    src: 'https://ik.imagekit.io/kmpery/gallery/17.jpg?',
+    alt: 'Gallery 9',
+  },
+  {
+    src: 'https://ik.imagekit.io/kmpery/gallery/18.jpg?',
+    alt: 'Gallery 9',
+  },
+  {
+    src: 'https://ik.imagekit.io/kmpery/gallery/19.jpg?',
+    alt: 'Gallery 9',
+  },
 ];
 
 const useIsLargeScreen = () => {
