@@ -135,8 +135,10 @@ const GallerySection: React.FC = () => {
   );
   const [autoSlide, setAutoSlide] = useState(true);
   const [showControls, setShowControls] = useState(false);
+  const [swipeDirection, setSwipeDirection] = useState<string | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isLargeScreen = useIsLargeScreen();
+  const touchStartXRef = useRef<number | null>(null);
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
@@ -175,24 +177,40 @@ const GallerySection: React.FC = () => {
   const openLightbox = (index: number) => {
     setSelectedImageIndex(index);
     setLightboxOpen(true);
+    setShowControls(true);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setShowControls(false), 3000);
   };
 
   const closeLightbox = () => {
     setLightboxOpen(false);
     setSelectedImageIndex(null);
+    setSwipeDirection(null);
   };
 
   const nextImage = () => {
     if (selectedImageIndex !== null) {
+      setSwipeDirection('left');
       setSelectedImageIndex((selectedImageIndex + 1) % images.length);
+
+      // Reset swipe direction after animation completes
+      setTimeout(() => {
+        setSwipeDirection(null);
+      }, 300);
     }
   };
 
   const prevImage = () => {
     if (selectedImageIndex !== null) {
+      setSwipeDirection('right');
       setSelectedImageIndex(
         (selectedImageIndex - 1 + images.length) % images.length
       );
+
+      // Reset swipe direction after animation completes
+      setTimeout(() => {
+        setSwipeDirection(null);
+      }, 300);
     }
   };
 
@@ -204,8 +222,64 @@ const GallerySection: React.FC = () => {
     timeoutRef.current = setTimeout(() => setShowControls(false), 3000);
   };
 
-  const handleSwipeLeft = () => nextImage();
-  const handleSwipeRight = () => prevImage();
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+
+    const touchX = e.touches[0].clientX;
+    const diff = touchX - touchStartXRef.current;
+
+    // Prevent default to stop page scrolling
+    if (Math.abs(diff) > 5) {
+      e.preventDefault();
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchEndX - touchStartXRef.current;
+
+    // Threshold for swipe detection
+    if (diff > 50) {
+      prevImage();
+      showControlsTemporarily();
+    } else if (diff < -50) {
+      nextImage();
+      showControlsTemporarily();
+    } else {
+      // Small movement, just show controls
+      showControlsTemporarily();
+    }
+
+    touchStartXRef.current = null;
+  };
+
+  // Get animation variants based on swipe direction
+  const getImageVariants = () => {
+    return {
+      enter: (direction: string | null) => {
+        return {
+          x: direction === 'left' ? 1000 : direction === 'right' ? -1000 : 0,
+          opacity: 0,
+        };
+      },
+      center: {
+        x: 0,
+        opacity: 1,
+      },
+      exit: (direction: string | null) => {
+        return {
+          x: direction === 'left' ? -1000 : direction === 'right' ? 1000 : 0,
+          opacity: 0,
+        };
+      },
+    };
+  };
 
   return (
     <section className='py-20 bg-amber-950 dark:bg-gray-900' id='gallery'>
@@ -377,7 +451,7 @@ const GallerySection: React.FC = () => {
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`w-1.2 h-1.2 rounded-full ${
+              className={`w-1.5 h-1.5 rounded-full ${
                 currentSlide === idx ? 'bg-white' : 'bg-white/50'
               } transition`}
             />
@@ -400,59 +474,95 @@ const GallerySection: React.FC = () => {
               exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()}
               className='relative w-screen h-screen flex items-center justify-center'
-              onTouchStart={(e) => {
-                const touch = e.touches[0];
-                const startX = touch.clientX;
-
-                const handleTouchMove = (e: TouchEvent) => {
-                  const touch = e.touches[0];
-                  const diffX = touch.clientX - startX;
-
-                  if (diffX > 50) {
-                    handleSwipeRight();
-                    showControlsTemporarily();
-                    document.removeEventListener('touchmove', handleTouchMove);
-                  } else if (diffX < -50) {
-                    handleSwipeLeft();
-                    showControlsTemporarily();
-                    document.removeEventListener('touchmove', handleTouchMove);
-                  }
-                };
-
-                document.addEventListener('touchmove', handleTouchMove, {
-                  passive: true,
-                });
-                document.addEventListener(
-                  'touchend',
-                  () => {
-                    document.removeEventListener('touchmove', handleTouchMove);
-                  },
-                  { once: true }
-                );
-              }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
-              <AnimatePresence>
-                {showControls && (
-                  <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    onClick={closeLightbox}
-                    className='absolute bottom-24 left-1/2 -translate-x-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition'
-                  >
-                    <IoCloseOutline size={24} />
-                  </motion.button>
-                )}
+              <AnimatePresence initial={false} custom={swipeDirection}>
+                <motion.div
+                  key={selectedImageIndex}
+                  custom={swipeDirection}
+                  variants={getImageVariants()}
+                  initial='enter'
+                  animate='center'
+                  exit='exit'
+                  transition={{
+                    x: { type: 'spring', stiffness: 300, damping: 30 },
+                    opacity: { duration: 0.2 },
+                  }}
+                  className='w-full h-full flex items-center justify-center'
+                >
+                  <img
+                    src={`${images[selectedImageIndex].src}?tr=w-1920,q-90,f-auto`}
+                    alt={images[selectedImageIndex].alt}
+                    className='w-screen h-screen object-contain'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      showControlsTemporarily();
+                    }}
+                    decoding='async'
+                    loading='lazy'
+                  />
+                </motion.div>
               </AnimatePresence>
 
-              <motion.img
-                src={`${images[selectedImageIndex].src}?tr=w-1920,q-90,f-auto`}
-                alt={images[selectedImageIndex].alt}
-                className='w-screen h-screen object-contain'
-                onClick={showControlsTemporarily}
-                decoding='async'
-                loading='lazy'
-              />
+              <AnimatePresence>
+                {showControls && (
+                  <>
+                    <motion.button
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        closeLightbox();
+                      }}
+                      className='absolute bottom-24 left-1/2 -translate-x-1/2 bg-white text-black p-2 rounded-full shadow-md hover:scale-110 transition z-50'
+                    >
+                      <IoCloseOutline size={24} />
+                    </motion.button>
+
+                    <motion.button
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        prevImage();
+                      }}
+                      className='absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full shadow-md hover:bg-black/50 transition z-50'
+                    >
+                      <MdOutlineChevronLeft size={28} />
+                    </motion.button>
+
+                    <motion.button
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ duration: 0.3 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        nextImage();
+                      }}
+                      className='absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full shadow-md hover:bg-black/50 transition z-50'
+                    >
+                      <MdOutlineChevronRight size={28} />
+                    </motion.button>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 20 }}
+                      transition={{ duration: 0.3 }}
+                      className='absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm bg-black/50 px-3 py-1 rounded-full'
+                    >
+                      {selectedImageIndex + 1} / {images.length}
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
             </motion.div>
           </motion.div>
         )}
