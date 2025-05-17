@@ -162,7 +162,6 @@ const GallerySection: React.FC = () => {
     return () => clearInterval(interval);
   }, [autoSlide, instanceRef, isLargeScreen]);
 
-  // Add scroll lock effect
   useEffect(() => {
     if (lightboxOpen) {
       document.body.style.overflow = 'hidden';
@@ -192,8 +191,6 @@ const GallerySection: React.FC = () => {
     if (selectedImageIndex !== null) {
       setSwipeDirection('left');
       setSelectedImageIndex((selectedImageIndex + 1) % images.length);
-
-      // Reset swipe direction after animation completes
       setTimeout(() => {
         setSwipeDirection(null);
       }, 300);
@@ -206,8 +203,6 @@ const GallerySection: React.FC = () => {
       setSelectedImageIndex(
         (selectedImageIndex - 1 + images.length) % images.length
       );
-
-      // Reset swipe direction after animation completes
       setTimeout(() => {
         setSwipeDirection(null);
       }, 300);
@@ -232,7 +227,6 @@ const GallerySection: React.FC = () => {
     const touchX = e.touches[0].clientX;
     const diff = touchX - touchStartXRef.current;
 
-    // Prevent default to stop page scrolling
     if (Math.abs(diff) > 5) {
       e.preventDefault();
     }
@@ -244,7 +238,6 @@ const GallerySection: React.FC = () => {
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchEndX - touchStartXRef.current;
 
-    // Threshold for swipe detection
     if (diff > 50) {
       prevImage();
       showControlsTemporarily();
@@ -252,14 +245,12 @@ const GallerySection: React.FC = () => {
       nextImage();
       showControlsTemporarily();
     } else {
-      // Small movement, just show controls
       showControlsTemporarily();
     }
 
     touchStartXRef.current = null;
   };
 
-  // Get animation variants based on swipe direction
   const getImageVariants = () => {
     return {
       enter: (direction: string | null) => {
@@ -473,7 +464,7 @@ const GallerySection: React.FC = () => {
               animate={{ scale: 1 }}
               exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()}
-              className='relative w-screen h-screen flex items-center justify-center'
+              className='relative w-full h-full flex items-center justify-center'
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
@@ -495,7 +486,7 @@ const GallerySection: React.FC = () => {
                   <img
                     src={`${images[selectedImageIndex].src}?tr=w-1920,q-90,f-auto`}
                     alt={images[selectedImageIndex].alt}
-                    className='w-screen h-screen object-contain'
+                    className='w-full h-full object-contain'
                     onClick={(e) => {
                       e.stopPropagation();
                       showControlsTemporarily();
@@ -523,33 +514,37 @@ const GallerySection: React.FC = () => {
                       <IoCloseOutline size={24} />
                     </motion.button>
 
-                    <motion.button
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.3 }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        prevImage();
-                      }}
-                      className='absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full shadow-md hover:bg-black/50 transition z-50'
-                    >
-                      <MdOutlineChevronLeft size={28} />
-                    </motion.button>
+                    {isLargeScreen && (
+                      <>
+                        <motion.button
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                          transition={{ duration: 0.3 }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            prevImage();
+                          }}
+                          className='absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full shadow-md hover:bg-black/50 transition z-50'
+                        >
+                          <MdOutlineChevronLeft size={28} />
+                        </motion.button>
 
-                    <motion.button
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 20 }}
-                      transition={{ duration: 0.3 }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        nextImage();
-                      }}
-                      className='absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full shadow-md hover:bg-black/50 transition z-50'
-                    >
-                      <MdOutlineChevronRight size={28} />
-                    </motion.button>
+                        <motion.button
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: 20 }}
+                          transition={{ duration: 0.3 }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            nextImage();
+                          }}
+                          className='absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full shadow-md hover:bg-black/50 transition z-50'
+                        >
+                          <MdOutlineChevronRight size={28} />
+                        </motion.button>
+                      </>
+                    )}
 
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
