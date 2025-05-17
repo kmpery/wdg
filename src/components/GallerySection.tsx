@@ -17,7 +17,7 @@ interface Image {
 
 const images: Image[] = [
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/1.jpg?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/1.jpg?updatedAt=1747456531270',
     alt: 'Gallery 1',
   },
   {
