@@ -46,7 +46,7 @@ const HomeSection: React.FC = () => {
                 <img
                   src='https://ik.imagekit.io/kmpery/home/1.jpg?updatedAt=1747509493901'
                   alt='Groom'
-                  className='w-64 h-64 rounded-full object-cover relative z-0'
+                  className='w-64 h-64 rounded-full object-cover relative z-0 bg-cover'
                 />
                 <div className='absolute inset-0 w-full h-full scale-[1.4] z-10 pointer-events-none'>
                   <div className='w-full h-full origin-center'>
@@ -89,7 +89,7 @@ const HomeSection: React.FC = () => {
                 <img
                   src='https://ik.imagekit.io/kmpery/home/2.jpg?updatedAt=1747509493897'
                   alt='Groom'
-                  className='w-64 h-64 rounded-full object-cover relative z-0'
+                  className='w-64 h-64 rounded-full object-cover relative z-0 bg-cover'
                 />
                 <div className='absolute inset-0 w-full h-full z-10 pointer-events-none'>
                   <div className='w-full h-full scale-[1.4] origin-center'>
