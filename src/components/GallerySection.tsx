@@ -37,7 +37,7 @@ const images: Image[] = [
     alt: 'Gallery 5',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/6.jpg?',
+    src: 'https://ik.imagekit.io/kmpery/gallery/6.jpg?updatedAt=1747456049983',
     alt: 'Gallery 6',
   },
   {
