@@ -377,7 +377,7 @@ const GallerySection: React.FC = () => {
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`w-2.5 h-2.5 rounded-full ${
+              className={`w-2 h-2 rounded-full ${
                 currentSlide === idx ? 'bg-white' : 'bg-white/50'
               } transition`}
             />
