@@ -48,6 +48,21 @@ const GiftSection: React.FC = () => {
       description: 'Risa Inda Sari',
       details: '085298614812',
     },
+    {
+      title: 'dana',
+      titleDisplay: (
+        <div className='flex items-center justify-center gap-2'>
+          <img
+            src='/gifts/dana.png'
+            alt='DANA'
+            className='w-16 h-16 object-contain'
+          />
+        </div>
+      ),
+      icon: <MdOutlineCardGiftcard size={24} />,
+      description: 'Risa Inda Sari',
+      details: '085298614812',
+    },
   ];
 
   const copyToClipboard = (text: string, detailType: string) => {
@@ -82,7 +97,7 @@ const GiftSection: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto'>
           {giftOptions.map((option, index) => (
             <motion.div
               key={index}
@@ -90,18 +105,18 @@ const GiftSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className='bg-amber-50 dark:bg-sky-950 rounded-lg p-8 shadow-md'
+              className='bg-amber-50 dark:bg-sky-950 rounded-lg p-2 shadow-md'
             >
-              <div className='w-16 h-16 text-amber-800 dark:text-sky-300 bg-amber-100 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-6'>
+              <div className='w-12 h-12 text-amber-800 dark:text-sky-300 bg-amber-100 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-1'>
                 {option.icon}
               </div>
               <h3 className=' text-center mb-1'>{option.titleDisplay}</h3>
-              <p className='text-amber-800 dark:text-sky-300 text-center mb-6'>
+              <p className='text-amber-800 dark:text-sky-300 text-center mb-1'>
                 {option.description}
               </p>
 
               {option.details && (
-                <div className='bg-white dark:bg-sky-900 p-4 rounded-md border border-amber-200 dark:border-sky-700'>
+                <div className='bg-white dark:bg-sky-900 p-2 rounded-md border border-amber-200 dark:border-sky-700'>
                   <p className='text-amber-800 dark:text-sky-200 whitespace-pre-line text-center font-sans'>
                     {option.details}
                   </p>
@@ -109,15 +124,15 @@ const GiftSection: React.FC = () => {
                     onClick={() =>
                       copyToClipboard(option.details ?? '', option.title)
                     }
-                    className='mt-4 flex items-center justify-center text-amber-900 dark:text-sky-200 transition-colors duration-300 mx-auto'
+                    className='mt-1 flex items-center justify-center text-amber-900 dark:text-sky-200 transition-colors duration-300 mx-auto'
                   >
                     {copiedDetail === option.title ? (
                       <>
-                        <MdOutlineInventory size={24} />
+                        <MdOutlineInventory size={20} />
                       </>
                     ) : (
                       <>
-                        <MdOutlineFileCopy size={24} />
+                        <MdOutlineFileCopy size={20} />
                       </>
                     )}
                   </button>

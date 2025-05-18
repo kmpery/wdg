@@ -82,7 +82,7 @@ END:VCALENDAR
             viewport={{ once: true }}
             className='bg-amber-50 dark:bg-sky-950 p-8 rounded-lg shadow-md'
           >
-            <div className='w-16 h-16 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-6'>
+            <div className='w-12 h-12 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-6'>
               <div
                 title='Klik untuk simpan ke kalender Anda (Google / iOS / Android)'
                 className='inline-block'
@@ -90,7 +90,7 @@ END:VCALENDAR
                 <Calendar
                   onClick={addToCalendar}
                   className='text-amber-800 dark:text-sky-200 cursor-pointer hover:scale-110 transition-transform'
-                  size={28}
+                  size={24}
                 />
               </div>
             </div>
@@ -128,12 +128,12 @@ END:VCALENDAR
             viewport={{ once: true }}
             className='bg-amber-50 dark:bg-sky-950 p-8 rounded-lg shadow-md'
           >
-            <div className='w-16 h-16 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-6'>
+            <div className='w-12 h-12 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-6'>
               <div title='Klik untuk simpan ke kalender Anda (Google / iOS / Android)'>
                 <Calendar
                   onClick={addToCalendar}
                   className='text-amber-800 dark:text-sky-200 cursor-pointer hover:scale-110 transition-transform'
-                  size={28}
+                  size={24}
                 />
               </div>
             </div>
