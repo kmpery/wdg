@@ -42,8 +42,9 @@ const Footer: React.FC = () => {
             />
             <a
               className='transition-colors duration-300 hover:text-red-400 dark:hover:text-sky-400'
-              href=''
+              href='https://wa.me/6289626821754'
               target='_blank'
+              rel='noopener noreferrer'
             >
               @kmpery
             </a>
