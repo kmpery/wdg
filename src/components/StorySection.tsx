@@ -9,7 +9,7 @@ const StorySection: React.FC = () => {
       title: 'Pertama kali bertemu',
       description: `Dia adalah kakak kelasku di tahun 2018, dan awal kedekatan kami terjadi pada Mei 2019, tepatnya di bulan puasa. Di bulan yang penuh berkah ini, dia memberanikan diri untuk membawa sekantong gorengan dan martabak, sebagai tanda niat baiknya, untuk pertama kali bertemu dengan keluargaku.`,
       image:
-        'https://ik.imagekit.io/kmpery/story/1.jpg?tr=w-auto,dpr-auto,q-80,f-auto',
+        'https://ik.imagekit.io/kmpery/story/1.jpg?updatedAt=1748188544219tr=w-auto,dpr-auto,q-80,f-auto',
     },
     {
       date: 'Maret, 2024',

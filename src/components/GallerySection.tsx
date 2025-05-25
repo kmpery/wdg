@@ -21,20 +21,8 @@ const images: Image[] = [
     alt: 'Gallery 1',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/2.jpg?',
-    alt: 'Gallery 2',
-  },
-  {
     src: 'https://ik.imagekit.io/kmpery/gallery/3.jpg?',
     alt: 'Gallery 3',
-  },
-  {
-    src: 'https://ik.imagekit.io/kmpery/gallery/4.jpg?',
-    alt: 'Gallery 4',
-  },
-  {
-    src: 'https://ik.imagekit.io/kmpery/gallery/5.jpg?',
-    alt: 'Gallery 5',
   },
   {
     src: 'https://ik.imagekit.io/kmpery/gallery/6.jpg?updatedAt=1747456049983',
@@ -45,10 +33,6 @@ const images: Image[] = [
     alt: 'Gallery 7',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/8.jpg?',
-    alt: 'Gallery 8',
-  },
-  {
     src: 'https://ik.imagekit.io/kmpery/gallery/9.jpg?',
     alt: 'Gallery 9',
   },
@@ -57,16 +41,8 @@ const images: Image[] = [
     alt: 'Gallery 10',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/11.jpg?',
-    alt: 'Gallery 11',
-  },
-  {
     src: 'https://ik.imagekit.io/kmpery/gallery/12.jpg?',
     alt: 'Gallery 12',
-  },
-  {
-    src: 'https://ik.imagekit.io/kmpery/gallery/13.jpg?',
-    alt: 'Gallery 13',
   },
   {
     src: 'https://ik.imagekit.io/kmpery/gallery/14.jpg?',
@@ -93,24 +69,12 @@ const images: Image[] = [
     alt: 'Gallery 19',
   },
   {
-    src: 'https://ik.imagekit.io/kmpery/gallery/20.jpg?',
-    alt: 'Gallery 20',
-  },
-  {
     src: 'https://ik.imagekit.io/kmpery/gallery/21.jpg?',
     alt: 'Gallery 21',
   },
   {
     src: 'https://ik.imagekit.io/kmpery/gallery/22.jpg?',
     alt: 'Gallery 22',
-  },
-  {
-    src: 'https://ik.imagekit.io/kmpery/gallery/23.jpg?',
-    alt: 'Gallery 23',
-  },
-  {
-    src: 'https://ik.imagekit.io/kmpery/gallery/24.jpg?',
-    alt: 'Gallery 24',
   },
 ];
 
