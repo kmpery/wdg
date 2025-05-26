@@ -23,7 +23,8 @@ const EventSection: React.FC<EventSectionProps> = ({ activeTab }) => {
       },
       locations: [
         {
-          address: "Pare'-pare' Maradekaya, Kabupaten Gowa, Sulawesi Selatan",
+          address:
+            'Jl.Sahabu Dg Tindri, Maradekaya, kec.Bajeng kab.Gowa, Sulawesi Selatan',
           mapSrc:
             'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3972.9264102669254!2d119.43295707498312!3d-5.274165994703939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNcKwMTYnMjcuMCJTIDExOcKwMjYnMDcuOSJF!5e0!3m2!1sid!2sid!4v1744434675941!5m2!1sid!2sid',
           googleMapsUrl: 'https://maps.app.goo.gl/4kw6z5nDqvNiNxFw9',
@@ -44,7 +45,7 @@ const EventSection: React.FC<EventSectionProps> = ({ activeTab }) => {
       locations: [
         {
           address:
-            'Jl.Nuhung Dg Bani Tamacinna desa Maradekaya kec.Bajeng kab.Gowa, dekat SDN Inpres Pakkingkingang',
+            'Jl.Nuhung Dg Bani Tamacinna, Maradekaya kec.Bajeng kab.Gowa, Sulawesi Selatan. Dekat SDN Inpress Pakkingkingang',
           mapSrc:
             'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3972.89082632421!2d119.44695287498313!3d-5.2797221946984285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNcKwMTYnNDcuMCJTIDExOcKwMjYnNTguMyJF!5e0!3m2!1sid!2sid!4v1748242356274!5m2!1sid!2sid',
           googleMapsUrl: 'https://maps.app.goo.gl/ACmxkbAtYe7FxQEt6',
@@ -114,7 +115,7 @@ END:VCALENDAR
           className='text-center mb-12'
         >
           <h2 className='text-4xl font-bold text-amber-900 dark:text-sky-400 mb-4'>
-            Wedding Day
+            Wedding Events
           </h2>
           <div className='w-16 h-1 bg-amber-800 dark:bg-sky-400 mx-auto mb-8'></div>
           <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto'>
@@ -124,16 +125,16 @@ END:VCALENDAR
           </p>
         </motion.div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto'>
           {/* Akad Nikah */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='bg-amber-50 dark:bg-sky-950 p-8 rounded-lg shadow-md'
+            className='bg-amber-50 dark:bg-sky-950 p-4 rounded-lg shadow-md'
           >
-            <div className='w-12 h-12 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-6'>
+            <div className='w-12 h-12 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-2'>
               <div
                 title='Klik untuk simpan ke kalender Anda (Google / iOS / Android)'
                 className='inline-block'
@@ -145,10 +146,10 @@ END:VCALENDAR
                 />
               </div>
             </div>
-            <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-4'>
+            <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-2'>
               Akad Nikah
             </h3>
-            <div className='flex items-center justify-center space-x-2 mb-3'>
+            <div className='flex items-center justify-center space-x-2 mb-1'>
               <Calendar
                 size={16}
                 className='text-amber-700 dark:text-sky-300'
@@ -157,13 +158,13 @@ END:VCALENDAR
                 {currentData.akad.date}
               </span>
             </div>
-            <div className='flex items-center justify-center space-x-2 mb-3'>
+            <div className='flex items-center justify-center space-x-2 mb-1'>
               <Clock size={16} className='text-amber-700 dark:text-sky-300' />
               <span className='text-amber-800 dark:text-sky-200'>
                 {currentData.akad.time}
               </span>
             </div>
-            <div className='flex items-center justify-center space-x-2 mb-6'>
+            <div className='flex items-center justify-center space-x-2 mb-1'>
               <MapPin size={16} className='text-amber-700 dark:text-sky-300' />
               <span className='text-amber-800 dark:text-sky-200'>
                 {currentData.akad.location}
@@ -177,9 +178,9 @@ END:VCALENDAR
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='bg-amber-50 dark:bg-sky-950 p-8 rounded-lg shadow-md'
+            className='bg-amber-50 dark:bg-sky-950 p-4 rounded-lg shadow-md'
           >
-            <div className='w-12 h-12 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-6'>
+            <div className='w-12 h-12 bg-amber-100 dark:bg-sky-900 rounded-full flex items-center justify-center mx-auto mb-2'>
               <div title='Klik untuk simpan ke kalender Anda (Google / iOS / Android)'>
                 <Calendar
                   onClick={addToCalendar}
@@ -188,10 +189,10 @@ END:VCALENDAR
                 />
               </div>
             </div>
-            <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-4'>
+            <h3 className='text-2xl font-bold text-amber-900 dark:text-sky-400 text-center mb-2'>
               Resepsi
             </h3>
-            <div className='flex items-center justify-center space-x-2 mb-3'>
+            <div className='flex items-center justify-center space-x-2 mb-1'>
               <Calendar
                 size={16}
                 className='text-amber-700 dark:text-sky-300'
@@ -200,13 +201,13 @@ END:VCALENDAR
                 {currentData.resepsi.date}
               </span>
             </div>
-            <div className='flex items-center justify-center space-x-2 mb-3'>
+            <div className='flex items-center justify-center space-x-2 mb-1'>
               <Clock size={16} className='text-amber-700 dark:text-sky-300' />
               <span className='text-amber-800 dark:text-sky-200'>
                 {currentData.resepsi.time}
               </span>
             </div>
-            <div className='flex items-center justify-center space-x-2 mb-6'>
+            <div className='flex items-center justify-center space-x-2 mb-1'>
               <MapPin size={16} className='text-amber-700 dark:text-sky-300' />
               <span className='text-amber-800 dark:text-sky-200'>
                 {currentData.resepsi.location}

@@ -50,7 +50,7 @@ const HomePage: React.FC = () => {
             <HomeSection />
 
             {/* Tab Switch */}
-            <div className='flex justify-center my-8'>
+            <div className='flex justify-center mb-5 bg-none'>
               <TabSwitch activeTab={activeTab} onChange={handleTabChange} />
             </div>
 

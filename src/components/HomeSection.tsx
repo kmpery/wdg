@@ -131,9 +131,9 @@ const HomeSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='mt-16 text-center bg-amber-200 dark:bg-sky-950 p-8 rounded-lg'
+            className='mt-16 text-center text-sm bg-amber-100 dark:bg-sky-950 p-4 rounded-lg'
           >
-            <h3 className='text-2xl font-semibold text-amber-800 dark:text-sky-400 mb-4'>
+            <h3 className='font-semibold text-amber-800 dark:text-sky-400 mb-2'>
               (Q.S. Ar-Rum: 21)
             </h3>
             <p className='text-amber-800 dark:text-sky-200'>

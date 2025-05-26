@@ -11,7 +11,7 @@ const TabSwitch: React.FC<TabSwitchProps> = ({ activeTab, onChange }) => {
     <div className='relative flex items-center justify-center mx-auto w-64 h-12 bg-amber-100 dark:bg-sky-950 rounded-full p-1 cursor-pointer shadow-md'>
       {/* Background slider */}
       <motion.div
-        className='absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-amber-600 dark:bg-sky-700'
+        className='absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-amber-900 dark:bg-sky-700'
         animate={{
           left: activeTab === 'wanita' ? '2px' : 'calc(50% + 2px)',
         }}
