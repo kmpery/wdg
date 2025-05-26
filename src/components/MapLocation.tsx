@@ -1,13 +1,12 @@
 import React from 'react';
-import { LiaExternalLinkAltSolid } from 'react-icons/lia';
 import { motion } from 'framer-motion';
 
-const MapLocation: React.FC = () => {
-  const mapSrc =
-    'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3972.9264102669254!2d119.43295707498312!3d-5.274165994703939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNcKwMTYnMjcuMCJTIDExOcKwMjYnMDcuOSJF!5e0!3m2!1sid!2sid!4v1744434675941!5m2!1sid!2sid';
+interface MapLocationProps {
+  mapSrc: string;
+  googleMapsUrl: string;
+}
 
-  const googleMapsUrl = 'https://maps.app.goo.gl/4kw6z5nDqvNiNxFw9';
-
+const MapLocation: React.FC<MapLocationProps> = ({ mapSrc, googleMapsUrl }) => {
   return (
     <div className='bg-amber-50 dark:bg-sky-950 rounded-lg shadow-lg overflow-hidden'>
       <div className='h-96 w-full'>
@@ -32,7 +31,7 @@ const MapLocation: React.FC = () => {
           whileTap={{ scale: 0.95 }}
           className='inline-flex items-center justify-center px-4 py-1 bg-amber-900 text-white rounded-md hover:bg-amber-800 transition-colors duration-300 dark:bg-sky-800 dark:text-sky-100 dark:hover:bg-sky-600'
         >
-          <LiaExternalLinkAltSolid size={30} />
+          <span className='mr-2'>Open in Google Maps</span>
         </motion.a>
       </div>
     </div>

@@ -3,7 +3,59 @@ import { motion } from 'framer-motion';
 import { MapPin, Calendar, Clock } from 'lucide-react';
 import MapLocation from './MapLocation';
 
-const EventSection: React.FC = () => {
+interface EventSectionProps {
+  activeTab: 'wanita' | 'pria';
+}
+
+const EventSection: React.FC<EventSectionProps> = ({ activeTab }) => {
+  // Define separate data for wanita and pria tabs
+  const eventData = {
+    wanita: {
+      akad: {
+        date: 'Rabu, 18 Juni 2025',
+        time: '11:00 - 12:00 WITA',
+        location: 'Kediaman Mempelai Wanita',
+      },
+      resepsi: {
+        date: 'Rabu, 18 Juni 2025',
+        time: '12.00 WITA - Selesai',
+        location: 'Kediaman Mempelai Wanita',
+      },
+      locations: [
+        {
+          address: "Pare'-pare' Maradekaya, Kabupaten Gowa, Sulawesi Selatan",
+          mapSrc:
+            'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3972.9264102669254!2d119.43295707498312!3d-5.274165994703939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNcKwMTYnMjcuMCJTIDExOcKwMjYnMDcuOSJF!5e0!3m2!1sid!2sid!4v1744434675941!5m2!1sid!2sid',
+          googleMapsUrl: 'https://maps.app.goo.gl/4kw6z5nDqvNiNxFw9',
+        },
+      ],
+    },
+    pria: {
+      akad: {
+        date: 'Rabu, 18 Juni 2025',
+        time: '09:30 - 11:00 WITA',
+        location: 'Kediaman Mempelai Wanita',
+      },
+      resepsi: {
+        date: 'Kamis, 19 Juni 2025',
+        time: '08.00 WITA - Selesai',
+        location: 'Kediaman Mempelai Pria',
+      },
+      locations: [
+        {
+          address:
+            'Jl.nuhung dg bani tamacinna desa maradekaya kec.bajeng kab.gowa, dekat SDN inpres pakkingkingang',
+          mapSrc:
+            'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3972.89082632421!2d119.44695287498313!3d-5.2797221946984285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNcKwMTYnNDcuMCJTIDExOcKwMjYnNTguMyJF!5e0!3m2!1sid!2sid!4v1748242356274!5m2!1sid!2sid',
+          googleMapsUrl: 'https://maps.app.goo.gl/ACmxkbAtYe7FxQEt6',
+        },
+      ],
+    },
+  };
+
+  // Get data based on active tab
+  const currentData = eventData[activeTab];
+
   // Fungsi untuk Google Calendar atau .ics file
   const addToCalendar = () => {
     const isUsingGoogle = confirm(
@@ -11,8 +63,7 @@ const EventSection: React.FC = () => {
     );
 
     const title = 'Pernikahan Nursalim & Risa Indasari';
-    const location =
-      "Kediaman Mempelai Wanita, Pare'-pare' Maradekaya, Kabupaten Gowa, Sulawesi Selatan";
+    const location = currentData.locations[0].address;
     const details =
       'Kami mengundang Anda untuk hadir dalam acara pernikahan kami.';
     const start = '20250618T013000Z';
@@ -103,19 +154,19 @@ END:VCALENDAR
                 className='text-amber-700 dark:text-sky-300'
               />
               <span className='text-amber-800 dark:text-sky-200'>
-                Rabu, 18 Juni 2025
+                {currentData.akad.date}
               </span>
             </div>
             <div className='flex items-center justify-center space-x-2 mb-3'>
               <Clock size={16} className='text-amber-700 dark:text-sky-300' />
               <span className='text-amber-800 dark:text-sky-200'>
-                09:30 - 11:00 WITA
+                {currentData.akad.time}
               </span>
             </div>
             <div className='flex items-center justify-center space-x-2 mb-6'>
               <MapPin size={16} className='text-amber-700 dark:text-sky-300' />
               <span className='text-amber-800 dark:text-sky-200'>
-                Kediaman Mempelai Wanita
+                {currentData.akad.location}
               </span>
             </div>
           </motion.div>
@@ -146,19 +197,19 @@ END:VCALENDAR
                 className='text-amber-700 dark:text-sky-300'
               />
               <span className='text-amber-800 dark:text-sky-200'>
-                Rabu, 18 Juni 2025
+                {currentData.resepsi.date}
               </span>
             </div>
             <div className='flex items-center justify-center space-x-2 mb-3'>
               <Clock size={16} className='text-amber-700 dark:text-sky-300' />
               <span className='text-amber-800 dark:text-sky-200'>
-                11.00 WITA - Selesai
+                {currentData.resepsi.time}
               </span>
             </div>
             <div className='flex items-center justify-center space-x-2 mb-6'>
               <MapPin size={16} className='text-amber-700 dark:text-sky-300' />
               <span className='text-amber-800 dark:text-sky-200'>
-                Kediaman Mempelai Wanita
+                {currentData.resepsi.location}
               </span>
             </div>
           </motion.div>
@@ -176,9 +227,12 @@ END:VCALENDAR
               Location
             </h3>
             <p className='text-amber-800 dark:text-sky-200 max-w-2xl mx-auto mb-4 text-center'>
-              Alamat: Pare'-pare' Maradekaya, Kabupaten Gowa, Sulawesi Selatan
+              Alamat: {currentData.locations[0].address}
             </p>
-            <MapLocation />
+            <MapLocation
+              mapSrc={currentData.locations[0].mapSrc}
+              googleMapsUrl={currentData.locations[0].googleMapsUrl}
+            />
           </motion.div>
         </div>
       </div>

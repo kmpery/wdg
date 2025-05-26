@@ -1,7 +1,7 @@
 'use client';
 
 import type React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import Navbar from '../components/Navbar';
@@ -14,11 +14,13 @@ import RsvpSection from '../components/RsvpSection';
 import GiftSection from '../components/GiftSection';
 import ThankYouSection from '../components/ThankYouSection';
 import Footer from '../components/Footer';
+import TabSwitch from '../components/TabSwitch';
 
 import useStore from '../store/useStore';
 
 const HomePage: React.FC = () => {
   const isOpen = useStore((state) => state.isOpen);
+  const [activeTab, setActiveTab] = useState<'wanita' | 'pria'>('wanita');
 
   // Lock scroll before invitation is opened
   useEffect(() => {
@@ -28,9 +30,12 @@ const HomePage: React.FC = () => {
     };
   }, [isOpen]);
 
+  const handleTabChange = (tab: 'wanita' | 'pria') => {
+    setActiveTab(tab);
+  };
+
   return (
     <div className='min-h-screen bg-cream dark:bg-gray-900 text-amber-900 dark:text-white font-serif transition-colors duration-300'>
-      {/* Hero section is always visible */}
       <HeroSection />
 
       <AnimatePresence>
@@ -43,11 +48,18 @@ const HomePage: React.FC = () => {
           >
             <Navbar />
             <HomeSection />
-            <EventSection />
+
+            {/* Tab Switch */}
+            <div className='flex justify-center my-8'>
+              <TabSwitch activeTab={activeTab} onChange={handleTabChange} />
+            </div>
+
+            {/* Dynamic Sections */}
+            <EventSection activeTab={activeTab} />
             <StorySection />
             <GallerySection />
             <RsvpSection />
-            <GiftSection />
+            <GiftSection activeTab={activeTab} />
             <ThankYouSection />
             <Footer />
           </motion.div>

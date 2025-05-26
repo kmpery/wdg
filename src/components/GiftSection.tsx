@@ -14,56 +14,113 @@ interface GiftOption {
   details?: string;
 }
 
-const GiftSection: React.FC = () => {
+interface GiftSectionProps {
+  activeTab: 'wanita' | 'pria';
+}
+
+const GiftSection: React.FC<GiftSectionProps> = ({ activeTab }) => {
   const [copiedDetail, setCopiedDetail] = useState<string | null>(null);
 
-  const giftOptions: GiftOption[] = [
-    {
-      title: 'bca',
-      titleDisplay: (
-        <div className='flex items-center justify-center gap-2'>
-          <img
-            src='/gifts/bca.png'
-            alt='BCA'
-            className='w-16 h-16 object-contain'
-          />
-        </div>
-      ),
-      icon: <MdOutlineCardGiftcard size={24} />,
-      description: 'Risa Inda Sari',
-      details: '7990360582',
-    },
-    {
-      title: 'isaku',
-      titleDisplay: (
-        <div className='flex items-center justify-center gap-2'>
-          <img
-            src='/gifts/isaku.png'
-            alt='i.saku'
-            className='w-16 h-16 object-contain'
-          />
-        </div>
-      ),
-      icon: <MdOutlineCardGiftcard size={24} />,
-      description: 'Risa Inda Sari',
-      details: '085298614812',
-    },
-    {
-      title: 'dana',
-      titleDisplay: (
-        <div className='flex items-center justify-center gap-2'>
-          <img
-            src='/gifts/dana.png'
-            alt='DANA'
-            className='w-16 h-16 object-contain'
-          />
-        </div>
-      ),
-      icon: <MdOutlineCardGiftcard size={24} />,
-      description: 'Risa Inda Sari',
-      details: '085298614812',
-    },
-  ];
+  // Define separate gift data for bride and groom
+  const giftData = {
+    wanita: [
+      {
+        title: 'bca',
+        titleDisplay: (
+          <div className='flex items-center justify-center gap-2'>
+            <img
+              src='/gifts/bca.png'
+              alt='BCA'
+              className='w-16 h-16 object-contain'
+            />
+          </div>
+        ),
+        icon: <MdOutlineCardGiftcard size={24} />,
+        description: 'Risa Inda Sari',
+        details: '7990360582',
+      },
+      {
+        title: 'isaku',
+        titleDisplay: (
+          <div className='flex items-center justify-center gap-2'>
+            <img
+              src='/gifts/isaku.png'
+              alt='i.saku'
+              className='w-16 h-16 object-contain'
+            />
+          </div>
+        ),
+        icon: <MdOutlineCardGiftcard size={24} />,
+        description: 'Risa Inda Sari',
+        details: '085298614812',
+      },
+      {
+        title: 'dana',
+        titleDisplay: (
+          <div className='flex items-center justify-center gap-2'>
+            <img
+              src='/gifts/dana.png'
+              alt='DANA'
+              className='w-16 h-16 object-contain'
+            />
+          </div>
+        ),
+        icon: <MdOutlineCardGiftcard size={24} />,
+        description: 'Risa Inda Sari',
+        details: '085298614812',
+      },
+    ],
+    pria: [
+      {
+        title: 'bni',
+        titleDisplay: (
+          <div className='flex items-center justify-center gap-2'>
+            <img
+              src='/gifts/bni.png'
+              alt='BNI'
+              className='w-16 h-16 object-contain'
+            />
+          </div>
+        ),
+        icon: <MdOutlineCardGiftcard size={24} />,
+        description: 'Nursalim',
+        details: '1815338298',
+      },
+      {
+        title: 'mandiri',
+        titleDisplay: (
+          <div className='flex items-center justify-center gap-2'>
+            <img
+              src='/gifts/ovo.png'
+              alt='Ovo'
+              className='w-16 h-16 object-contain'
+            />
+          </div>
+        ),
+        icon: <MdOutlineCardGiftcard size={24} />,
+        description: 'Nursalim',
+        details: '082293837301',
+      },
+      {
+        title: 'gopay',
+        titleDisplay: (
+          <div className='flex items-center justify-center gap-2'>
+            <img
+              src='/gifts/dana.png'
+              alt='Dana'
+              className='w-16 h-16 object-contain'
+            />
+          </div>
+        ),
+        icon: <MdOutlineCardGiftcard size={24} />,
+        description: 'Nursalim',
+        details: '082293837301',
+      },
+    ],
+  };
+
+  // Get the current gift options based on active tab
+  const giftOptions: GiftOption[] = giftData[activeTab];
 
   const copyToClipboard = (text: string, detailType: string) => {
     navigator.clipboard.writeText(text);
