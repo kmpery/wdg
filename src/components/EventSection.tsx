@@ -13,7 +13,7 @@ const EventSection: React.FC<EventSectionProps> = ({ activeTab }) => {
     wanita: {
       akad: {
         date: 'Rabu, 18 Juni 2025',
-        time: '11:00 - 12:00 WITA',
+        time: '09:00 - 12:00 WITA',
         location: 'Kediaman Mempelai Wanita',
       },
       resepsi: {
