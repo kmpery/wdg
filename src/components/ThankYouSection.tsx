@@ -37,9 +37,9 @@ const ThankYouSection: React.FC = () => {
 
     socket.onmessage = (event) => {
       try {
-        const data = JSON.parse(event.data);
-        if (data?.event === 'new-comment') {
-          fetchComments();
+        const data: Comment = JSON.parse(event.data);
+        if (data && data._id && data.name && data.message && data.createdAt) {
+          setComments((prev) => [data, ...prev]); // Masukkan komentar terbaru ke paling atas
         }
       } catch {
         console.error('Data WebSocket tidak valid:', event.data);
