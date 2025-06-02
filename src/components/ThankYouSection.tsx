@@ -14,8 +14,8 @@ interface Comment {
   createdAt: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
-const WS_URL = API_BASE_URL.replace(/^http/, 'ws');
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+const WS_URL = import.meta.env.VITE_WS_URL;
 
 const ThankYouSection: React.FC = () => {
   const { recipientName } = useStore();

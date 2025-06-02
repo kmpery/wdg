@@ -23,7 +23,7 @@ interface GuestEntry {
   willAttend: string;
 }
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 const RsvpSection: React.FC = () => {
   const { recipientName } = useStore();
@@ -55,7 +55,7 @@ const RsvpSection: React.FC = () => {
   const fetchGuestbook = async () => {
     setLoadingGuestbook(true);
     try {
-      const res = await fetch(`${backendUrl}/api/rsvp`);
+      const res = await fetch(`${API_URL}/api/rsvp`);
       if (!res.ok) {
         throw new Error('Gagal mengambil data buku tamu');
       }
@@ -87,7 +87,7 @@ const RsvpSection: React.FC = () => {
     }
 
     try {
-      const res = await fetch(`${backendUrl}/api/rsvp`, {
+      const res = await fetch(`${API_URL}/api/rsvp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
