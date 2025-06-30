@@ -14,8 +14,8 @@ interface Comment {
   createdAt: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
-const WS_URL = import.meta.env.VITE_WS_URL;
+const API_BASE_URL = import.meta.env.VITE_API_UR;
+const WS_URL = import.meta.env.VITE_WS_UR;
 
 const ThankYouSection: React.FC = () => {
   const { recipientName } = useStore();

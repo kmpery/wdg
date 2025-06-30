@@ -23,7 +23,7 @@ interface GuestEntry {
   willAttend: string;
 }
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_UR;
 
 const RsvpSection: React.FC = () => {
   const { recipientName } = useStore();
